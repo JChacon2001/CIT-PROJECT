@@ -3,7 +3,7 @@ html_bp = Blueprint("html", __name__)
 
 @html_bp.route("/")
 def home():
-    return "<h1>HEY THERE</h1>"
+    return render_template("home.html")
 
 @html_bp.route("/qa")
 def q_and_a():
