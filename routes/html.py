@@ -13,5 +13,6 @@ def q_and_a():
 def login():
     return "login"
 
-
-
+@html_bp.errorhandler(404)
+def page_not_found(error):
+    return render_template('page_not_found.html'), 404
