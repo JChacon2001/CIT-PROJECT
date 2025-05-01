@@ -19,7 +19,7 @@
   /* Sidebar */
   .sidebar {
     width: 260px;
-    background-color: #343a40;
+    background-color: #120D31;
     color: white;
     padding: 1.5rem 1rem;
     flex-shrink: 0;
@@ -132,17 +132,17 @@
   }
   
   /* Theme Colors */
-  .card.blue { background-color: #0275d8; }
-  .card.blue .card-footer { background-color: #025aa5; }
+  .card.blue { background-color: #302F4D; }
+  .card.blue .card-footer { background-color: #28273F; }
   
-  .card.yellow { background-color: #f0ad4e; }
-  .card.yellow .card-footer { background-color: #e09b3d; }
+  .card.yellow { background-color: #A57982; }
+  .card.yellow .card-footer { background-color: #9D6C76; }
   
-  .card.green { background-color: #5cb85c; }
-  .card.green .card-footer { background-color: #4cae4c; }
+  .card.green { background-color: #B98EA7; }
+  .card.green .card-footer { background-color: #B0829D; }
   
-  .card.red { background-color: #d9534f; }
-  .card.red .card-footer { background-color: #c9302c; }
+  .card.red { background-color: #A3A380; }
+  .card.red .card-footer { background-color: #989871; }
   
   /* Tables */
   .table-section {
