@@ -1,4 +1,6 @@
-from flask import Blueprint, render_template, url_for, redirect, request, Flask
+from flask import Blueprint, render_template
+from models import *
+from db import db
 html_bp = Blueprint("html", __name__)
 
 @html_bp.route("/")
@@ -8,6 +10,18 @@ def home():
 @html_bp.route("/qa")
 def q_and_a():
     return "q and a page"
+
+@html_bp.route("/decks")
+def decks():
+    decks = db.session.execute(db.select(Deck)).scalars()
+    return render_template("alldecks.html", data=decks)
+
+@html_bp.route("/decks/<int:id>")
+def deckcont(id):
+    stmt = db.select(Cards).where(Cards.deck_id == id)
+    exec = db.session.execute(stmt).scalars()
+    return render_template("deck.html", data=exec)
+
 
 @html_bp.route("/login")
 def login():
