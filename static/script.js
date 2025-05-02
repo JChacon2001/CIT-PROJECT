@@ -1,6 +1,5 @@
-
-document.querySelectorAll("answer").forEach(change => {
-    change.addEventListener('click', function(){
-        document.querySelector("answer").innerHTML = "flipped"
+document.querySelectorAll(".cardeck").forEach(flip => {
+    flip.addEventListener('click', function(){
+        
     })
 })

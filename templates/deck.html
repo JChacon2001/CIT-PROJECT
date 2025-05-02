@@ -2,9 +2,9 @@
 
 {% block content %}
     {% for i in data %}
-    <div> 
-       <p>{{i.answer}}</p> 
-       <button class="answer" id="flip"> flip</button>
+    <div class = "carddeck"> 
+       <p class="cards">{{i.answer}}</p> 
+       <button id="flip"> flip</button>
     </div>
 
     {% endfor %}
