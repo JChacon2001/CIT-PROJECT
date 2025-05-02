@@ -29,7 +29,3 @@ def faq():
 @html_bp.route("/testcard")
 def testcard():
     return render_template("testcard.html")
-
-@html_bp.route("/login")
-def login():
-    return "login"
