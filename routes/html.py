@@ -26,6 +26,9 @@ def deckcont(id):
 def faq():
     return render_template("faq.html")
 
+@html_bp.route("/testcard")
+def testcard():
+    return render_template("testcard.html")
 
 @html_bp.route("/login")
 def login():
