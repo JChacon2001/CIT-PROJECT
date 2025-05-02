@@ -34,6 +34,7 @@
     margin-bottom: 2rem;
     text-align: center;
     padding-right: 1rem;
+    font-weight: bold;
   }
   
   .nav-menu {
@@ -270,4 +271,11 @@
   padding: 0 1rem 1rem;
   line-height: 1.5;
   color: #444;
+}
+
+:root {
+  --color-primary: #0055A4;   /* BCIT blue */
+  --color-secondary: #FFD200; /* BCIT yellow */
+  --bg-light: #F9F9F9;
+  --text-dark: #333;
 }
