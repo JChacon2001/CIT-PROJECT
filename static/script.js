@@ -1,14 +1,12 @@
 function flipCard(cardElement) {
-    cardElement.classList.toggle('flipped');
     if(cardElement.classList.contains('flipped')) {
         cardElement.classList.add('unflip');
-        setTimeout(function(){
-          cardElement.classList.remove('flipped', 'unflip');
-        }, 500);
+        cardElement.classList.remove('flipped');
       }
-      else { 
+    else { 
         cardElement.classList.add("flipped");
-      }
+        cardElement.classList.remove('unflip')
+    }
 }
 
 

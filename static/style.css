@@ -340,3 +340,12 @@
   align-items: center;
   height: 100vh;
 }
+
+.unflip{
+  color:blue;
+}
+
+.tempcard{
+  border:2px solid black;
+  height:50px;
+}
