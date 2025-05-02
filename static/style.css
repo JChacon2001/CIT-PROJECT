@@ -140,14 +140,14 @@
   .card.blue { background-color: #302F4D; }
   .card.blue .card-footer { background-color: #28273F; }
   
-  .card.yellow { background-color: #A57982; }
-  .card.yellow .card-footer { background-color: #9D6C76; }
+  .card.plum { background-color: #A57982; }
+  .card.plum .card-footer { background-color: #9D6C76; }
   
-  .card.green { background-color: #B98EA7; }
-  .card.green .card-footer { background-color: #B0829D; }
+  .card.pink { background-color: #B98EA7; }
+  .card.pink .card-footer { background-color: #B0829D; }
   
-  .card.red { background-color: #A3A380; }
-  .card.red .card-footer { background-color: #989871; }
+  .card.green { background-color: #A3A380; }
+  .card.green .card-footer { background-color: #989871; }
   
   /* Tables */
   .table-section {
@@ -180,4 +180,94 @@
     background-color: rgba(255, 255, 255, 0.2);
   }
   
-  
+/* Main Content */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* FAQ Header */
+.faq-header {
+  background: var(--bg-light);
+  padding: 2rem 1rem;
+  text-align: center;
+}
+.faq-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.faq-header p {
+  color: #555;
+}
+
+/* Container */
+.faq-container {
+  display: flex;
+  padding: 1rem;
+  gap: 2rem;
+}
+
+/* Categories */
+.faq-categories {
+  width: 180px;
+}
+.faq-categories ul {
+  list-style: none;
+}
+.faq-categories li {
+  padding: 0.5rem 0;
+  cursor: pointer;
+}
+.faq-categories li.active {
+  font-weight: bold;
+  position: relative;
+}
+.faq-categories li.active::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--color-secondary);
+  border-radius: 50%;
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* FAQ Accordion */
+.faq-content {
+  flex: 1;
+}
+.faq-content details {
+  background: var(--bg-light);
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.faq-content summary {
+  list-style: none;
+  padding: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+}
+.faq-content summary::-webkit-details-marker {
+  display: none;
+}
+.faq-content summary::after {
+  content: '+';
+  position: absolute;
+  right: 1rem;
+  font-size: 1.2rem;
+  color: var(--color-primary);
+}
+.faq-content details[open] summary::after {
+  content: '−';
+}
+.faq-content p {
+  padding: 0 1rem 1rem;
+  line-height: 1.5;
+  color: #444;
+}
