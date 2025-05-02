@@ -1,11 +1,10 @@
+function flipCard(cardElement) {
+    cardElement.classList.toggle('flipped');
+}
 
-document.querySelectorAll("answer").forEach(change => {
+
+document.querySelectorAll(".answer").forEach(change => {
     change.addEventListener('click', function(){
-        document.querySelector("answer").innerHTML = "flipped"
+        flipCard(this)
     })
 })
-
-function flipCard(cardElement) {
-    cardElement.querySelector('.flip-card-inner').classList.toggle('flipped');
-  }
-  

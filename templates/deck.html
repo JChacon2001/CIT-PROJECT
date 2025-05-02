@@ -4,11 +4,11 @@
     {% for i in data %}
     <div> 
        <p>{{i.answer}}</p> 
-       <button class="answer" id="flip"> flip</button>
+       <button onclick="flipCard(this)" id="flip"> flip</button>
     </div>
 
     {% endfor %}
 
-<script src="{{ url_for('static', filename='script.js') }}""></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 
 {% endblock %}

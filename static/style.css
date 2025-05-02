@@ -323,3 +323,7 @@
   color: white;
   transform: rotateY(180deg);
 }
+
+.flipped{
+  color:red
+}
