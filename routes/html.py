@@ -22,6 +22,10 @@ def deckcont(id):
     exec = db.session.execute(stmt).scalars()
     return render_template("deck.html", data=exec)
 
+@html_bp.route("/faq")
+def faq():
+    return render_template("faq.html")
+
 
 @html_bp.route("/login")
 def login():
