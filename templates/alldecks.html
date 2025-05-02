@@ -3,7 +3,7 @@
 {% block content %}
     {% for i in data %}
     <div> 
-       <p>{{i.name}}</p> 
+       <a href="{{ url_for('html.deckcont', id=i.id)}}"> {{i.name}}</a>
     </div>
 
     {% endfor %}
