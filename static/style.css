@@ -327,3 +327,12 @@
 .flipped{
   color:red
 }
+
+.unflip{
+  display:none;
+}
+
+.tempcard{
+  border:2px solid black;
+  height:50px;
+}

@@ -2,9 +2,8 @@
 
 {% block content %}
     {% for i in data %}
-    <div> 
+    <div onclick="flipCard(this)" class="tempcard"> 
        <p>{{i.answer}}</p> 
-       <button onclick="flipCard(this)" id="flip"> flip</button>
     </div>
 
     {% endfor %}
