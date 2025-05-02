@@ -334,6 +334,10 @@
   color:red
 }
 
+.flipped .ans{
+  display:none
+}
+
 .card-center-wrapper {
   display: flex;
   justify-content: center;
@@ -345,7 +349,13 @@
   color:blue;
 }
 
+.unflip .ques{
+  display:none
+}
+
+
+
 .tempcard{
   border:2px solid black;
-  height:50px;
+  height:100px;
 }

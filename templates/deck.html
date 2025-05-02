@@ -3,7 +3,8 @@
 {% block content %}
     {% for i in data %}
     <div onclick="flipCard(this)" class="tempcard flipped"> 
-       <p>{{i.answer}}</p> 
+        <p class="ques">{{i.question}}</p>
+        <p class="ans">{{i.answer}}</p> 
     </div>
 
     {% endfor %}
