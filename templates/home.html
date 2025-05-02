@@ -1,27 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-</head>
-<body>
-  <div class="wrapper">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <h2 class="logo">Webname</h2>
-      <nav class="nav-menu">
-        <a href="#" class="nav-link">Dashboard</a>
-        <a href="#" class="nav-link">Unit Library</a>
-        <a href="#" class="nav-link">All Cards</a>
-        <div class="sidebar-divider"></div>
+{% extends "base.html" %}
 
-      </nav>
-    </aside>
-
+{% block content %}
     <!-- Main content -->
     <main class="main-content">
         <header class="main-header">
@@ -44,7 +23,7 @@
           </div>
         </a>
 
-        <a href="#" class="card yellow">
+        <a href="#" class="card plum">
           <div class="card-body">
             <i class="fas fa-folder card-icon"></i>
             <div class="card-title">Deck 2</div>
@@ -54,7 +33,7 @@
           </div>
         </a>
 
-        <a href="#" class="card green">
+        <a href="#" class="card pink">
           <div class="card-body">
             <i class="fas fa-folder card-icon"></i>
             <div class="card-title">Deck 3</div>
@@ -64,7 +43,7 @@
           </div>
         </a>
 
-        <a href="#" class="card red">
+        <a href="#" class="card green">
           <div class="card-body">
             <i class="fas fa-folder card-icon"></i>
             <div class="card-title">Deck 4</div>
@@ -117,6 +96,4 @@
       </section>
     </main>
   </div>
-</body>
-</html>
-
+  {% endblock %}
