@@ -1,18 +1,17 @@
-document.querySelectorAll(".carddeck").forEach(flip => {
-    
-    flip.addEventListener('click', function(){
+function flipCard(cardElement) {
+    if(cardElement.classList.contains('flipped')) {
+        cardElement.classList.add('unflip');
+        cardElement.classList.remove('flipped');
+      }
+    else { 
+        cardElement.classList.add("flipped");
+        cardElement.classList.remove('unflip')
+    }
+}
 
-        if (this.innerHTMl == "flipped"){
-            this.innerHTML = "unflipped"
-        }
-        else{
-            this.innerHTML = "flipped" 
-            this.innerHTML += `<button id="flip"> flip </button>`
-        }
-        
 
-        
-        
-        
+document.querySelectorAll(".answer").forEach(change => {
+    change.addEventListener('click', function(){
+        flipCard(this)
     })
 })

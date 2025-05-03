@@ -12,11 +12,12 @@
   <div class="wrapper">
     <!-- Sidebar -->
     <aside class="sidebar">
-      <h2 class="logo">Webname</h2>
+      <h2 class="logo">QuizCIT</h2>
       <nav class="nav-menu">
-        <a href="#" class="nav-link">Dashboard</a>
+        <a href="{{ url_for('html.home')}}" class="nav-link">Dashboard</a>
         <a href="#" class="nav-link">Unit Library</a>
         <a href="#" class="nav-link">All Cards</a>
+         <a href="{{ url_for('html.faq') }}" class="nav-link">FAQ</a>
         <div class="sidebar-divider"></div>
 
       </nav>
@@ -30,5 +31,6 @@
     &copy; 2025 Group 4, BCIT. All rights reserved.
   </footer>
 
+ 
 </body>
 </html>
