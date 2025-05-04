@@ -1,5 +1,5 @@
 from typing import Optional
-from sqlalchemy import String, ForeignKey, DateTime, func
+from sqlalchemy import String, ForeignKey, DateTime, func, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from db import db
 
@@ -10,6 +10,7 @@ class Cards(db.Model):
     question: Mapped[str] = mapped_column(String(120))
     answer: Mapped[str] = mapped_column(String(120))
     created: Mapped[str] = mapped_column(DateTime, default=func.now())
+    completed: Mapped[bool] = mapped_column(Boolean, default=False)
     deck: Mapped["Deck"] = relationship("Deck", back_populates="cards")
     
     
