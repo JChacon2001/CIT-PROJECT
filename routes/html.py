@@ -29,3 +29,8 @@ def faq():
 @html_bp.route("/testcard")
 def testcard():
     return render_template("testcard.html")
+
+@html_bp.route("/Acards")
+def allcards():
+    cards = db.session.execute(db.select(Cards)).scalars()
+    return render_template("allcards.html", data=cards)
