@@ -9,28 +9,44 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
+
+  <!-- Top Navbar -->
+  <header class="top-bar">
+    <div class="sidebar-toggle" onclick="toggleSidebar()">
+      <i class="fas fa-bars"></i>
+    </div>
+    <div class="top-logo">QuizCIT</div>
+  </header>
+
   <div class="wrapper">
     <!-- Sidebar -->
-    <aside class="sidebar">
-      <h2 class="logo">QuizCIT</h2>
+    <aside class="sidebar" id="sidebar">
       <nav class="nav-menu">
-        <a href="{{ url_for('html.home')}}" class="nav-link">Dashboard</a>
-        <a href="{{ url_for('html.decks')}}" class="nav-link">Unit Library</a>
-        <a href="{{ url_for('html.allcards')}}" class="nav-link">All Cards</a>
-         <a href="{{ url_for('html.faq') }}" class="nav-link">FAQ</a>
+        <a href="{{ url_for('html.home')}}" class="nav-link">
+          <i class="fas fa-home nav-icon"></i><span class="link-text">Dashboard</span>
+        </a>
+        <a href="#" class="nav-link">
+          <i class="fas fa-book nav-icon"></i><span class="link-text">Unit Library</span>
+        </a>
+        <a href="#" class="nav-link">
+          <i class="fas fa-clone nav-icon"></i><span class="link-text">All Cards</span>
+        </a>
+        <a href="{{ url_for('html.faq') }}" class="nav-link">
+          <i class="fas fa-question-circle nav-icon"></i><span class="link-text">FAQ</span>
+        </a>
         <div class="sidebar-divider"></div>
-
       </nav>
     </aside>
 
-  <main class="container">
-    {% block content %}{% endblock %}
-  </main>
+    <main class="main-content" id="main-content">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
 
   <footer>
     &copy; 2025 Group 4, BCIT. All rights reserved.
   </footer>
 
- 
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
