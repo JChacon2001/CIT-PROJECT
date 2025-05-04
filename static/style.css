@@ -4,8 +4,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
-
+a{
+  text-decoration: none;
+}
 body, html {
   height: 100%;
   font-family: 'RosaSansRegular', sans-serif;
@@ -204,6 +207,7 @@ table {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.05);
 }
 
+
 th, td {
   padding: 0.75rem 1rem;
   border: 1px solid #ddd;
@@ -378,19 +382,36 @@ th {
 
 .deck{
   border:2px solid black;
-  width:25%;
-  height:40%;
+  width:15%;
+  height:300px;
   font-size: 50px;
   text-align: center;
-}
-
-.deck a{
-  text-decoration: none;
+  margin:5px;
 }
 
 .deck:hover{
-  background-color: #120d311a;
+  background-color: #120d3110;
   transition: ease-in-out .15s;
   transform:scale(1.04);
 }
 
+.preview{
+  border:2px solid black;
+  width:80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.preview p{
+  font-size: 20px;
+  margin:0;
+}
+
+.decks{
+  display:flex;
+  flex-wrap: wrap;
+}
+
+.Acards p{
+  font-size: 24px;
+}
