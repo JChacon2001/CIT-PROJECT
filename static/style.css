@@ -346,7 +346,51 @@ th {
   height: 100vh;
 }
 
+
+
+/* styles created from user */
 .tempcard {
   border: 2px solid black;
   height: 100px;
 }
+
+.tempcard p{
+  transform: translateX(50%) translateY(50%);
+
+}
+
+.flipped{
+  color:red
+}
+
+.flipped .ans{
+  display:none
+}
+
+.unflip{
+  color:blue;
+  
+}
+
+.unflip .ques{
+  display:none
+}
+
+.deck{
+  border:2px solid black;
+  width:25%;
+  height:40%;
+  font-size: 50px;
+  text-align: center;
+}
+
+.deck a{
+  text-decoration: none;
+}
+
+.deck:hover{
+  background-color: #120d311a;
+  transition: ease-in-out .15s;
+  transform:scale(1.04);
+}
+

@@ -2,8 +2,13 @@
 
 {% block content %}
     {% for i in data %}
-    <div> 
+    <div class="deck"> 
        <a href="{{ url_for('html.deckcont', id=i.id)}}"> {{i.name}}</a>
+       <div class="preview">
+            {% for j in data.cards %}
+                <p>{j.answer}</p>
+            {% endfor %}
+       </div>
     </div>
 
     {% endfor %}
