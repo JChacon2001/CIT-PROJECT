@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% for i in data %}
-    <div> 
-       <a href="{{ url_for('html.deckcont', id=i.id)}}"> {{i.name}}</a>
+    <div class="decks">
+        {% for i in data %}
+        <div class="deck">
+            <a href="{{ url_for('html.deckcont', id=i.id)}}" >{{i.name}}</a>
+            <div class="preview">
+                {% for j in i.cards %}
+                <p>{{ j.answer }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
     </div>
-
-    {% endfor %}
+    
 
 {% endblock %}

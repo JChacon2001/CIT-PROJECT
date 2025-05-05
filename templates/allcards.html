@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class=" decks">
+    {% for i in data %}
+    <div class="deck Acards">
+        <p>from {{i.deck.name}}</p>
+        <p>{{i.answer}}</p>
+        <p>{{i.question}}</p>
+    </div>
+
+    {% endfor %}
+</div>
+    
+
+{% endblock %}

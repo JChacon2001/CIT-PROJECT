@@ -5,15 +5,25 @@
     <main class="main-content">
         <header class="main-header">
             <h1>Dashboard</h1>
-            <div class="search-container">
-              <i class="fas fa-search search-icon"></i>
-              <input type="text" placeholder="Search..." class="search-input" />
-            </div>
           </header>          
 
       <!-- Cards -->
       <section class="card-section">
-        <a href="#" class="card blue">
+        {% for i in top4 %}
+          <a href="{{ url_for('html.deckcont', id=i.id)}}" class="card blue">
+            <div class="card-body">
+              <i class="fas fa-folder card-icon"></i>
+              <div class="card-title">
+                <!-- Deck {{i.id}} -->
+                 {{i.name}}
+              </div>
+            </div>
+            <div class="card-footer">
+              <span class="arrow">›</span>
+            </div>
+          </a>
+        {% endfor %}
+        <!-- <a href="#" class="card blue">
           <div class="card-body">
             <i class="fas fa-folder card-icon"></i>
             <div class="card-title">Deck 1</div>
@@ -51,7 +61,7 @@
           <div class="card-footer">
             <span class="arrow">›</span>
           </div>
-        </a>
+        </a> -->
       </section>
 
       <!-- Tables -->
@@ -68,9 +78,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td>Deck 1</td><td>25</td><td>80%</td><td>2023/04/10</td><td>2024/03/01</td></tr>
-            <tr><td>Deck 2</td><td>40</td><td>90%</td><td>2023/02/15</td><td>2024/03/20</td></tr>
-            <tr><td>Deck 3</td><td>30</td><td>70%</td><td>2023/01/22</td><td>2024/04/01</td></tr>
+            {% for i in Deck %}
+            <tr><td><a href="{{ url_for('html.deckcont', id=i.id)}}">{{i.name}}</a></td><td>{{ i.cards }}</td><td>80%</td><td>2023/04/10</td><td>2024/03/01</td></tr>
+            <!-- <tr><td>Deck 2</td><td>40</td><td>90%</td><td>2023/02/15</td><td>2024/03/20</td></tr>
+            <tr><td>Deck 3</td><td>30</td><td>70%</td><td>2023/01/22</td><td>2024/04/01</td></tr> -->
+            {% endfor %}
           </tbody>
         </table>
       </section>
