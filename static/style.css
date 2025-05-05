@@ -330,8 +330,22 @@
   transform: rotateY(180deg);
 }
 
+@keyframes flipping{
+  0%{
+    transform:skewX(0deg)
+  }
+  100%{
+    transform:skewX(180deg)
+  }
+}
 .flipped{
-  color:red
+  color:red;
+  animation-name:flipping;
+  animation-duration:2s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in-out 3s;
+  animation-fill-mode: forwards;
+
 }
 
 .flipped .ans{

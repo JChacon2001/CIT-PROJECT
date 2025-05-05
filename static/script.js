@@ -9,6 +9,9 @@ function flipCard(cardElement) {
     }
 }
 
+function flipping(card){
+    card.classList.add = 'rotateY(180%)'
+}
 
 document.querySelectorAll(".answer").forEach(change => {
     change.addEventListener('click', function(){
