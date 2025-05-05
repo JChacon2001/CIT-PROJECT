@@ -1,8 +1,9 @@
 from flask import Flask, render_template
 from routes import html_bp
 from db import db
+from flask_wtf import FlaskForm
 app = Flask(__name__)
-
+app.config['SECRET_KEY'] = 'supersecret'
 
 app.register_blueprint(html_bp, url_prefix="/")
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
