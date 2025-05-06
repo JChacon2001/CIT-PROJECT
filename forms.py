@@ -11,3 +11,8 @@ class CardForm(FlaskForm):
     question = TextAreaField("Question")
     answer = TextAreaField("Answer")
     submit = SubmitField("Save Card")
+    
+class EditCardForm(FlaskForm):
+    question = TextAreaField('Question')
+    answer   = TextAreaField('Answer')
+    submit   = SubmitField('Save Changes')

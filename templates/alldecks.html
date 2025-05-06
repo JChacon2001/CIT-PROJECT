@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <a href="{{ url_for('html.deck_form') }}"> Add Deck </a>
     <div class="decks">
         {% for i in data %}
         <div class="deck">
