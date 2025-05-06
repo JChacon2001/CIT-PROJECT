@@ -58,7 +58,7 @@ def create_card():
 
 @html_bp.route('/card/edit/<int:id>', methods=['GET', 'POST'])
 def edit_card(id):
-    stmt = db.select(Cards).where(Cards.deck_id == id)
+    stmt = db.select(Cards).where(Cards.id == id)
     card = db.session.execute(stmt).scalar()
     form = EditCardForm(obj=card)
     if form.validate_on_submit():
