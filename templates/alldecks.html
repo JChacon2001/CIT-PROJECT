@@ -11,6 +11,7 @@
                 <p>{{ j.answer }}</p>
                 {% endfor %}
             </div>
+        <a href="{{ url_for('html.edit_deck', id=i.id)}}">Edit</a>
         </div>
         {% endfor %}
     </div>

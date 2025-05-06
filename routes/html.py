@@ -69,6 +69,18 @@ def edit_card(id):
 
     return render_template('edit_card.html', form=form, card=card)
 
+@html_bp.route('/deck/edit/<int:id>', methods=['GET', 'POST'])
+def edit_deck(id):
+    stmt = db.select(Deck).where(Deck.id == id)
+    deck = db.session.execute(stmt).scalar()
+    form = DeckForm(obj=deck)
+    if form.validate_on_submit():
+        deck.name = form.name.data
+        deck.description   = form.description.data
+        db.session.commit()
+        return redirect(url_for('html.decks', id=id))
+    return render_template('edit_deck.html', form=form, deck=deck)
+
 @html_bp.route("/faq")
 def faq():
     return render_template("faq.html")
