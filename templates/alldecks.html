@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <a href="{{ url_for('html.deck_form') }}"> Add Deck </a>
+    <a href="{{ url_for('html.deck_form') }}" class="btn btn-primary"> Add Deck </a>
     <div class="decks">
         {% for i in data %}
         <div class="deck">
@@ -11,7 +11,8 @@
                 <p>{{ j.answer }}</p>
                 {% endfor %}
             </div>
-        <a href="{{ url_for('html.edit_deck', id=i.id)}}">Edit</a>
+        <a href="{{ url_for('html.edit_deck', id=i.id)}}" class="btn btn-primary">Edit</a>
+        <a href="{{ url_for('html.delete_deck', id=i.id)}}" class="btn btn-danger">Delete</a>
         </div>
         {% endfor %}
     </div>

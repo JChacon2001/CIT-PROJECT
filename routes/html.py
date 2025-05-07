@@ -30,8 +30,7 @@ def deckcont(id):
 def deck_form():
     form = DeckForm()
     if form.validate_on_submit():
-       
-        cat_name = form.category.data.strip()    
+        cat_name = form.category.data
         stmt = db.select(Category).where(Category.name == cat_name)
         category = db.session.execute(stmt).scalar()
         if category is None:
@@ -84,6 +83,7 @@ def edit_deck(id):
     if form.validate_on_submit():
         deck.name = form.name.data
         deck.description   = form.description.data
+        deck.category_name = form.category.data
         db.session.commit()
         return redirect(url_for('html.decks', id=id))
     return render_template('edit_deck.html', form=form, deck=deck)
@@ -97,6 +97,15 @@ def delete_card(id):
     db.session.commit()
     return redirect(url_for('html.decks', id=deck_id))
 
+@html_bp.route('/deck/delete/<int:id>')
+def delete_deck(id):
+    stmt = db.select(Deck).where(Deck.id == id)
+    deck = db.session.execute(stmt).scalar()
+    for i in deck.cards:
+        db.session.delete(i)
+    db.session.delete(deck)
+    db.session.commit()
+    return redirect(url_for('html.decks'))
 
 @html_bp.route("/faq")
 def faq():
