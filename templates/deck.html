@@ -4,6 +4,7 @@
     {% for i in data %}
     <div onclick="flipCard(this)" class="tempcard flipped"> 
     <a href="{{ url_for('html.edit_card', id=i.id)}}" >Edit Card </a>
+    <a href="{{ url_for('html.delete_card', id=i.id) }}" onclick="return confirm('Really delete this card?');">Delete</a>
         <p class="ques">{{i.question}}</p>
         <p class="ans">{{i.answer}}</p> 
     </div>

@@ -81,6 +81,16 @@ def edit_deck(id):
         return redirect(url_for('html.decks', id=id))
     return render_template('edit_deck.html', form=form, deck=deck)
 
+@html_bp.route('/card/delete/<int:id>')
+def delete_card(id):
+    stmt = db.select(Cards).where(Cards.id == id)
+    card = db.session.execute(stmt).scalar()
+    deck_id = card.deck_id
+    db.session.delete(card)
+    db.session.commit()
+    return redirect(url_for('html.decks', id=deck_id))
+
+
 @html_bp.route("/faq")
 def faq():
     return render_template("faq.html")
