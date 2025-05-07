@@ -27,17 +27,23 @@ def deckcont(id):
     return render_template("deck.html", data=exec)
 
 @html_bp.route("/deck/new", methods=['GET', 'POST'])
-def deck_form(id=None):
+def deck_form():
     form = DeckForm()
-    
     if form.validate_on_submit():
-        new_deck = Deck(name=form.name.data, description=form.description.data)
+       
+        cat_name = form.category.data.strip()    
+        stmt = db.select(Category).where(Category.name == cat_name)
+        category = db.session.execute(stmt).scalar()
+        if category is None:
+            category = Category(name=cat_name)
+            db.session.add(category) 
+        new_deck = Deck(name=form.name.data,description=form.description.data,category=category)
         db.session.add(new_deck)
         db.session.commit()
-    
         return redirect(url_for("html.decks"))
 
     return render_template("create_deck.html", form=form)
+
 
 @html_bp.route('/card/new', methods=['GET', 'POST'])
 def create_card():

@@ -3,8 +3,10 @@ from wtforms import StringField, TextAreaField, SubmitField, SelectField
 
 class DeckForm(FlaskForm):
     name = StringField("Deck Name")
-    description = TextAreaField("Description")
-    submit = SubmitField("Save Deck")
+    description = StringField("Description")
+    category    = StringField("Category")
+    submit = SubmitField("Create Deck")
+
     
 class CardForm(FlaskForm):
     deck = SelectField('Deck', coerce=int)
