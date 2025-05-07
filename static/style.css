@@ -415,3 +415,10 @@ th {
 .Acards p{
   font-size: 24px;
 }
+
+.next-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+}
