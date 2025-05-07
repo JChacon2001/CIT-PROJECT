@@ -356,8 +356,8 @@ th {
 .tempcard {
   border: 2px solid black;
   height: 100px;
+  width: 50%;
 }
-
 .tempcard p{
   transform: translateX(50%) translateY(50%);
 
@@ -373,7 +373,6 @@ th {
 
 .flip{
   color:blue;
-  
 }
 
 .flip .ques{
