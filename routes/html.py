@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for
 from models import *
-from forms import DeckForm, CardForm
+from forms import DeckForm, CardForm, EditCardForm
 from db import db
 html_bp = Blueprint("html", __name__)
 
@@ -55,6 +55,42 @@ def create_card():
         return redirect(url_for('html.decks', id=deck_id))
 
     return render_template("create_card.html", form=form)
+
+@html_bp.route('/card/edit/<int:id>', methods=['GET', 'POST'])
+def edit_card(id):
+    stmt = db.select(Cards).where(Cards.id == id)
+    card = db.session.execute(stmt).scalar()
+    form = EditCardForm(obj=card)
+    if form.validate_on_submit():
+        card.question = form.question.data
+        card.answer   = form.answer.data
+        db.session.commit()
+        return redirect(url_for('html.decks', id=card.deck_id))
+
+    return render_template('edit_card.html', form=form, card=card)
+
+@html_bp.route('/deck/edit/<int:id>', methods=['GET', 'POST'])
+def edit_deck(id):
+    stmt = db.select(Deck).where(Deck.id == id)
+    deck = db.session.execute(stmt).scalar()
+    form = DeckForm(obj=deck)
+    if form.validate_on_submit():
+        deck.name = form.name.data
+        deck.description   = form.description.data
+        db.session.commit()
+        return redirect(url_for('html.decks', id=id))
+    return render_template('edit_deck.html', form=form, deck=deck)
+
+@html_bp.route('/card/delete/<int:id>')
+def delete_card(id):
+    stmt = db.select(Cards).where(Cards.id == id)
+    card = db.session.execute(stmt).scalar()
+    deck_id = card.deck_id
+    db.session.delete(card)
+    db.session.commit()
+    return redirect(url_for('html.decks', id=deck_id))
+
+
 @html_bp.route("/faq")
 def faq():
     return render_template("faq.html")

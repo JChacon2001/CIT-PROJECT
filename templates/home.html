@@ -10,19 +10,24 @@
       <!-- Cards -->
       <section class="card-section">
         {% for i in top4 %}
-          <a href="{{ url_for('html.deckcont', id=i.id)}}" class="card blue">
+          <a href="{{ url_for('html.deckcont', id=i.id) }}" 
+             class="card 
+                    {% if loop.index == 1 %}blue
+                    {% elif loop.index == 2 %}plum
+                    {% elif loop.index == 3 %}pink
+                    {% elif loop.index == 4 %}green
+                    {% endif %}">
             <div class="card-body">
               <i class="fas fa-folder card-icon"></i>
-              <div class="card-title">
-                <!-- Deck {{i.id}} -->
-                 {{i.name}}
-              </div>
+              <div class="card-title">{{ i.name }}</div>
             </div>
             <div class="card-footer">
               <span class="arrow">›</span>
             </div>
           </a>
         {% endfor %}
+      </section>
+      
         <!-- <a href="#" class="card blue">
           <div class="card-body">
             <i class="fas fa-folder card-icon"></i>
