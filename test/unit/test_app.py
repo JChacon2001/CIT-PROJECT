@@ -5,3 +5,34 @@ def test_main_page(test_client):
     assert response.status_code == 200
     assert b"Dashboard" in response.data
 
+
+def test_faq_page(test_client):
+    response = test_client.get('/faq')
+    assert response.status_code == 200
+    assert b"FAQs" in response.data
+
+def test_unit_lib_page(test_client):
+    response = test_client.get('/decks')
+    assert response.status_code == 200
+    assert b"Add Deck" in response.data
+
+def test_allcards_page(test_client):
+    response = test_client.get('/Acards')
+    assert response.status_code == 200
+    assert b"from Test1" in response.data
+
+def test_create_card_page(test_client):
+    response = test_client.get('/card/new')
+    assert response.status_code == 200
+    assert b"Deck" in response.data 
+
+def test_view_single_deck(test_client):
+    response = test_client.get('card/edit/1')
+    assert response.status_code == 200
+    assert b"bad" in response.data 
+
+def test_edit_card_page(test_client):
+    response = test_client.get('card/edit/1')
+    assert response.status_code == 200
+    assert b"Question" in response.data 
+
