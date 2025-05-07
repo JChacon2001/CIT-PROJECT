@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for
+from flask import session, request
 from models import *
 from forms import DeckForm, CardForm, EditCardForm
 from db import db
@@ -97,7 +98,23 @@ def faq():
 
 @html_bp.route("/testcard")
 def testcard():
-    return render_template("testcard.html")
+    if "card_index" not in session:
+        session["card_index"] = 0
+
+    all_cards = db.session.execute(db.select(Cards)).scalars().all()
+
+    if not all_cards:
+        return "No cards available."
+
+    index = session["card_index"] % len(all_cards)
+    current_card = all_cards[index]
+
+    return render_template("testcard.html", question=current_card.question, answer=current_card.answer)
+
+@html_bp.route("/testcard/next", methods=["POST"])
+def next_testcard():
+    session["card_index"] = session.get("card_index", 0) + 1
+    return redirect(url_for("html.testcard"))
 
 @html_bp.route("/Acards")
 def allcards():
