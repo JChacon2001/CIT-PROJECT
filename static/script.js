@@ -1,18 +1,14 @@
 function flipCard(cardElement) {
-    if(cardElement.classList.contains('flipped')) {
-        cardElement.classList.add('unflip');
-        cardElement.classList.remove('flipped');
-        cardElement.flipping(this)
+    if(cardElement.classList.contains('unflipped')) {
+        cardElement.classList.add('flip');
+        cardElement.classList.remove('unflipped');
+
       }
     else { 
-        cardElement.classList.add("flipped");
-        cardElement.classList.remove('unflip')
-        cardElement.flipping(this)
-    }
-}
+        cardElement.classList.add("unflipped");
+        cardElement.classList.remove('flip')
 
-function flipping(card){
-    card.style.transform = "rotateY(180deg)"
+    }
 }
 
 document.querySelectorAll(".answer").forEach(change => {

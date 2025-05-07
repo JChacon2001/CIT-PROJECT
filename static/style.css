@@ -363,20 +363,20 @@ th {
 
 }
 
-.flipped{
+.unflipped{
   color:red
 }
 
-.flipped .ans{
+.unflipped .ans{
   display:none
 }
 
-.unflip{
+.flip{
   color:blue;
   
 }
 
-.unflip .ques{
+.flip .ques{
   display:none
 }
 
