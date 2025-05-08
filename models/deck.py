@@ -9,4 +9,4 @@ class Deck(db.Model):
     name: Mapped[str] = mapped_column(String(50))
     description: Mapped[str] = mapped_column(String(50), nullable=True)
     cards: Mapped[list["Cards"]] = relationship("Cards", back_populates="deck")
-    category: Mapped[list["Category"]] = relationship("categories", back_populates="deck")
+    category: Mapped[list["Category"]] = relationship("Category", back_populates="deck")
