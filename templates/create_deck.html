@@ -17,6 +17,12 @@
       
     </p>
 
+    <p>
+      {{ form.category.label }}<br>
+      {{ form.category }}<br>
+      
+    </p>
+
     <p>{{ form.submit() }}</p>
   </form>
   <p><a href="{{ url_for('html.decks') }}"> Back to all decks</a></p>

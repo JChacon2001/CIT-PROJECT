@@ -4,11 +4,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  
 }
-a{
+
+a {
   text-decoration: none;
 }
+
 body, html {
   height: 100%;
   font-family: 'RosaSansRegular', sans-serif;
@@ -207,7 +208,6 @@ table {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.05);
 }
 
-
 th, td {
   padding: 0.75rem 1rem;
   border: 1px solid #ddd;
@@ -350,68 +350,65 @@ th {
   height: 100vh;
 }
 
-
-
 /* styles created from user */
 .tempcard {
   border: 2px solid black;
   height: 100px;
   width: 50%;
 }
-.tempcard p{
+.tempcard p {
   transform: translateX(50%) translateY(50%);
-
 }
 
-.unflipped{
-  color:red
+.unflipped {
+  color: red;
 }
 
-.unflipped .ans{
-  display:none
+.unflipped .ans {
+  display: none;
 }
 
-.flip{
-  color:blue;
+.flip {
+  color: blue;
 }
 
-.flip .ques{
-  display:none
+.flip .ques {
+  display: none;
 }
 
-.deck{
-  border:2px solid black;
-  width:15%;
-  height:300px;
+.deck {
+  border: 2px solid black;
+  width: 15%;
+  height: 300px;
   font-size: 50px;
   text-align: center;
-  margin:5px;
+  margin: 5px;
 }
 
-.deck:hover{
+.deck:hover {
   background-color: #120d3110;
   transition: ease-in-out .15s;
-  transform:scale(1.04);
+  transform: scale(1.04);
 }
 
-.preview{
-  border:2px solid black;
-  width:80%;
+.preview {
+  border: 2px solid black;
+  width: 80%;
   margin-left: auto;
   margin-right: auto;
 }
 
-.preview p{
+.preview p {
   font-size: 20px;
-  margin:0;
+  margin: 0;
 }
 
-.decks{
-  display:flex;
+.decks {
+  display: flex;
   flex-wrap: wrap;
 }
 
-.Acards p{
+.Acards p {
   font-size: 24px;
 }
 

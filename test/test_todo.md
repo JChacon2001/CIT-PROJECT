@@ -6,13 +6,13 @@
 
 ## Test decks aka unit lib
 
-[ ] Test deck page
+[ x ] Test deck page
 
 [ ] Test deck card access
 
-[ ] Test deck card edit feature on front end
+[ x ] Test deck card edit feature on front end
 
-[ ] Test deck card edit feature on db
+[  ] Test deck card edit feature on db
 
 ##  Test deck card
 
