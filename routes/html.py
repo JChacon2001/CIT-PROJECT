@@ -131,6 +131,12 @@ def next_testcard():
     session["card_index"] = session.get("card_index", 0) + 1
     return redirect(url_for("html.testcard"))
 
+@html_bp.route("/testcard/back", methods=["POST"])
+def back_testcard():
+    if not session["card_index"] == 0 or not session["card_index"] < 0:
+        session["card_index"] = session.get("card_index",0) - 1
+    return redirect(url_for("html.testcard"))
+
 @html_bp.route("/Acards")
 def allcards():
     cards = db.session.execute(db.select(Cards)).scalars()
