@@ -26,13 +26,11 @@ def test_client():
 def test_client2():
     app = create_app()
     app.config['TESTING'] = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:database.db:'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
     app.config['WTF_CSRF_ENABLED'] = False
     app.config["SECRET_KEY"] = "supersecret"
 
     app.register_blueprint(html_bp, url_prefix="/")
-
-
 
     with app.app_context():  
         db.create_all()
