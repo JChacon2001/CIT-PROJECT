@@ -43,21 +43,22 @@ def create_app(config_class=TestConfig):
 #             db.drop_all()
 @pytest.fixture
 def test_client():
-    return app.test_client()
+    return app.test_client(TestConfig)
 
 @pytest.fixture
 def test_client2():
     app = create_app()
     app.config['TESTING'] = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:database.db:'
     app.config['WTF_CSRF_ENABLED'] = False
 
-    with app.app_context(): 
+
+    with app.app_context():  # Ensure app context is active
         db.create_all()
 
     with app.test_client() as testing_client:
-        with app.app_context():  
+        with app.app_context():  # again during test execution
             yield testing_client
 
-    with app.app_context():
-        db.drop_all()
+    # with app.app_context():
+    #     db.drop_all()
