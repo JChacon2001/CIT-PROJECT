@@ -71,7 +71,7 @@ def edit_card(id):
         card.question = form.question.data
         card.answer   = form.answer.data
         db.session.commit()
-        return redirect(url_for('html.deckcont', id=card.deck_id))
+        return redirect(url_for('html.decks', id=card.deck_id))
 
     return render_template('edit_card.html', form=form, card=card)
 
@@ -92,10 +92,11 @@ def edit_deck(id):
 def delete_card(id):
     stmt = db.select(Cards).where(Cards.id == id)
     card = db.session.execute(stmt).scalar()
-    deck_id = card.deck_id
+    stmt2 = db.session.execute(db.select(Deck).where(Deck.id == card.deck_id)).scalar()
+    r2 = stmt2.id
     db.session.delete(card)
     db.session.commit()
-    return redirect(url_for('html.decks', id=deck_id))
+    return redirect(url_for('html.deckcont', id=r2))
 
 @html_bp.route('/deck/delete/<int:id>')
 def delete_deck(id):
