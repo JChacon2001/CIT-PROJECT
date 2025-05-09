@@ -3,6 +3,7 @@ from flask import Flask, render_template
 from routes import html_bp
 from db import db
 
+
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'supersecret'
