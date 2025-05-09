@@ -13,7 +13,7 @@ def home():
 
 @html_bp.route("/qa")
 def q_and_a():
-    return "q and a page"
+    return render_template("QA.html")
 
 @html_bp.route("/decks")
 def decks():
