@@ -89,6 +89,9 @@ body, html {
   transition: background 0.3s, padding 0.3s;
   min-height: 48px;
 }
+.home-link {
+  color: white;
+}
 
 .nav-icon {
   font-size: 1.2rem;
@@ -925,4 +928,10 @@ th {
   color: #556677;
   padding-left: 16px;
   border-left: 1px solid #eceef0;
+}
+
+/* Table header styling */
+table thead th {
+  background-color: #302F4D;
+  color: white;
 }
