@@ -1,13 +1,11 @@
 function flipCard(cardElement) {
-    if(cardElement.classList.contains('unflipped')) {
-        cardElement.classList.add('flip');
-        cardElement.classList.remove('unflipped');
-
+    if(cardElement.classList.contains('flipped')) {
+        cardElement.classList.add('unflip');
+        cardElement.classList.remove('flipped');
       }
     else { 
-        cardElement.classList.add("unflipped");
-        cardElement.classList.remove('flip')
-
+        cardElement.classList.add("flipped");
+        cardElement.classList.remove('unflip')
     }
 }
 
@@ -22,3 +20,4 @@ function toggleSidebar() {
     sidebar.classList.toggle('collapsed');
   }
   
+
