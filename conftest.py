@@ -52,11 +52,11 @@ def test_client2():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
     app.config['WTF_CSRF_ENABLED'] = False
 
-    with app.app_context():  # Ensure app context is active
+    with app.app_context(): 
         db.create_all()
 
     with app.test_client() as testing_client:
-        with app.app_context():  # again during test execution
+        with app.app_context():  
             yield testing_client
 
     with app.app_context():

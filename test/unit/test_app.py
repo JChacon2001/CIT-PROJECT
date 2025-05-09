@@ -61,7 +61,7 @@ def test_main_page_loads(test_client):
     
 
 #     with test_client.application.app_context():
-#         deckstest = db.session.query(Deck).filter_by(name="test deck").all()
+#         deckstest = db.session.query(Deck).filter_by(name="test deck")
 #         # assert len(deckstest) == 1
 #         # print(deckstest)
 #         assert deckstest[1].description == "Testing"
