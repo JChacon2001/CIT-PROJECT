@@ -8,12 +8,12 @@ function flipCard(cardElement) {
         cardElement.classList.remove('unflip')
     }
 }
-
+    
 document.querySelectorAll(".answer").forEach(change => {
-    change.addEventListener('click', function(){
-        flipCard(this)
+        change.addEventListener('click', function(){
+            flipCard(this)
     })
-})
+})  
 
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
