@@ -1,7 +1,7 @@
-# app.py
 from flask import Flask, render_template
 from routes import html_bp
 from db import db
+
 
 def create_app():
     
