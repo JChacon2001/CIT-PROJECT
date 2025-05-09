@@ -3,10 +3,26 @@
 {% block content %}
 <div class=" decks">
     {% for i in data %}
-    <div class="deck Acards">
-        <p>from {{i.deck.name}}</p>
-        <p>{{i.answer}}</p>
-        <p>{{i.question}}</p>
+    <div class="flip-card" onclick="flipCard(this)">
+        <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <h1>from {{ i.deck.name }}</h1>
+            <div class="options">
+                <a href="{{ url_for('html.edit_card', id=i.id)}}" >Edit</a>
+                <a href="{{ url_for('html.delete_card', id=i.id) }}" onclick="return confirm('Really delete this card?');">Delete</a>
+            </div>
+            <h2>{{ i.question }}</h2>
+        </div>
+        <div class="flip-card-back">
+            <h1>from {{ i.deck.name }}</h1>
+            <div class="options">
+                <a href="{{ url_for('html.edit_card', id=i.id)}}" >Edit</a>
+                <a href="{{ url_for('html.delete_card', id=i.id) }}" onclick="return confirm('Really delete this card?');">Delete</a>
+            </div>
+            
+            <h2>{{ i.answer }}</h2>
+        </div>
+        </div>
     </div>
 
     {% endfor %}

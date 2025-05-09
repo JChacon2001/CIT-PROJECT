@@ -304,6 +304,7 @@ th {
   width: 300px;
   height: 200px;
   perspective: 1000px;
+  margin:5px;
 }
 
 .flip-card-inner {
@@ -313,6 +314,12 @@ th {
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
+}
+
+.flip-card-inner h1{
+  position:absolute;
+  font-size:15px;
+  transform:translate(150%,350%)
 }
 
 .flip-card.flipped .flip-card-inner {
@@ -343,6 +350,10 @@ th {
   transform: rotateY(180deg);
 }
 
+.flip-card-back a{
+  color:rgb(215, 255, 68);
+}
+
 .card-center-wrapper {
   display: flex;
   justify-content: center;
@@ -351,55 +362,62 @@ th {
 }
 
 /* styles created from user */
-.tempcard {
-  border: 2px solid black;
-  height: 100px;
-  width: 50%;
-}
-.tempcard p {
-  transform: translateX(50%) translateY(50%);
+
+.options {
+  position:absolute;
+  transform: translateX(-110%) translateY(-300%);
 }
 
-.unflipped {
-  color: red;
-}
-
-.unflipped .ans {
-  display: none;
-}
-
-.flip {
-  color: blue;
-}
-
-.flip .ques {
-  display: none;
+.cardarray{
+  display:flex;
+  flex-wrap: wrap;
 }
 
 .deck {
-  border: 2px solid black;
-  width: 15%;
+  background-color: transparent;
+  width: 300px;
   height: 300px;
-  font-size: 50px;
-  text-align: center;
-  margin: 5px;
+  perspective: 1000px;
+  margin:5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 15px ;
+  padding:15px;
 }
 
+.deck .title{
+  font-size:30px
+}
 .deck:hover {
   background-color: #120d3110;
   transition: ease-in-out .15s;
   transform: scale(1.04);
 }
 
+.deck .eord{
+  position:absolute;
+  bottom:10px
+}
+
+.eord a{
+  font-size:10px;
+}
+
+
 .preview {
-  border: 2px solid black;
+
   width: 80%;
   margin-left: auto;
   margin-right: auto;
+  height:60%;
+  overflow:scroll;
+}
+
+.preview::-webkit-scrollbar{
+  display:none
 }
 
 .preview p {
-  font-size: 20px;
+  font-size: 16px;
   margin: 0;
 }
 
@@ -418,3 +436,14 @@ th {
   font-size: 1rem;
   cursor: pointer;
 }
+
+.create_deck{
+  margin-left:auto;
+  margin-right:auto;
+  width:50%;
+  text-align:center;
+  border-radius: 25px;
+  padding:20px;
+
+}
+

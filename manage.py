@@ -4,6 +4,8 @@ import csv
 from sqlalchemy import select, func
 from models import Cards, Deck
 
+file = "flashcard.csv"
+
 def load_csv(filename):
     with open(filename, 'r', encoding='utf-8') as csvfile:
         csvreader = csv.DictReader(csvfile)
@@ -34,4 +36,4 @@ if __name__ == "__main__":
     with app.app_context():
         drop_tables()
         create_tables()
-        load_csv("test.csv")
+        load_csv(file)
