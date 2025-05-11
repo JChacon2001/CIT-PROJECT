@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <a href="{{ url_for('html.deck_form') }}" class="btn btn-primary"> Add Deck </a>
+    <div class="decks">
+        {% for i in data %}
+        <div class="deck">
+            <a href="{{ url_for('html.deckcont', id=i.id)}}" class="title">{{i.name}}</a>
+            <div class="preview">
+                {% for j in i.cards %}
+                <p>{{ j.question }}</p>
+                {% endfor %}
+            </div>
+            <div class="eord">
+                <a href="{{ url_for('html.edit_deck', id=i.id)}}" class="btn btn-primary">Edit</a>
+                <a href="{{ url_for('html.delete_deck', id=i.id)}}" class="btn btn-danger">Delete</a>
+            </div>
+        
+        </div>
+        {% endfor %}
+    </div>
+    
+
+{% endblock %}

@@ -1,79 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/rosa-sans" type="text/css"/>
-</head>
-<body>
-  <div class="wrapper">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <h2 class="logo">Webname</h2>
-      <nav class="nav-menu">
-        <a href="#" class="nav-link">Dashboard</a>
-        <a href="#" class="nav-link">Unit Library</a>
-        <a href="#" class="nav-link">All Cards</a>
-        <div class="sidebar-divider"></div>
+{% extends "base.html" %}
 
-      </nav>
-    </aside>
-
+{% block content %}
     <!-- Main content -->
     <main class="main-content">
-        <header class="main-header">
-            <h1>Dashboard</h1>
-            <div class="search-container">
-              <i class="fas fa-search search-icon"></i>
-              <input type="text" placeholder="Search..." class="search-input" />
-            </div>
-          </header>          
+      <header class="main-header">
+        <h1>Dashboard</h1>
+      </header>
 
       <!-- Cards -->
       <section class="card-section">
-        <a href="#" class="card blue">
-          <div class="card-body">
-            <i class="fas fa-folder card-icon"></i>
-            <div class="card-title">Deck 1</div>
-          </div>
-          <div class="card-footer">
-            <span class="arrow">›</span>
-          </div>
-        </a>
-
-        <a href="#" class="card yellow">
-          <div class="card-body">
-            <i class="fas fa-folder card-icon"></i>
-            <div class="card-title">Deck 2</div>
-          </div>
-          <div class="card-footer">
-            <span class="arrow">›</span>
-          </div>
-        </a>
-
-        <a href="#" class="card green">
-          <div class="card-body">
-            <i class="fas fa-folder card-icon"></i>
-            <div class="card-title">Deck 3</div>
-          </div>
-          <div class="card-footer">
-            <span class="arrow">›</span>
-          </div>
-        </a>
-
-        <a href="#" class="card red">
-          <div class="card-body">
-            <i class="fas fa-folder card-icon"></i>
-            <div class="card-title">Deck 4</div>
-          </div>
-          <div class="card-footer">
-            <span class="arrow">›</span>
-          </div>
-        </a>
+        {% for i in top4 %}
+          <a href="{{ url_for('html.deckcont', id=i.id) }}"
+             class="card
+                    {% if loop.index == 1 %}blue
+                    {% elif loop.index == 2 %}plum
+                    {% elif loop.index == 3 %}pink
+                    {% elif loop.index == 4 %}green
+                    {% endif %}">
+            <div class="card-body">
+              <i class="fas fa-folder card-icon"></i>
+              <div class="card-title">{{ i.name }}</div>
+            </div>
+            <div class="card-footer">
+              <span class="arrow">›</span>
+            </div>
+          </a>
+        {% endfor %}
       </section>
 
       <!-- Tables -->
@@ -90,9 +42,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td>Deck 1</td><td>25</td><td>80%</td><td>2023/04/10</td><td>2024/03/01</td></tr>
-            <tr><td>Deck 2</td><td>40</td><td>90%</td><td>2023/02/15</td><td>2024/03/20</td></tr>
-            <tr><td>Deck 3</td><td>30</td><td>70%</td><td>2023/01/22</td><td>2024/04/01</td></tr>
+            {% for i in Deck %}
+              <tr>
+                <td><a href="{{ url_for('html.deckcont', id=i.id) }}">{{ i.name }}</a></td>
+                <td>{{ i.cards|length }}</td>
+                <td>0%</td>
+                <td>2023/04/10</td>
+                <td>2024/03/01</td>
+              </tr>
+            {% endfor %}
           </tbody>
         </table>
       </section>
@@ -118,6 +76,4 @@
       </section>
     </main>
   </div>
-</body>
-</html>
-
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="create_deck">
+<form method="post">
+  {{ form.hidden_tag() }}
+  <div>
+    {{ form.name.label }} <br>
+    {{ form.name() }}
+  </div>
+  <div>
+    {{ form.description.label }} <br>
+    {{ form.description() }}
+  </div>
+   <div>
+    {{ form.category.label }} <br>
+    {{ form.category() }}
+  </div>
+  <div>
+    {{ form.submit() }}
+  </div>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="cardarray">
+        {% for i in data %}
+        <div class="flip-card" onclick="flipCard(this)">
+            <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <div class="options">
+                    <a href="{{ url_for('html.edit_card', id=i.id)}}" >Edit</a>
+                    <a href="{{ url_for('html.delete_card', id=i.id) }}" onclick="return confirm('Really delete this card?');">Delete</a>
+                </div>
+                <h2> {{ i.question }}</h2>
+            </div>
+            <div class="flip-card-back">
+                <div class="options">
+                    <a href="{{ url_for('html.edit_card', id=i.id)}}" >Edit</a>
+                    <a href="{{ url_for('html.delete_card', id=i.id) }}" onclick="return confirm('Really delete this card?');">Delete</a>
+                </div>
+                
+                <h2>{{ i.answer }}</h2>
+            </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+    
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}

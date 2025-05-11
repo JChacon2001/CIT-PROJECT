@@ -1,14 +1,144 @@
-from flask import Blueprint, render_template, url_for, redirect, request, Flask
+from flask import Blueprint, render_template, redirect, url_for
+from flask import session, request
+from models import *
+from forms import DeckForm, CardForm, EditCardForm
+from db import db
 html_bp = Blueprint("html", __name__)
 
 @html_bp.route("/")
 def home():
-    return render_template("home.html")
+    top4 = db.session.execute(db.select(Deck).limit(4)).scalars()
+    decks = db.session.execute(db.select(Deck)).scalars()
+    return render_template("home.html", top4=top4, Deck=decks)
 
 @html_bp.route("/qa")
 def q_and_a():
-    return "q and a page"
+    return render_template("QA.html")
 
-@html_bp.route("/login")
-def login():
-    return "login"
+@html_bp.route("/decks")
+def decks():
+    decks = db.session.execute(db.select(Deck)).scalars()
+    return render_template("alldecks.html", data=decks)
+
+@html_bp.route("/decks/<int:id>")
+def deckcont(id):
+    stmt = db.select(Cards).where(Cards.deck_id == id)
+    exec = db.session.execute(stmt).scalars()
+    return render_template("deck.html", data=exec)
+
+@html_bp.route("/deck/new", methods=['GET', 'POST'])
+def deck_form():
+    form = DeckForm()
+    if form.validate_on_submit():
+        cat_name = form.category.data
+        stmt = db.select(Category).where(Category.name == cat_name)
+        category = db.session.execute(stmt).scalar()
+        if category is None:
+            category = Category(name=cat_name)
+            db.session.add(category) 
+        new_deck = Deck(name=form.name.data,description=form.description.data,category=category)
+        db.session.add(new_deck)
+        db.session.commit()
+        return redirect(url_for("html.decks"))
+
+    return render_template("create_deck.html", form=form)
+
+
+@html_bp.route('/card/new', methods=['GET', 'POST'])
+def create_card():
+    form = CardForm()
+    stmt = db.select(Deck).order_by(Deck.name)
+    decks = db.session.execute(stmt).scalars()
+    form.deck.choices = []
+    for deck in decks:
+        form.deck.choices.append((deck.id, deck.name))
+
+    if form.validate_on_submit():
+        deck_id = form.deck.data
+        new_card = Cards(question=form.question.data, answer=form.answer.data,deck_id=deck_id)
+        db.session.add(new_card)
+        db.session.commit()
+        return redirect(url_for('html.decks', id=deck_id))
+
+    return render_template("create_card.html", form=form)
+
+@html_bp.route('/card/edit/<int:id>', methods=['GET', 'POST'])
+def edit_card(id):
+    stmt = db.select(Cards).where(Cards.id == id)
+    card = db.session.execute(stmt).scalar()
+    form = EditCardForm(obj=card)
+    if form.validate_on_submit():
+        card.question = form.question.data
+        card.answer   = form.answer.data
+        db.session.commit()
+        return redirect(url_for('html.decks', id=card.deck_id))
+
+    return render_template('edit_card.html', form=form, card=card)
+
+@html_bp.route('/deck/edit/<int:id>', methods=['GET', 'POST'])
+def edit_deck(id):
+    stmt = db.select(Deck).where(Deck.id == id)
+    deck = db.session.execute(stmt).scalar()
+    form = DeckForm(obj=deck)
+    if form.validate_on_submit():
+        deck.name = form.name.data
+        deck.description   = form.description.data
+        deck.category_name = form.category.data
+        db.session.commit()
+        return redirect(url_for('html.decks', id=id))
+    return render_template('edit_deck.html', form=form, deck=deck)
+
+@html_bp.route('/card/delete/<int:id>')
+def delete_card(id):
+    stmt = db.select(Cards).where(Cards.id == id)
+    card = db.session.execute(stmt).scalar()
+    stmt2 = db.session.execute(db.select(Deck).where(Deck.id == card.deck_id)).scalar()
+    r2 = stmt2.id
+    db.session.delete(card)
+    db.session.commit()
+    return redirect(url_for('html.deckcont', id=r2))
+
+@html_bp.route('/deck/delete/<int:id>')
+def delete_deck(id):
+    stmt = db.select(Deck).where(Deck.id == id)
+    deck = db.session.execute(stmt).scalar()
+    for i in deck.cards:
+        db.session.delete(i)
+    db.session.delete(deck)
+    db.session.commit()
+    return redirect(url_for('html.decks'))
+
+@html_bp.route("/faq")
+def faq():
+    return render_template("faq.html")
+
+@html_bp.route("/testcard")
+def testcard():
+    if "card_index" not in session:
+        session["card_index"] = 0
+
+    all_cards = db.session.execute(db.select(Cards)).scalars().all()
+
+    if not all_cards:
+        return "No cards available."
+
+    index = session["card_index"] % len(all_cards)
+    current_card = all_cards[index]
+
+    return render_template("testcard.html", question=current_card.question, answer=current_card.answer)
+
+@html_bp.route("/testcard/next", methods=["POST"])
+def next_testcard():
+    session["card_index"] = session.get("card_index", 0) + 1
+    return redirect(url_for("html.testcard"))
+
+@html_bp.route("/testcard/back", methods=["POST"])
+def back_testcard():
+    if not session["card_index"] == 0 or not session["card_index"] < 0:
+        session["card_index"] = session.get("card_index",0) - 1
+    return redirect(url_for("html.testcard"))
+
+@html_bp.route("/Acards")
+def allcards():
+    cards = db.session.execute(db.select(Cards)).scalars()
+    return render_template("allcards.html", data=cards)
