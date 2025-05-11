@@ -3,6 +3,7 @@ from flask import session, request
 from models import *
 from forms import DeckForm, CardForm, EditCardForm
 from db import db
+import csv,io
 html_bp = Blueprint("html", __name__)
 
 @html_bp.route("/")
@@ -108,6 +109,20 @@ def delete_deck(id):
     db.session.commit()
     return redirect(url_for('html.decks'))
 
+@html_bp.route("/import", methods=["GET", "POST"])
+def import_csv():
+    if request.method == "POST":
+        f = request.files["csv"]                         
+        reader = csv.DictReader(io.StringIO(f.read().decode()))
+        with db.session.begin():
+            for r in reader:
+                deck = db.session.execute(db.select(Deck).where(Deck.name == r["deck"])).scalar()
+                if deck is None:
+                    deck = Deck(name=r["deck"])
+                    db.session.add(deck)
+                    db.session.flush()
+                db.session.add(Cards(deck_id=deck.id,question=r["question"],answer=r["answer"]))
+    return render_template("import.html")
 @html_bp.route("/faq")
 def faq():
     return render_template("faq.html")

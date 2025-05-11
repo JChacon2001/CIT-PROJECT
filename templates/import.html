@@ -1,0 +1,12 @@
+{# templates/import.html #} {% extends "base.html" %} {% block content %}
+<h2>Import Flashcards</h2>
+
+<form method="post" enctype="multipart/form-data">
+  <input type="file" name="csv" accept=".csv" required>   
+  <button>Upload</button>
+</form>
+
+<p>
+  <strong>CSV header must be</strong> <code>deck,question,answer</code>
+</p>
+{% endblock %}
