@@ -2,6 +2,8 @@
 
 {% block content %}
     <a href="{{ url_for('html.deck_form') }}" class="btn btn-primary"> Add Deck </a>
+    <a href="{{ url_for('html.create_card') }}" class="btn btn-primary"> Add Cards</a>
+    <a href="{{ url_for('html.import_csv') }}" class="btn btn-info"> Import Deck</a>
     <div class="decks">
         {% for i in data %}
         <div class="deck">
