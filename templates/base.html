@@ -10,7 +10,7 @@
 </head>
 <body>
 
-  <!-- Top Navbar -->
+  <!-- top Navbar -->
   <header class="top-bar">
     <div class="sidebar-toggle" onclick="toggleSidebar()">
       <i class="fas fa-bars"></i>
@@ -19,7 +19,7 @@
   </header>
 
   <div class="wrapper">
-    <!-- Sidebar -->
+    <!-- sidebar -->
     <aside class="sidebar" id="sidebar">
       <nav class="nav-menu">
         <a href="{{ url_for('html.home')}}" class="nav-link">
@@ -28,8 +28,8 @@
         <a href="{{ url_for('html.decks')}}" class="nav-link">
           <i class="fas fa-book nav-icon"></i><span class="link-text">Unit Library</span>
         </a>
-        <a href="{{ url_for('html.allcards')}}" class="nav-link">
-          <i class="fas fa-clone nav-icon"></i><span class="link-text">All Cards</span>
+        <a href="{{ url_for('html.decks')}}" class="nav-link">
+          <i class="fas fa-clone nav-icon"></i><span class="link-text">All Decks</span>
         </a>
         <a href="{{ url_for('html.faq') }}" class="nav-link">
           <i class="fas fa-question-circle nav-icon"></i><span class="link-text">FAQ</span>

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Courses and Decks</h1>
+
+    {% for category, decks in grouped_decks.items() %}
+        <div class="category">
+            <h2>{{ category }}</h2>
+            <ul>
+                {% for deck in decks %}
+                    <li class="deck">
+                        <a href="{{ url_for('html.deckcont', id=deck.id) }}">{{ deck.name }}</a>
+                        - {{ deck.description or "No description" }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
