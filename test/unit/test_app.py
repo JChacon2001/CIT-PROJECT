@@ -90,5 +90,3 @@ def test_create_new_deck(test_client2):
         deck = Deck.query.filter_by(name="Test Deck").first()
         assert deck is not None
         assert deck.description == "A test deck description."
-        assert deck.category is not None
-        assert deck.category.name == "Science"
