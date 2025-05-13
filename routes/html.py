@@ -124,6 +124,7 @@ def import_csv():
                 db.session.add(Cards(deck_id=deck.id,question=r["question"],answer=r["answer"]))
         return render_template("import.html", msg="Upload successful")
     return render_template("import.html")
+    
 @html_bp.route("/faq")
 def faq():
     return render_template("faq.html")

@@ -2,9 +2,6 @@ import pytest
 from models import Deck
 from db import db
 
-
-
-
 def test_main_page(test_client):
     response = test_client.get('/')
     assert response.status_code == 200
