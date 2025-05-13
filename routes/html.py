@@ -37,7 +37,7 @@ def deck_form():
         if category is None:
             category = Category(name=cat_name)
             db.session.add(category) 
-        new_deck = Deck(name=form.name.data,description=form.description.data,category=category)
+        new_deck = Deck(name=form.name.data,description=form.description.data)
         db.session.add(new_deck)
         db.session.commit()
         return redirect(url_for("html.decks"))
@@ -80,11 +80,12 @@ def edit_card(id):
 def edit_deck(id):
     stmt = db.select(Deck).where(Deck.id == id)
     deck = db.session.execute(stmt).scalar()
+        
     form = DeckForm(obj=deck)
     if form.validate_on_submit():
         deck.name = form.name.data
         deck.description   = form.description.data
-        deck.category_name = form.category.data
+        deck.category.name = form.category.data
         db.session.commit()
         return redirect(url_for('html.decks', id=id))
     return render_template('edit_deck.html', form=form, deck=deck)
@@ -159,3 +160,8 @@ def back_testcard():
 def allcards():
     cards = db.session.execute(db.select(Cards)).scalars()
     return render_template("allcards.html", data=cards)
+
+@html_bp.route("/courses")
+def courses():
+    res = db.session.execute(db.select(Category)).scalars()
+    return render_template("courses.html", data=res)

@@ -935,3 +935,17 @@ table thead th {
   background-color: #302F4D;
   color: white;
 }
+
+table tbody td a {
+  color: #9D6C76;
+}
+
+ .category {
+  margin-bottom: 2em;
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+}
+.deck {
+  margin-left: 1em;
+}
