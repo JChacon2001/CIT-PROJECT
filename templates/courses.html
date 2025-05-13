@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Course Categories</h1>
+  <h1>Courses </h1>
   <ul>
     {% for category in data %}
       <a href="{{ url_for('html.deckcont', id=category.id) }}"> <li>{{ category.name }}</li></a>
