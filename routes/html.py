@@ -80,8 +80,6 @@ def edit_card(id):
 def edit_deck(id):
     stmt = db.select(Deck).where(Deck.id == id)
     deck = db.session.execute(stmt).scalar()
-
-
     form = DeckForm(obj=deck)
     if form.validate_on_submit():
         deck.name = form.name.data
