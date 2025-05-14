@@ -96,7 +96,7 @@ def delete_card(id):
     r2 = stmt2.id
     db.session.delete(card)
     db.session.commit()
-    return redirect(url_for('html.deckcont', id=r2))
+    return redirect(url_for('html.deckcont ', id=r2))
 
 @html_bp.route('/deck/delete/<int:id>')
 def delete_deck(id):
