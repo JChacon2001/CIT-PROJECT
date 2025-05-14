@@ -80,12 +80,16 @@ def edit_card(id):
 def edit_deck(id):
     stmt = db.select(Deck).where(Deck.id == id)
     deck = db.session.execute(stmt).scalar()
-        
     form = DeckForm(obj=deck)
     if form.validate_on_submit():
         deck.name = form.name.data
         deck.description   = form.description.data
-        deck.category.name = form.category.data
+        cat_name = form.category.data
+        stmt = db.select(Category).where(Category.name == cat_name)
+        category = db.session.execute(stmt).scalar()
+        if category is None:
+            category = Category(name=cat_name)
+            db.session.add(category)
         db.session.commit()
         return redirect(url_for('html.decks', id=id))
     return render_template('edit_deck.html', form=form, deck=deck)
@@ -112,9 +116,10 @@ def delete_deck(id):
 
 @html_bp.route("/import", methods=["GET", "POST"])
 def import_csv():
+    data = []
     if request.method == "POST":
         f = request.files["csv"]                         
-        reader = csv.DictReader(io.StringIO(f.read().decode()))
+        reader = csv.DictReader(io.StringIO(f.read().decode("utf-8")))
         with db.session.begin():
             for r in reader:
                 deck = db.session.execute(db.select(Deck).where(Deck.name == r["deck"])).scalar()
@@ -122,8 +127,13 @@ def import_csv():
                     deck = Deck(name=r["deck"])
                     db.session.add(deck)
                     db.session.flush()
-                db.session.add(Cards(deck_id=deck.id,question=r["question"],answer=r["answer"]))
-        return render_template("import.html", msg="Upload successful")
+                deck_name = r['deck']
+                question = r['question']
+                answer= r['answer']
+                db.session.add(Cards(deck_id=deck.id,question=question,answer=answer))
+                data.append({"deck": deck_name, "question": question, "answer": answer})
+
+        return render_template("import.html", msg="Upload successful", data=data)
     return render_template("import.html")
     
 @html_bp.route("/faq")

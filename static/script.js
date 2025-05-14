@@ -20,4 +20,12 @@ function toggleSidebar() {
     sidebar.classList.toggle('collapsed');
   }
   
+function toggleContent(id) {
+    var el = document.getElementById("content-" + id);
+    if (el.style.display === "none" || el.style.display === "") {
+        el.style.display = "block";
+    } else {
+        el.style.display = "none";
+    }
+}
 
