@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Course Decks</h1>
+
+    {% if data %}
+        {% for deck in data %}
+            <div class="deck-box">
+                <div class="deck-title" onclick="toggleContent('{{ deck.id }}')">
+                    {{ deck.name }}
+                </div>
+                <div class="deck-content" id="content-{{ deck.id }}">
+                    {% if deck.cards %}
+                        {% for card in deck.cards %}
+                            <div class="card">
+                                <strong>Q:</strong> {{ card.question }}<br>
+                                <strong>A:</strong> {{ card.answer }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No cards in this deck.</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No decks available.</p>
+    {% endif %}
+    
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}

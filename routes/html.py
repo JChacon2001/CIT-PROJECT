@@ -3,6 +3,7 @@ from flask import session, request
 from models import *
 from forms import DeckForm, CardForm, EditCardForm
 from db import db
+import csv,io
 html_bp = Blueprint("html", __name__)
 
 @html_bp.route("/")
@@ -36,7 +37,7 @@ def deck_form():
         if category is None:
             category = Category(name=cat_name)
             db.session.add(category) 
-        new_deck = Deck(name=form.name.data,description=form.description.data,category=category)
+        new_deck = Deck(name=form.name.data,description=form.description.data)
         db.session.add(new_deck)
         db.session.commit()
         return redirect(url_for("html.decks"))
@@ -83,7 +84,12 @@ def edit_deck(id):
     if form.validate_on_submit():
         deck.name = form.name.data
         deck.description   = form.description.data
-        deck.category_name = form.category.data
+        cat_name = form.category.data
+        stmt = db.select(Category).where(Category.name == cat_name)
+        category = db.session.execute(stmt).scalar()
+        if category is None:
+            category = Category(name=cat_name)
+            db.session.add(category)
         db.session.commit()
         return redirect(url_for('html.decks', id=id))
     return render_template('edit_deck.html', form=form, deck=deck)
@@ -108,6 +114,22 @@ def delete_deck(id):
     db.session.commit()
     return redirect(url_for('html.decks'))
 
+@html_bp.route("/import", methods=["GET", "POST"])
+def import_csv():
+    if request.method == "POST":
+        f = request.files["csv"]                         
+        reader = csv.DictReader(io.StringIO(f.read().decode()))
+        with db.session.begin():
+            for r in reader:
+                deck = db.session.execute(db.select(Deck).where(Deck.name == r["deck"])).scalar()
+                if deck is None:
+                    deck = Deck(name=r["deck"])
+                    db.session.add(deck)
+                    db.session.flush()
+                db.session.add(Cards(deck_id=deck.id,question=r["question"],answer=r["answer"]))
+        return render_template("import.html", msg="Upload successful")
+    return render_template("import.html")
+    
 @html_bp.route("/faq")
 def faq():
     return render_template("faq.html")
@@ -142,3 +164,8 @@ def back_testcard():
 def allcards():
     cards = db.session.execute(db.select(Cards)).scalars()
     return render_template("allcards.html", data=cards)
+
+@html_bp.route("/courses")
+def courses():
+    res = db.session.execute(db.select(Category)).scalars()
+    return render_template("courses.html", data=res)
