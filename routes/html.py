@@ -116,9 +116,10 @@ def delete_deck(id):
 
 @html_bp.route("/import", methods=["GET", "POST"])
 def import_csv():
+    data = []
     if request.method == "POST":
         f = request.files["csv"]                         
-        reader = csv.DictReader(io.StringIO(f.read().decode()))
+        reader = csv.DictReader(io.StringIO(f.read().decode("utf-8")))
         with db.session.begin():
             for r in reader:
                 deck = db.session.execute(db.select(Deck).where(Deck.name == r["deck"])).scalar()
@@ -126,8 +127,13 @@ def import_csv():
                     deck = Deck(name=r["deck"])
                     db.session.add(deck)
                     db.session.flush()
-                db.session.add(Cards(deck_id=deck.id,question=r["question"],answer=r["answer"]))
-        return render_template("import.html", msg="Upload successful")
+                deck_name = r['deck']
+                question = r['question']
+                answer= r['answer']
+                db.session.add(Cards(deck_id=deck.id,question=question,answer=answer))
+                data.append({"deck": deck_name, "question": question, "answer": answer})
+
+        return render_template("import.html", msg="Upload successful", data=data)
     return render_template("import.html")
     
 @html_bp.route("/faq")
