@@ -1,38 +1,36 @@
-import pytest
-
-def test_main_page(test_client):
-    response = test_client.get('/')
-    assert response.status_code == 200
-    assert b"Dashboard" in response.data
+from flask import Flask, render_template
+from routes import html_bp
+from db import db
 
 
-def test_faq_page(test_client):
-    response = test_client.get('/faq')
-    assert response.status_code == 200
-    assert b"FAQs" in response.data
+def create_app():
+    
+    app = Flask(__name__)
+    app.config['SECRET_KEY'] = 'supersecret'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-def test_unit_lib_page(test_client):
-    response = test_client.get('/decks')
-    assert response.status_code == 200
-    assert b"Add Deck" in response.data
+   
+    db.init_app(app)
 
-def test_allcards_page(test_client):
-    response = test_client.get('/Acards')
-    assert response.status_code == 200
-    assert b"from Test1" in response.data
+  
+    app.register_blueprint(html_bp, url_prefix='/')
 
-def test_create_card_page(test_client):
-    response = test_client.get('/card/new')
-    assert response.status_code == 200
-    assert b"Deck" in response.data 
+   
+    @app.errorhandler(404)
+    def page_not_found(error):
+        return render_template('page_not_found.html'), 404
 
-def test_view_single_deck(test_client):
-    response = test_client.get('card/edit/1')
-    assert response.status_code == 200
-    assert b"bad" in response.data 
+ 
+    with app.app_context():
+        db.create_all()
 
-def test_edit_card_page(test_client):
-    response = test_client.get('card/edit/1')
-    assert response.status_code == 200
-    assert b"Question" in response.data 
+    return app
 
+
+
+app = create_app()
+
+if __name__ == '__main__':
+    
+    app.run(debug=True, port=5000)

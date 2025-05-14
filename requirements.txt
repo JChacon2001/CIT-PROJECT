@@ -1,0 +1,5 @@
+Flask
+pytest
+sqlalchemy
+flask_sqlalchemy
+flask_wtf

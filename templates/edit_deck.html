@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="create_deck">
 <form method="post">
   {{ form.hidden_tag() }}
   <div>
@@ -18,4 +19,5 @@
     {{ form.submit() }}
   </div>
 </form>
+</div>
 {% endblock %}

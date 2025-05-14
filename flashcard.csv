@@ -1,0 +1,32 @@
+deck,question,answer,category
+Math 1,What is 2 + 2?,4,Math
+Math 1,What is the derivative of x^2?,2x,Math
+Science 1,What is the chemical symbol for water?,H2O,Science
+Science 1,What planet is known as the Red Planet?,Mars,Science
+History 1,Who was the first President of the United States?,George Washington,History
+History 1,In what year did World War II end?,1945,History
+Math 2,What is the integral of 1/x?,ln|x| + C,Math
+Math 2,What is the value of pi (to 2 decimal places)?,3.14,Math
+Science 2,What gas do plants absorb from the atmosphere?,Carbon Dioxide,Science
+Science 2,What part of the cell contains DNA?,Nucleus,Science
+History 2,Who discovered America in 1492?,Christopher Columbus,History
+History 2,"What wall fell in 1989, symbolizing the end of the Cold War?",Berlin Wall,History
+Literature 1,Who wrote 'Romeo and Juliet'?,William Shakespeare,Literature
+Literature 1,What is the name of the hobbit played by Elijah Wood in 'The Lord of the Rings'?,Frodo Baggins,Literature
+Geography 1,What is the capital of France?,Paris,Geography
+Geography 1,Which river flows through Egypt?,Nile,Geography
+Math 3,What is the square root of 81?,9,Math
+Math 3,What is 7 multiplied by 8?,56,Math
+Science 3,What planet is closest to the Sun?,Mercury,Science
+Science 3,What is the powerhouse of the cell?,Mitochondria,Science
+History 3,Who was the British Prime Minister during WWII?,Winston Churchill,History
+History 3,Which empire built the Colosseum?,Roman Empire,History
+Literature 2,Who wrote '1984'?,George Orwell,Literature
+Literature 2,What is the main character's name in 'Moby Dick'?,Captain Ahab,Literature
+Geography 2,What is the largest desert in the world?,Sahara,Geography
+Geography 2,Mount Everest is part of which mountain range?,Himalayas,Geography
+Art 1,Who painted the Mona Lisa?,Leonardo da Vinci,Art
+Art 1,What art movement is Salvador Dalí associated with?,Surrealism,Art
+Music 1,Who composed the Fifth Symphony?,Ludwig van Beethoven,Music
+Music 2,What is the name of the music symbol for silence?,Rest,Music
+Technology 1,What does CPU stand for?,Central Processing Unit,Technology

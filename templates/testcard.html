@@ -2,6 +2,11 @@
 
 {% block content %}
 <div class="card-center-wrapper">
+
+  <form method="POST" action="{{ url_for('html.next_testcard') }}">
+    <button type="submit" class="next-button">Next Question</button>
+  </form>
+  
   <div class="flip-card" onclick="flipCard(this)">
     <div class="flip-card-inner">
       <div class="flip-card-front">

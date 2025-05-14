@@ -3,6 +3,7 @@ from flask import session, request
 from models import *
 from forms import DeckForm, CardForm, EditCardForm
 from db import db
+import csv,io
 html_bp = Blueprint("html", __name__)
 
 @html_bp.route("/")
@@ -13,7 +14,7 @@ def home():
 
 @html_bp.route("/qa")
 def q_and_a():
-    return "q and a page"
+    return render_template("QA.html")
 
 @html_bp.route("/decks")
 def decks():
@@ -36,7 +37,7 @@ def deck_form():
         if category is None:
             category = Category(name=cat_name)
             db.session.add(category) 
-        new_deck = Deck(name=form.name.data,description=form.description.data,category=category)
+        new_deck = Deck(name=form.name.data,description=form.description.data)
         db.session.add(new_deck)
         db.session.commit()
         return redirect(url_for("html.decks"))
@@ -83,7 +84,12 @@ def edit_deck(id):
     if form.validate_on_submit():
         deck.name = form.name.data
         deck.description   = form.description.data
-        deck.category_name = form.category.data
+        cat_name = form.category.data
+        stmt = db.select(Category).where(Category.name == cat_name)
+        category = db.session.execute(stmt).scalar()
+        if category is None:
+            category = Category(name=cat_name)
+            db.session.add(category)
         db.session.commit()
         return redirect(url_for('html.decks', id=id))
     return render_template('edit_deck.html', form=form, deck=deck)
@@ -92,10 +98,11 @@ def edit_deck(id):
 def delete_card(id):
     stmt = db.select(Cards).where(Cards.id == id)
     card = db.session.execute(stmt).scalar()
-    deck_id = card.deck_id
+    stmt2 = db.session.execute(db.select(Deck).where(Deck.id == card.deck_id)).scalar()
+    r2 = stmt2.id
     db.session.delete(card)
     db.session.commit()
-    return redirect(url_for('html.decks', id=deck_id))
+    return redirect(url_for('html.deckcont ', id=r2))
 
 @html_bp.route('/deck/delete/<int:id>')
 def delete_deck(id):
@@ -107,6 +114,28 @@ def delete_deck(id):
     db.session.commit()
     return redirect(url_for('html.decks'))
 
+@html_bp.route("/import", methods=["GET", "POST"])
+def import_csv():
+    data = []
+    if request.method == "POST":
+        f = request.files["csv"]                         
+        reader = csv.DictReader(io.StringIO(f.read().decode("utf-8")))
+        with db.session.begin():
+            for r in reader:
+                deck = db.session.execute(db.select(Deck).where(Deck.name == r["deck"])).scalar()
+                if deck is None:
+                    deck = Deck(name=r["deck"])
+                    db.session.add(deck)
+                    db.session.flush()
+                deck_name = r['deck']
+                question = r['question']
+                answer= r['answer']
+                db.session.add(Cards(deck_id=deck.id,question=question,answer=answer))
+                data.append({"deck": deck_name, "question": question, "answer": answer})
+
+        return render_template("import.html", msg="Upload successful", data=data)
+    return render_template("import.html")
+    
 @html_bp.route("/faq")
 def faq():
     return render_template("faq.html")
@@ -131,7 +160,18 @@ def next_testcard():
     session["card_index"] = session.get("card_index", 0) + 1
     return redirect(url_for("html.testcard"))
 
+@html_bp.route("/testcard/back", methods=["POST"])
+def back_testcard():
+    if not session["card_index"] == 0 or not session["card_index"] < 0:
+        session["card_index"] = session.get("card_index",0) - 1
+    return redirect(url_for("html.testcard"))
+
 @html_bp.route("/Acards")
 def allcards():
     cards = db.session.execute(db.select(Cards)).scalars()
     return render_template("allcards.html", data=cards)
+
+@html_bp.route("/courses")
+def courses():
+    res = db.session.execute(db.select(Category)).scalars()
+    return render_template("courses.html", data=res)
