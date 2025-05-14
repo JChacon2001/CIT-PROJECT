@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for
 from flask import session, request
 from models import *
-from forms import DeckForm, CardForm, EditCardForm
+from forms import DeckForm, CardForm, EditCardForm, csvForm
 from db import db
 import csv,io
 html_bp = Blueprint("html", __name__)
@@ -108,34 +108,35 @@ def delete_card(id):
 def delete_deck(id):
     stmt = db.select(Deck).where(Deck.id == id)
     deck = db.session.execute(stmt).scalar()
-    for i in deck.cards:
-        db.session.delete(i)
-    db.session.delete(deck)
-    db.session.commit()
+    if deck:
+        for cards in deck.cards:
+            db.session.delete(cards)
+        db.session.delete(deck)
+        db.session.commit()
     return redirect(url_for('html.decks'))
+
 
 @html_bp.route("/import", methods=["GET", "POST"])
 def import_csv():
     data = []
-    if request.method == "POST":
-        f = request.files["csv"]                         
+    form = csvForm()
+    decks = db.session.execute(db.select(Deck)).scalars()
+    msg  = request.args.get("msg", "")
+    form.deck.choices = [(d.id, d.name) for d in decks]
+    if form.validate_on_submit():
+        deck = db.session.execute(db.select(Deck).where(Deck.id == form.deck.data)).scalar()
+        f = form.csv.data
         reader = csv.DictReader(io.StringIO(f.read().decode("utf-8")))
-        with db.session.begin():
-            for r in reader:
-                deck = db.session.execute(db.select(Deck).where(Deck.name == r["deck"])).scalar()
-                if deck is None:
-                    deck = Deck(name=r["deck"])
-                    db.session.add(deck)
-                    db.session.flush()
-                deck_name = r['deck']
-                question = r['question']
-                answer= r['answer']
-                db.session.add(Cards(deck_id=deck.id,question=question,answer=answer))
-                data.append({"deck": deck_name, "question": question, "answer": answer})
+        for r in reader:
+            q = r["question"]
+            a = r["answer"]
+            db.session.add(Cards(deck_id=deck.id, question=q, answer=a))
+            data.append({"deck": deck.name, "question": q, "answer": a})
+        db.session.commit() 
+        msg = f"Imported {len(data)} cards into “{deck.name}”"
+        return render_template("import.html",form=form,data=data,msg=msg)
+    return render_template("import.html", form=form,data=data,msg=msg)
 
-        return render_template("import.html", msg="Upload successful", data=data)
-    return render_template("import.html")
-    
 @html_bp.route("/faq")
 def faq():
     return render_template("faq.html")

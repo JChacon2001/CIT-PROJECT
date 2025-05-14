@@ -18,6 +18,7 @@ def test_create_full_stack(test_client2):
         deck = Deck(name="Physics", description="Basics", category_id=cat.id)
         db.session.add(deck)
         db.session.commit()
+        
 
         card = Cards(question="What is gravity?", answer="A force", deck_id=deck.id)
         db.session.add(card)
@@ -28,9 +29,17 @@ def test_create_full_stack(test_client2):
 
 
 def test_import_csv(test_client2):
+    with test_client2.application.app_context():
+        deck = Deck(name="Test Deck", description="Desc")
+        db.session.add(deck)
+        db.session.commit()
+        deck_id = deck.id
+        
+        
     csv_data = "deck,question,answer\nDeck1,What is Flask?,A web framework\nDeck2,What is Python?,A programming language"
     
     data = {
+        "deck": str(deck_id),
         "csv": (io.BytesIO(csv_data.encode("utf-8")), "test_import.csv")
     }
 
@@ -41,16 +50,22 @@ def test_import_csv(test_client2):
     )
 
     assert response.status_code == 200
-    assert b"Upload successful" in response.data
+    expected_msg = f"Imported 2 cards into “{deck.name}”"
+    assert expected_msg.encode() in response.data
 
     with test_client2.application.app_context():
-        deck1 = db.session.execute(db.select(Deck).where(Deck.name == "Deck1")).scalar()
-        deck2 = db.session.execute(db.select(Deck).where(Deck.name == "Deck2")).scalar()
+        updated = db.session.execute(db.select(Deck).where(Deck.id == deck_id)).scalar()
+        assert updated is not None
+        assert len(updated.cards) == 2
 
-        assert deck1 is not None
-        assert deck2 is not None
-        assert len(deck1.cards) == 1  
-        assert len(deck2.cards) == 1
+       
+        questions = {c.question for c in updated.cards}
+        answers   = {c.answer   for c in updated.cards}
+
+        assert "What is Flask?" in questions
+        assert "A web framework" in answers
+        assert "What is Python?" in questions
+        assert "A programming language" in answers
 
 def test_detete_decks(test_client2):
     csv_data = "deck,question,answer\nDeck1,What is Flask?,A web framework\nDeck2,What is Python?,A programming language"
