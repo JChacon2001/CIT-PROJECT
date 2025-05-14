@@ -1,4 +1,4 @@
-{# templates/import.html #} {% extends "base.html" %} {% block content %}
+{% extends "base.html" %} {% block content %}
 <h2>Import Flashcards</h2>
 {% if msg %}
   <p style="color: green;">{{ msg }}</p>
@@ -6,9 +6,29 @@
 <form method="post" enctype="multipart/form-data">
   <input type="file" name="csv" accept=".csv" required>   
   <button>Upload</button>
-</form>
 
-<p>
-  <strong>CSV header must be</strong> <code>deck,question,answer</code>
+<strong>CSV header must be</strong> <code>deck,question,answer</code>
+</form>
+  {% if data %}
+    <h3>Imported Data</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Deck</th>
+          <th>Question</th>
+          <th>Answer</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data %}
+          <tr>
+           <td>{{ row.deck }}</td>
+            <td>{{ row.question }}</td>
+            <td>{{ row.answer }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
 </p>
 {% endblock %}
