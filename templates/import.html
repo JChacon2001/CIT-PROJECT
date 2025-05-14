@@ -1,4 +1,5 @@
 {# templates/import.html #} {% extends "base.html" %} {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='import.css') }}">
 <h2>Import Flashcards</h2>
 {% if msg %}
   <p style="color: green;">{{ msg }}</p>
