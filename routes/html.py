@@ -8,6 +8,7 @@ html_bp = Blueprint("html", __name__)
 
 @html_bp.route("/")
 def home():
+    
     top4 = db.session.execute(db.select(Deck).limit(4)).scalars()
     decks = db.session.execute(db.select(Deck)).scalars()
     return render_template("home.html", top4=top4, Deck=decks)

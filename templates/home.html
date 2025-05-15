@@ -47,7 +47,7 @@
                 <td><a href="{{ url_for('html.deckcont', id=i.id) }}">{{ i.name }}</a></td>
                 <td>{{ i.cards|length }}</td>
                 <td>0%</td>
-                <td>2023/04/10</td>
+                <td>{{i.upload_date.strftime('%Y-%m-%d')}}</td>
                 <td>2024/03/01</td>
               </tr>
             {% endfor %}

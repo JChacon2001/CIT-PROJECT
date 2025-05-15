@@ -7,11 +7,6 @@ def test_main_page(test_client):
     assert response.status_code == 200
     assert b"Dashboard" in response.data
 
-
-
-
-
-
 def test_faq_page(test_client):
     response = test_client.get('/faq')
     assert response.status_code == 200
