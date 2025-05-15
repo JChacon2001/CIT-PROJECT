@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for
 from flask import session, request
 from models import *
-from forms import DeckForm, CardForm, EditCardForm, csvForm
+from forms import DeckForm, CardForm, EditCardForm, csvForm, StudyForm
 from db import db
 import csv,io
 html_bp = Blueprint("html", __name__)
@@ -102,7 +102,7 @@ def delete_card(id):
     r2 = stmt2.id
     db.session.delete(card)
     db.session.commit()
-    return redirect(url_for('html.deckcont ', id=r2))
+    return redirect(url_for('html.deckcont', id=r2))
 
 @html_bp.route('/deck/delete/<int:id>')
 def delete_deck(id):
@@ -136,6 +136,24 @@ def import_csv():
         msg = f"Imported {len(data)} cards into “{deck.name}”"
         return render_template("import.html",form=form,data=data,msg=msg)
     return render_template("import.html", form=form,data=data,msg=msg)
+
+@html_bp.route("/study/<int:id>", methods=["GET","POST"])
+def study_deck(id):
+    form = StudyForm()
+    stmt = db.session.execute(db.select(Cards).where(Cards.deck_id == id)).scalars()
+    result = [i for i in stmt]
+    total_cards = len(result)
+    if form.validate_on_submit():
+        current_index = int(form.card_index.data)
+        if form.previous.data:
+            current_index = (current_index - 1) % total_cards
+        elif form.next.data:
+            current_index = (current_index + 1) % total_cards
+    else:
+        current_index = 0
+    form.card_index.data = str(current_index)   
+    current_card = result[current_index]
+    return render_template("study.html", form=form, card=current_card,current_index=current_index,total_cards=total_cards)
 
 @html_bp.route("/faq")
 def faq():

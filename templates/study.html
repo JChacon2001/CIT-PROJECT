@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Study: {{ card.deck.name }}</h2>
+  <p>Card {{ current_index + 1 }} of {{ total_cards }}</p>
+
+  <div class="decks">
+    <div class="flip-card answer">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <strong>Q:</strong> {{ card.question }}
+        </div>
+        <div class="flip-card-back">
+          <strong>A:</strong> {{ card.answer }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.card_index() }}
+    {{ form.previous(class="btn btn-outline-primary") }}
+    {{ form.next(class="btn btn-primary") }}
+  </form>
+{% endblock %}
