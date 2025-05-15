@@ -1,54 +1,55 @@
-
 {% extends "base.html" %}
 
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='import.css') }}">
 
-<h2>Import Flashcards</h2>
+<div class="import-page">
+  <h2 class="import-title">Import Flashcards</h2>
 
-{% if msg %}
-  <p style="color: green;">{{ msg }}</p>
-{% endif %}
+  {% if msg %}
+    <p class="import-message">{{ msg }}</p>
+  {% endif %}
 
-<form method="POST" enctype="multipart/form-data">
-  {{ form.hidden_tag() }}
+  <form class="import-form" method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
 
-  <div>
-    {{ form.deck.label }}<br>
-    {{ form.deck() }}
-  </div>
+    <div>
+      {{ form.deck.label }}<br>
+      {{ form.deck() }}
+    </div>
 
-  <div>
-    {{ form.csv.label }}<br>
-    {{ form.csv() }}
-  </div>
+    <div>
+      {{ form.csv.label(class="import-file-label") }}<br>
+      {{ form.csv(class="import-file-input") }}
+    </div>
 
-  <div>
-    {{ form.submit() }}
-  </div>
-</form>
+    <div>
+      {{ form.submit(class="import-submit-btn") }}
+    </div>
+  </form>
 
-<strong>CSV header must be</strong> <code>question,answer</code>
+  <strong>CSV header must be</strong> <code class="import-code">question,answer</code>
 
-{% if data %}
-  <h3>Imported Data</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Deck</th>
-        <th>Question</th>
-        <th>Answer</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for row in data %}
+  {% if data %}
+    <h3 class="import-title">Imported Data</h3>
+    <table class="import-table">
+      <thead>
         <tr>
-          <td>{{ row.deck }}</td>
-          <td>{{ row.question }}</td>
-          <td>{{ row.answer }}</td>
+          <th>Deck</th>
+          <th>Question</th>
+          <th>Answer</th>
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-{% endif %}
+      </thead>
+      <tbody>
+        {% for row in data %}
+          <tr>
+            <td>{{ row.deck }}</td>
+            <td>{{ row.question }}</td>
+            <td>{{ row.answer }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+</div>
 {% endblock %}
