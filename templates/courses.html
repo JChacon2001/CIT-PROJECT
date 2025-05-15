@@ -8,7 +8,7 @@
             <div class="deck-box">
                 <div class="deck-title" onclick="toggleContent('{{ deck.id }}')">
                     {{ deck.name }}
-                </div>
+                </div>`
                 <div class="deck-content" id="content-{{ deck.id }}">
                     {% if deck.cards %}
                         {% for card in deck.cards %}
