@@ -67,7 +67,7 @@ def test_import_csv(test_client2):
         assert "What is Python?" in questions
         assert "A programming language" in answers
 
-def test_detete_decks(test_client2):
+def test_delete_decks(test_client2):
     csv_data = "deck,question,answer\nDeck1,What is Flask?,A web framework\nDeck2,What is Python?,A programming language"
     
     data = {
