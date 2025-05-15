@@ -29,3 +29,4 @@ class StudyForm(FlaskForm):
     card_index = HiddenField(validators=[DataRequired()])
     previous   = SubmitField("Previous")
     next       = SubmitField("Next")
+    studied    = SubmitField("Studied")

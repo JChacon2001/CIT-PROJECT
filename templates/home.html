@@ -44,11 +44,18 @@
           <tbody>
             {% for i in Deck %}
               <tr>
+                <!-- <td><a href="{{ url_for('html.deckcont', id=i.id) }}">{{ i.name }}</a></td> -->
                 <td><a href="{{ url_for('html.deckcont', id=i.id) }}">{{ i.name }}</a></td>
-                <td>{{ i.cards|length }}</td>
-                <td>0%</td>
+                <td>{{ i.total }}</td>
+                <td>{{i.percent}}%</td>
                 <td>{{i.upload_date.strftime('%Y-%m-%d')}}</td>
-                <td>2024/03/01</td>
+                <td>
+                  {% if i.last_studied %}
+                  {{ i.last_studied.strftime('%Y-%m-%d') }}
+                {% else %}
+                  None
+                {% endif %}
+                </td>
               </tr>
             {% endfor %}
           </tbody>
