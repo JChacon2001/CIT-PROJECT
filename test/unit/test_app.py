@@ -44,6 +44,12 @@ def test_edit_card_page(test_client):
     assert response.status_code == 200
     assert b"Question" in response.data 
 
+def test_study_page(test_client2):
+    resp = test_client2.get('/study/1')
+    assert resp.status_code == 200
+
+def test_congrats_page(test_client2):
+    pass
 
 def test_main_page_loads(test_client):
     response = test_client.get('/')
