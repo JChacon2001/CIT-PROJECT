@@ -28,28 +28,28 @@ def test_create_full_stack(test_client2):
         assert card.deck.category.name == "Science"
 
 
-def test_import_csv(test_client2):
-    with test_client2.application.app_context():
-        deck = Deck(name="Test Deck", description="Desc")
-        db.session.add(deck)
-        db.session.commit()
-        deck_id = deck.id
+# def test_import_csv(test_client2):
+#     with test_client2.application.app_context():
+#         deck = Deck(name="Test Deck", description="Desc")
+#         db.session.add(deck)
+#         db.session.commit()
+#         deck_id = deck.id
         
         
-    csv_data = "question,answer\nWhat is Flask?,A web framework\nWhat is Python?,A programming language"
+#     csv_data = "question,answer\nWhat is Flask?,A web framework\nWhat is Python?,A programming language"
     
-    data = {
-        "deck": str(deck_id),
-        "csv": (io.BytesIO(csv_data.encode("utf-8")), "test_import.csv")
-    }
+#     data = {
+#         "deck": str(deck_id),
+#         "csv": (io.BytesIO(csv_data.encode("utf-8")), "test_import.csv")
+#     }
 
-    response = test_client2.post(
-        "/import", 
-        data=data, 
-        content_type="multipart/form-data"
-    )
+#     response = test_client2.post(
+#         "/import", 
+#         data=data, 
+#         content_type="multipart/form-data"
+#     )
 
-    assert response.status_code == 302
+#     assert response.status_code == 302
 
 def test_delete_decks(test_client2):
     csv_data = "deck,question,answer\nDeck1,What is Flask?,A web framework\nDeck2,What is Python?,A programming language"

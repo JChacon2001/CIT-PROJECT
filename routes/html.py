@@ -232,8 +232,8 @@ def import_csv():
         db.session.commit()
         msg = f"Imported {len(data)} cards into “{deck.name}”"
         
-        # PRG Pattern: Redirect to GET with msg in query params
-        return redirect(url_for("html.import_csv", msg=msg))
+
+        return render_template("import.html",form=form,data=data,msg=msg)
 
     return render_template("import.html", form=form, data=data, msg=msg)
 
