@@ -109,7 +109,7 @@ def deck_form():
 @html_bp.route('/card/new', methods=['GET', 'POST'])
 def create_card():
     form = CardForm()
-    stmt = db.select(Deck   ).order_by(Deck.name)
+    stmt = db.select(Deck).order_by(Deck.name)
     decks = db.session.execute(stmt).scalars()
     form.deck.choices = []
     for deck in decks:

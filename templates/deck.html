@@ -5,7 +5,7 @@
         <a href="{{ url_for('html.study_deck', id=data[0].id) }}" class="btn btn-sm btn-success">Study</a>
     {% endif %}
     
-    <a href="{{ url_for('html.create_card') }}" class="btn btn-primary">Add Cards</a>
+    <a href="{{ url_for('html.create_card') }}?Deck=1" class="btn btn-primary">Add Cards</a>
     
     <div class="cardarray">
         {% for i in data %}
