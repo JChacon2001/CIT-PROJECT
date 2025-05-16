@@ -537,6 +537,10 @@ html.dark-mode .title {
   flex-wrap: wrap;
 }
 
+.text-muted{
+  color: red;
+}
+
 .Acards p {
   font-size: 24px;
 }
