@@ -10,34 +10,42 @@ html_bp = Blueprint("html", __name__)
 @html_bp.route("/")
 def home():
     results = (
-    db.session.query(
-        Deck.id,
-        Deck.name,
-        Deck.upload_date,
-        Deck.last_studied,
-        func.count(Cards.id).label("total"),
-        func.count(case((Cards.completed == True, 1))).label("completed")
+        db.session.query(
+            Deck.id,
+            Deck.name,
+            Deck.upload_date,
+            Deck.last_studied,
+            func.count(Cards.id).label("total"),
+            func.count(case((Cards.completed == True, 1))).label("completed")
+        )
+        .outerjoin(Cards) 
+        .group_by(Deck.id)
+        .all()
     )
-    .outerjoin(Cards) 
-    .group_by(Deck.id)
-    .all()
-    )
+
     deck_data = []
     for deck_id, name, upload_date, last_studied, total, completed in results:
         percent = round((completed / total) * 100) if total > 0 else 0
         deck_data.append({
-            "id":deck_id,
+            "id": deck_id,
             "name": name,
             "upload_date": upload_date,
             "total": total,
             "completed": completed,
             "percent": percent,
-            "last_studied":last_studied
+            "last_studied": last_studied
         })
 
+    top4_query = (
+        db.session.query(Deck)
+        .filter(Deck.last_studied.isnot(None))
+        .order_by(Deck.last_studied.desc())
+        .limit(4)
+        .all()
+    )
 
-    top4 = db.session.execute(db.select(Deck).limit(4)).scalars()
-    return render_template("home.html", top4=top4, Deck=deck_data)
+    return render_template("home.html", top4=top4_query, Deck=deck_data)
+
 
 @html_bp.route("/qa")
 def q_and_a():

@@ -7,26 +7,31 @@
         <h1>Dashboard</h1>
       </header>
 
-      <!-- Cards -->
-      <section class="card-section">
-        {% for i in top4 %}
-          <a href="{{ url_for('html.deckcont', id=i.id) }}"
-             class="card
-                    {% if loop.index == 1 %}blue
-                    {% elif loop.index == 2 %}plum
-                    {% elif loop.index == 3 %}pink
-                    {% elif loop.index == 4 %}green
-                    {% endif %}">
-            <div class="card-body">
-              <i class="fas fa-folder card-icon"></i>
-              <div class="card-title">{{ i.name }}</div>
-            </div>
-            <div class="card-footer">
-              <span class="arrow">›</span>
-            </div>
-          </a>
-        {% endfor %}
-      </section>
+     <section class="card-section">
+  <div class="card-grid">
+    {% for i in top4 %}
+      <a href="{{ url_for('html.deckcont', id=i.id) }}"
+         class="card
+                {% if loop.index == 1 %}blue
+                {% elif loop.index == 2 %}plum
+                {% elif loop.index == 3 %}pink
+                {% elif loop.index == 4 %}green
+                {% endif %}">
+        <div class="card-body">
+          <i class="fas fa-folder card-icon"></i>
+          <div class="card-title">{{ i.name }}</div>
+        </div>
+        <div class="card-footer">
+          <span class="arrow">›</span>
+        </div>
+      </a>
+    {% endfor %}
+
+    {% for _ in range(4 - top4|length) %}
+      <div class="card placeholder-card"></div>
+    {% endfor %}
+  </div>
+</section>
 
       <!-- Tables -->
       <section class="table-section">

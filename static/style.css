@@ -222,6 +222,19 @@ body {
   margin-bottom: 2rem;
   padding-top: 1rem;
 }
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+
+
+.placeholder-card {
+  background: transparent;
+  border: 2px dashed #ccc;
+  visibility: hidden; /* keeps the layout spacing but hides the card */
+}
 
 .card {
   text-decoration: none;
