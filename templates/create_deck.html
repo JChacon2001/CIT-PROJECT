@@ -19,9 +19,11 @@
     </p>
 
     <p>
-      {{ form.category.label }}<br>
-      {{ form.category }}<br>
-      
+      <div>
+  <label for="category">Course</label> <br>
+  {{ form.category(id="category") }}
+</div>
+
     </p>
 
     <p>{{ form.submit() }}</p>
