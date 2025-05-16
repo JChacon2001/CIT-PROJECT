@@ -747,8 +747,8 @@ pre code {
   width: 100%;
   border-collapse: collapse;
   margin-top: 2rem;
-  background-color: var(--deck-bg);
-  color: var(--deck-text);
+  background-color: var(--pair-5-light);
+  color: var(--text);
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 0 8px rgba(0,0,0,0.05);
@@ -762,9 +762,11 @@ pre code {
 }
 
 .import-table th {
-  background-color: var(--pair-1-light);
+  background-color: var(--pair-2-light);
   color: white;
+  font-weight: bold;
 }
+
 
 .import-button-row {
   display: flex;
@@ -822,9 +824,7 @@ html.dark-mode .import-table th {
 .addcard-btn:hover {
   background-color: var(--pair-1-dark);
 }
-.import-table th {
-  background-color: #f9f9f9;
-}
+
 .add-btn {
   background-color: var(--pair-1-light);
 }
@@ -984,3 +984,31 @@ html.dark-mode .page-title {
   font-size: 0.9rem;
   color: var(--pair-2-dark);
 }
+
+.card-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  padding-left: .5rem;
+}
+.study-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.study-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.decks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
