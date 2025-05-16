@@ -45,13 +45,39 @@ def q_and_a():
 
 @html_bp.route("/decks")
 def decks():
-    decks = db.session.execute(db.select(Deck)).scalars()
-    return render_template("alldecks.html", data=decks)
+    results = (
+        db.session.query(
+            Deck.id,
+            Deck.name,
+            Deck.upload_date,
+            Deck.last_studied,
+            func.count(Cards.id).label("total"),
+            func.count(case((Cards.completed == True, 1))).label("completed")
+        )
+        .outerjoin(Cards, Deck.id == Cards.deck_id)
+        .group_by(Deck.id, Deck.name, Deck.upload_date, Deck.last_studied)
+        .all()
+    )
+
+    deck_data = []
+    for deck_id, name, upload_date, last_studied, total, completed in results:
+        percent = round((completed / total) * 100) if total > 0 else 0
+        deck_data.append({
+            "id": deck_id,
+            "name": name,
+            "upload_date": upload_date,
+            "total": total,
+            "completed": completed,
+            "percent": percent,
+            "last_studied": last_studied
+        })
+
+    return render_template("alldecks.html", data=deck_data)
 
 @html_bp.route("/decks/<int:id>")
 def deckcont(id):
     stmt = db.select(Cards).where(Cards.deck_id == id)
-    exec = db.session.execute(stmt).scalars()
+    exec = db.session.execute(stmt).scalars().all()
     return render_template("deck.html", data=exec)
 
 @html_bp.route("/deck/new", methods=['GET', 'POST'])
@@ -196,9 +222,8 @@ def study_deck(id):
         elif form.studied.data:
             current_card = result[current_index]
             current_card.completed = True
-            db.session.commit()  # Commit the completed update
+            db.session.commit()  
 
-            # Refresh list of incomplete cards after marking one completed
             stmt = db.session.execute(
                 db.select(Cards).where(Cards.deck_id == id, Cards.completed == False)
             ).scalars()
@@ -208,7 +233,6 @@ def study_deck(id):
             if total_cards == 0:
                 return render_template("congrats.html", redirect_url=url_for("html.decks"))
 
-            # Reset index since the current card was removed
             current_index = 0
 
         elif form.next.data:
@@ -268,3 +292,10 @@ def allcards():
 def courses():
     res = db.session.execute(db.select(Category)).scalars()
     return render_template("courses.html", data=res)
+
+
+@html_bp.route("/deck/<int:id>/reset", methods=["POST"])
+def reset_completion(id):
+    db.session.query(Cards).filter(Cards.deck_id == id).update({Cards.completed: False})
+    db.session.commit()
+    return redirect(url_for("html.decks"))

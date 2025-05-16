@@ -833,6 +833,10 @@ th {
   padding:15px;
 }
 
+.mb-2{
+  color: rgb(133, 90, 176);
+}
+
 .deck .title{
   font-size:30px
 }

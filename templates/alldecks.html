@@ -1,27 +1,54 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <a href="{{ url_for('html.deck_form') }}" class="btn btn-primary"> Add Deck </a>
-    <a href="{{ url_for('html.create_card') }}" class="btn btn-primary"> Add Cards</a>
-    <a href="{{ url_for('html.import_csv') }}" class="btn btn-info"> Import Deck</a>
-    <div class="decks">
-        {% for i in data %}
-        <div class="deck">
-            <a href="{{ url_for('html.deckcont', id=i.id)}}" class="title">{{i.name}}</a>
-            <div class="preview">
-                {% for j in i.cards %}
-                <p>{{ j.question }}</p>
-                {% endfor %}
+
+<a href="{{ url_for('html.deck_form') }}" class="btn btn-primary">Add Deck</a>
+<a href="{{ url_for('html.create_card') }}" class="btn btn-primary">Add Cards</a>
+<a href="{{ url_for('html.import_csv') }}" class="btn btn-info">Import Deck</a>
+
+<div class="decks mt-4">
+    {% for i in data %}
+    <div class="deck card p-3 mb-4">
+        <h4 class="card-title">
+            <a href="{{ url_for('html.deckcont', id=i.id) }}" class="text-decoration-none">
+                {{ i.name }}
+            </a>
+        </h4>
+
+        <div class="progress mb-2" style="height: 20px;">
+            <div class="progress-bar 
+                {% if i.percent >= 80 %} bg-success 
+                {% elif i.percent >= 50 %} bg-warning 
+                {% else %} bg-danger 
+                {% endif %}" 
+                role="progressbar"
+                style="width: {{ i.percent }}%;" 
+                aria-valuenow="{{ i.percent }}" 
+                aria-valuemin="0" 
+                aria-valuemax="100">
+                {{ i.percent }}%
             </div>
-            <div class="eord">
-                <a href="{{ url_for('html.edit_deck', id=i.id)}}" class="btn btn-primary">Edit</a>
-                <a href="{{ url_for('html.delete_deck', id=i.id)}}" class="btn btn-danger">Delete</a>
-                <a href="{{ url_for('html.study_deck', id=i.id) }}" class="btn btn-success">Study</a>
-            </div>
-        
         </div>
-        {% endfor %}
+
+        <p class="mb-2"><strong>{{ i.completed }}</strong> out of <strong>{{ i.total }}</strong> cards completed</p>
+        {% if i.last_studied %}
+            <p class="text-muted" ><small>Last studied: {{ i.last_studied.strftime('%Y-%m-%d') }}</small></p>
+        {% endif %}
+
+        <div class="eord mt-2">
+    <a href="{{ url_for('html.edit_deck', id=i.id) }}" class="btn btn-sm btn-primary">Edit</a>
+    <a href="{{ url_for('html.delete_deck', id=i.id) }}" class="btn btn-sm btn-danger">Delete</a>
+    <a href="{{ url_for('html.study_deck', id=i.id) }}" class="btn btn-sm btn-success">Study</a>
+    <form action="{{ url_for('html.reset_completion', id=i.id) }}" method="POST" style="display: inline;">
+        <button type="submit" class="btn btn-sm btn-warning"
+            onclick="return confirm('Are you sure you want to reset progress for this deck?');">
+            Reset
+        </button>
+    </form>
+</div>
+
     </div>
-    
+    {% endfor %}
+</div>
 
 {% endblock %}
