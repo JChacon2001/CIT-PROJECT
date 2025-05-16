@@ -23,7 +23,7 @@
     </div>
   </form>
 
-  <p style="margin-top: 1rem;">
+  <p style="margin-top: 1rem;" class="csv-req">
     <strong>CSV header must be</strong> 
     <code class="import-code">question,answer</code>
   </p>
@@ -42,8 +42,8 @@
         {% for row in data %}
           <tr>
             <td>{{ row.deck }}</td>
-            <td>{{ row.question }}</td>
-            <td>{{ row.answer }}</td>
+            <td><pre><code>{{ row.question }}</td></code></pre>
+            <td><pre><code>{{ row.answer }}</td></code></pre>
           </tr>
         {% endfor %}
       </tbody>

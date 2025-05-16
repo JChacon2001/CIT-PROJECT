@@ -526,7 +526,11 @@ html.dark-mode .title {
 .preview::-webkit-scrollbar{
   display:none
 }
-
+.csv-req {
+  align-items: center;
+  padding-left: 20rem;
+  padding-bottom: 2rem;
+}
 .preview p {
   font-size: 16px;
   margin: 0;
@@ -732,6 +736,12 @@ pre code {
   transition: background 0.2s ease;
 }
 
+.import-table td:first-child,
+.import-table th:first-child {
+  width: 10%;
+}
+
+
 .import-submit-btn:hover {
   background-color: var(--pair-2-dark);
 }
@@ -756,7 +766,7 @@ pre code {
 
 .import-table th,
 .import-table td {
-  border: 1px solid #ccc;
+  border: 1px solid black;
   padding: 0.75rem 1rem;
   text-align: left;
 }
@@ -855,7 +865,7 @@ html.dark-mode .import-table th {
   gap: 1rem;
   margin-bottom: 1rem;
   flex-wrap: wrap;
-  padding-left: 1rem;
+  padding-left: 2.25rem;
 }
 
 
