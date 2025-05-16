@@ -1,5 +1,76 @@
 @import url('https://fontlibrary.org//face/rosa-sans');
 
+
+:root {
+  --bar: #080B0C;
+  --bg: #f4f4f4;
+  --text: #1a1a1a;
+
+  --pair-1-light: #2F3E46;
+  --pair-1-dark: #212B31;
+
+  --pair-2-light: #354F52;
+  --pair-2-dark: #283C3E;
+
+  --pair-3-light: #52796F;
+  --pair-3-dark: #426159;
+
+  --pair-4-light: #84A98C;
+  --pair-4-dark: #6F9B78;
+
+  --pair-5-light: #CAD2C5;
+  --pair-5-dark: #B5C1AE;
+
+
+  --deck-bg: #ffffff;
+  --deck-text: #1a1a1a;
+  --deck-hover: #f0f0f0;
+
+}
+
+.dark-mode {
+  --bar: #1a1a1a;
+  --bg: #121212;
+  --text: #f0f0f0;
+
+  --pair-1-light: #3e4d56;
+  --pair-1-dark: #2a343a;
+
+  --pair-2-light: #46615e;
+  --pair-2-dark: #344847;
+
+  --pair-3-light: #689186;
+  --pair-3-dark: #4d6f67;
+
+  --pair-4-light: #a4c1ad;
+  --pair-4-dark: #86a292;
+
+  --pair-5-light: #dfe6dc;
+  --pair-5-dark: #c0ccbb;
+
+  --deck-bg: #1f1f1f;
+  --deck-text: #f0f0f0;
+  --deck-hover: #2a2a2a;
+}
+
+html.dark-mode .deck-box {
+  background-color: var(--pair-1-dark);
+}
+html.dark-mode .deck-name {
+  color: white;
+}
+
+html.dark-mode .card-item p {
+  color: black;
+}
+
+body,
+.main-content {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+
 * {
   margin: 0;
   padding: 0;
@@ -10,17 +81,23 @@ a {
   text-decoration: none;
 }
 
-body, html {
-  height: 100%;
-  font-family: 'RosaSansRegular', sans-serif;
-  background-color: #f4f4f4;
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
 }
 
 /* TOP BAR */
 .top-bar {
   display: flex;
   align-items: center;
-  background-color: #120D31;
+  background-color: var(--bar);
   color: white;
   padding: 1rem;
   position: fixed;
@@ -53,18 +130,23 @@ body, html {
 
 /* SIDEBAR */
 .sidebar {
+  position: sticky;
+  top: 64px; /* height of the top bar */
+  height: calc(100vh - 64px);
+  overflow-y: auto;
   width: 260px;
-  background-color: #120D31;
+  background-color: var(--bar);
   color: white;
-  padding: 1.5rem 1rem;
+
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   transition: width 0.3s ease;
+  z-index: 998;
 }
 
 .sidebar.collapsed {
-  width: 80px;
+  width: 60px;
 }
 
 .sidebar-divider {
@@ -138,6 +220,7 @@ body, html {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
   margin-bottom: 2rem;
+  padding-top: 1rem;
 }
 
 .card {
@@ -183,17 +266,18 @@ body, html {
   background-color: rgba(0, 0, 0, 0.15);
 }
 
-.card.blue { background-color: #302F4D; }
-.card.blue .card-footer { background-color: #28273F; }
+.card.blue { background-color: var(--pair-1-light); }
+.card.blue .card-footer { background-color: var(--pair-1-dark); }
 
-.card.plum { background-color: #A57982; }
-.card.plum .card-footer { background-color: #9D6C76; }
+.card.plum { background-color: var(--pair-2-light); }
+.card.plum .card-footer { background-color: var(--pair-2-dark); }
 
-.card.pink { background-color: #B98EA7; }
-.card.pink .card-footer { background-color: #B0829D; }
+.card.pink { background-color: var(--pair-3-light); }
+.card.pink .card-footer { background-color: var(--pair-3-dark); }
 
-.card.green { background-color: #A3A380; }
-.card.green .card-footer { background-color: #989871; }
+.card.green { background-color: var(--pair-4-light); }
+.card.green .card-footer { background-color: var(--pair-4-dark);; }
+
 
 /* tables */
 .table-section {
@@ -202,12 +286,15 @@ body, html {
 
 .table-section h2 {
   margin-bottom: 0.5rem;
+  padding-bottom: 1rem;
+  font-family: 'RosaSansRegular', sans-serif;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color: white;
+  background-color: var(--pair-5-light);
+  color: black;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.05);
 }
 
@@ -218,7 +305,8 @@ th, td {
 }
 
 th {
-  background-color: #e9ecef;
+  background-color: var(--pair-1-light);
+  color: white;
 }
 
 /* FLIP CARD + FAQ STYLES */
@@ -317,6 +405,7 @@ th {
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
+  
 }
 
 .flip-card-inner h1{
@@ -343,13 +432,14 @@ th {
 }
 
 .flip-card-front {
-  background-color: #ffffff;
-  color: #333;
+  background-color: var(--pair-5-light);
+  color: var(--text);
+
 }
 
 .flip-card-back {
-  background-color: #333;
-  color: white;
+  background-color: var(--pair-1-light);
+  color: var(--text);
   transform: rotateY(180deg);
 }
 
@@ -376,25 +466,33 @@ th {
 }
 
 .deck {
-  background-color: transparent;
+  background-color: var(--deck-bg);
+  color: var(--deck-text);
   width: 300px;
   height: 300px;
   perspective: 1000px;
-  margin:5px;
+  margin: 5px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  border-radius: 15px ;
-  padding:15px;
+  border-radius: 15px;
+  padding: 15px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.deck .title{
-  font-size:30px
-}
 .deck:hover {
-  background-color: #120d3110;
-  transition: ease-in-out .15s;
+  background-color: var(--deck-hover);
+  transition: ease-in-out 0.15s;
   transform: scale(1.04);
 }
 
+html.dark-mode .title {
+  color: white;
+}
+
+
+.deck .title{
+  font-size:30px;
+  color: var(--pair-2-light)
+}
 .deck .eord{
   position:absolute;
   bottom:10px
@@ -405,451 +503,6 @@ th {
 }
 
 
-.preview {
-
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  height:60%;
-  overflow:scroll;
-}
-
-.preview::-webkit-scrollbar{
-  display:none
-}
-
-.preview p {
-  font-size: 16px;
-  margin: 0;
-}
-
-.decks {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.Acards p {
-  font-size: 24px;
-}
-
-.next-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.create_deck{
-  margin-left:auto;
-  margin-right:auto;
-  width:50%;
-  text-align:center;
-  border-radius: 25px;
-  padding:20px;
-
-}@import url('https://fontlibrary.org//face/rosa-sans');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-a {
-  text-decoration: none;
-}
-
-body, html {
-  height: 100%;
-  font-family: 'RosaSansRegular', sans-serif;
-  background-color: #f4f4f4;
-}
-
-/* TOP BAR */
-.top-bar {
-  display: flex;
-  align-items: center;
-  background-color: #120D31;
-  color: white;
-  padding: 1rem;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 999;
-}
-
-.sidebar-toggle {
-  font-size: 1.5rem;
-  background: none;
-  color: white;
-  cursor: pointer;
-}
-
-.top-logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-left: 1rem;
-  padding-left: 1.5rem;
-}
-
-/* WRAPPER LAYOUT */
-.wrapper {
-  display: flex;
-  min-height: 100vh;
-  margin-top: 64px; /* top bar offset */
-}
-
-/* SIDEBAR */
-.sidebar {
-  width: 260px;
-  background-color: #120D31;
-  color: white;
-  padding: 1.5rem 1rem;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  transition: width 0.3s ease;
-}
-
-.sidebar.collapsed {
-  width: 80px;
-}
-
-.sidebar-divider {
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.2);
-  margin: 0.5rem 0;
-}
-
-/* nav menu */
-.nav-menu {
-  display: flex;
-  flex-direction: column;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  padding: 1.2rem 1rem;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-  transition: background 0.3s, padding 0.3s;
-  min-height: 48px;
-}
-
-.nav-icon {
-  font-size: 1.2rem;
-  width: 24px;         
-  min-width: 24px;
-  text-align: center;
-  flex-shrink: 0;
-  margin-right: 1rem;
-}
-
-.link-text {
-  white-space: nowrap;
-  display: inline-block;
-  transition: opacity 0.3s ease;
-  opacity: 1;
-}
-
-.sidebar.collapsed .link-text {
-  opacity: 0;
-  width: 0;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* MAIN CONTENT */
-.main-content {
-  flex-grow: 1;
-  padding: 2rem;
-  transition: margin-left 0.3s ease;
-}
-
-.wrapper .sidebar.collapsed + .main-content {
-  margin-left: 80px;
-}
-
-/* CARD STYLING */
-.card-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.card {
-  text-decoration: none;
-  border-radius: 12px;
-  overflow: hidden;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s, box-shadow 0.3s;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-.card-body {
-  padding: 1.5rem 1rem 1rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.card-icon {
-  font-size: 1.5rem;
-}
-
-.card-footer {
-  padding: 0.75rem 1rem;
-  background-color: rgba(0, 0, 0, 0.08);
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  transition: background-color 0.3s;
-}
-
-.card-footer:hover {
-  background-color: rgba(0, 0, 0, 0.15);
-}
-
-.card.blue { background-color: #302F4D; }
-.card.blue .card-footer { background-color: #28273F; }
-
-.card.plum { background-color: #A57982; }
-.card.plum .card-footer { background-color: #9D6C76; }
-
-.card.pink { background-color: #B98EA7; }
-.card.pink .card-footer { background-color: #B0829D; }
-
-.card.green { background-color: #A3A380; }
-.card.green .card-footer { background-color: #989871; }
-
-/* tables */
-.table-section {
-  margin-bottom: 2rem;
-}
-
-.table-section h2 {
-  margin-bottom: 0.5rem;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: white;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.05);
-}
-
-th, td {
-  padding: 0.75rem 1rem;
-  border: 1px solid #ddd;
-  text-align: left;
-}
-
-th {
-  background-color: #e9ecef;
-}
-
-/* FLIP CARD + FAQ STYLES */
-.faq-header {
-  background: var(--bg-light);
-  padding: 2rem 1rem;
-  text-align: center;
-}
-.faq-header h1 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-.faq-header p {
-  color: #555;
-}
-
-.faq-container {
-  display: flex;
-  padding: 1rem;
-  gap: 2rem;
-}
-
-.faq-categories {
-  width: 180px;
-}
-.faq-categories ul {
-  list-style: none;
-}
-.faq-categories li {
-  padding: 0.5rem 0;
-  cursor: pointer;
-}
-.faq-categories li.active {
-  font-weight: bold;
-  position: relative;
-}
-.faq-categories li.active::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  background: var(--color-secondary);
-  border-radius: 50%;
-  position: absolute;
-  left: -12px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.faq-content {
-  flex: 1;
-}
-.faq-content details {
-  background: var(--bg-light);
-  margin-bottom: 0.5rem;
-  border-radius: 4px;
-  overflow: hidden;
-}
-.faq-content summary {
-  list-style: none;
-  padding: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  position: relative;
-}
-.faq-content summary::-webkit-details-marker {
-  display: none;
-}
-.faq-content summary::after {
-  content: '+';
-  position: absolute;
-  right: 1rem;
-  font-size: 1.2rem;
-  color: var(--color-primary);
-}
-.faq-content details[open] summary::after {
-  content: '−';
-}
-.faq-content p {
-  padding: 0 1rem 1rem;
-  line-height: 1.5;
-  color: #444;
-}
-
-.flip-card {
-  background-color: transparent;
-  width: 300px;
-  height: 200px;
-  perspective: 1000px;
-  margin:5px;
-}
-
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-}
-
-.flip-card-inner h1{
-  position:absolute;
-  font-size:15px;
-  transform:translate(150%,350%)
-}
-
-.flip-card.flipped .flip-card-inner {
-  transform: rotateY(180deg);
-}
-
-.flip-card-front, .flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  padding: 20px;
-}
-
-.flip-card-front {
-  background-color: #ffffff;
-  color: #333;
-}
-
-.flip-card-back {
-  background-color: #5b5b5b;
-  color: white;
-  transform: rotateY(180deg);
-}
-
-.flip-card-back a{
-  color:white;
-}
-
-.card-center-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-/* styles created from user */
-
-.options {
-  position:absolute;
-  
-}
-
-.cardarray{
-  display:flex;
-  flex-wrap: wrap;
-}
-
-.deck {
-  background-color: transparent;
-  width: 300px;
-  height: 300px;
-  perspective: 1000px;
-  margin:5px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  border-radius: 15px ;
-  padding:15px;
-}
-
-.deck .title{
-  font-size:30px
-}
-.deck:hover {
-  background-color: #120d3110;
-  transition: ease-in-out .15s;
-  transform: scale(1.04);
-}
-
-.deck .eord{
-  position:absolute;
-  bottom:10px
-}
-
-.eord a{
-  font-size:10px;
-}
 
 
 .preview {
@@ -859,6 +512,8 @@ th {
   margin-right: auto;
   height:60%;
   overflow:scroll;
+  background-color: transparent;
+  color: inherit;
 }
 
 .preview::-webkit-scrollbar{
@@ -909,7 +564,8 @@ th {
   margin: 0 auto;
 }
 .term-item {
-  background: #ffffff;
+  background-color: var(--pair-5-light);
+  color: var(--text);
   border: 1px solid #eceef0;
   border-radius: 8px;
   display: flex;
@@ -919,24 +575,24 @@ th {
 }
 .term {
   flex: 1;
-  color: #2d3f50;
+  color: var(--text);
   font-weight: 500;
 }
 .definition {
   flex: 2;
-  color: #556677;
+  color: var(--text);
   padding-left: 16px;
   border-left: 1px solid #eceef0;
 }
 
 /* Table header styling */
 table thead th {
-  background-color: #302F4D;
+  background-color: var(--pair-1-light);
   color: white;
 }
 
 table tbody td a {
-  color: #9D6C76;
+  color: var(--pair-3-dark);
 }
 
  .category {
@@ -986,7 +642,8 @@ table tbody td a {
     display: none;
     margin-top: 10px;
     padding: 10px;
-    background-color: #f0f0f0;
+    background-color: var(--pair-5-light);
+    color: black;
 }
 
 pre code {
@@ -1001,6 +658,8 @@ pre code {
     border-radius: 8px;
     box-sizing: border-box;
     height: 100%;
+    background-color: var(--pair-5-light);
+    color: var(--text);
 }
 .import-page {
   font-family: Arial, sans-serif;
@@ -1083,6 +742,156 @@ pre code {
   text-align: left;
 }
 
+.addcard-btn {
+  margin-bottom: .5rem;
+  background-color: var(--pair-1-light);
+}
+.addcard-btn:hover {
+  background-color: var(--pair-1-dark);
+}
 .import-table th {
   background-color: #f9f9f9;
+}
+.add-btn {
+  background-color: var(--pair-1-light);
+}
+.add-btn:hover {
+  background-color: var(--pair-1-dark);
+}
+
+.cards-btn {
+  background-color: var(--pair-2-light);
+}
+.cards-btn:hover {
+  background-color: var(--pair-2-dark);
+}
+
+.import-btn {
+  background-color: var(--pair-3-light);
+}
+.import-btn:hover {
+  background-color: var(--pair-3-dark);
+}
+.btn,
+.btn:hover {
+  color: #fff;
+}
+
+.deck-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  padding-left: 1rem;
+}
+
+
+.page-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: var(--pair-1-light);
+}
+html.dark-mode .page-title {
+  color: white;
+}
+
+.course-box {
+  margin-bottom: 2.5rem;
+  background-color: var(--pair-5-light);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.course-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--pair-2-light);
+}
+
+.deck-box {
+  background-color: #fff;
+  border-left: 5px solid var(--pair-3-light);
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+  border-radius: 8px;
+}
+
+.deck-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--pair-1-dark);
+  cursor: pointer;
+}
+
+.deck-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.btn {
+  padding: 0.4rem 0.75rem;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #fff;
+  transition: background 0.2s ease;
+}
+
+.view-btn {
+  background-color: var(--pair-2-light);
+}
+
+.view-btn:hover {
+  background-color: var(--pair-2-dark);
+}
+
+.edit-btn {
+  background-color: var(--pair-4-light);
+  
+}
+
+.edit-btn:hover {
+  background-color: var(--pair-4-dark);
+}
+
+.delete-btn {
+  background-color: #c0392b;
+}
+
+.delete-btn:hover {
+  background-color: #922b21;
+}
+
+
+.deck-content {
+  margin-top: 0.75rem;
+  padding-left: 1rem;
+}
+
+.card-list {
+  margin-top: 0.5rem;
+}
+
+.card-item {
+  background-color: var(--pair-5-dark);
+  color: black;
+  margin-bottom: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 6px;
+}
+
+.empty-msg {
+  font-style: italic;
+  color: var(--text);
+}
+
+.toggle-arrow {
+  font-size: 0.9rem;
+  color: var(--pair-2-dark);
 }

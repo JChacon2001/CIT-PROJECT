@@ -1,31 +1,55 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Course Decks</h1>
+<h1 class="page-title">Courses and Decks</h1>
 
-    {% if data %}
-        {% for deck in data %}
-            <div class="deck-box">
-                <div class="deck-title" onclick="toggleContent('{{ deck.id }}')">
-                    {{ deck.name }}
-                </div>`
-                <div class="deck-content" id="content-{{ deck.id }}">
-                    {% if deck.cards %}
-                        {% for card in deck.cards %}
-                            <div class="card">
-                                <strong>Q:</strong> {{ card.question }}<br>
-                                <strong>A:</strong> {{ card.answer }}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <p>No cards in this deck.</p>
-                    {% endif %}
+<div class="course-list">
+  {% if categories %}
+    {% for course in categories %}
+      <div class="course-box">
+        <h2 class="course-title">{{ course.name }}</h2>
+
+        {% if course.decks %}
+          <div class="deck-list">
+            {% for deck in course.decks %}
+              <div class="deck-box">
+                <div class="deck-header" onclick="toggleContent('{{ deck.id }}')">
+                  <span class="deck-name">{{ deck.name }}</span>
+                  <span class="toggle-arrow">▼</span>
                 </div>
-            </div>
-        {% endfor %}
-    {% else %}
-        <p>No decks available.</p>
-    {% endif %}
-    
+
+                <div class="deck-actions">
+                  <a href="{{ url_for('html.deckcont', id=deck.id) }}" class="btn view-btn">View Deck</a>
+                  <a href="{{ url_for('html.edit_deck', id=deck.id) }}" class="btn edit-btn">Edit</a>
+                  <a href="{{ url_for('html.delete_deck', id=deck.id) }}" class="btn delete-btn">Delete</a>
+                </div>
+
+                <div class="deck-content" id="content-{{ deck.id }}">
+                  {% if deck.cards %}
+                    <div class="card-list">
+                      {% for card in deck.cards %}
+                        <div class="card-item">
+                          <p><strong>Q:</strong> {{ card.question }}</p>
+                          <p><strong>A:</strong> {{ card.answer }}</p>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    <p class="empty-msg">No cards in this deck.</p>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p class="empty-msg">No decks in this course.</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="empty-msg">No courses available.</p>
+  {% endif %}
+</div>
+
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 {% endblock %}

@@ -10,7 +10,11 @@
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   <script>hljs.highlightAll();</script>
-
+  <script>
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.classList.add("dark-mode");
+    }
+  </script>
 </head>
 <body>
 
@@ -18,8 +22,14 @@
   <header class="top-bar">
     <div class="sidebar-toggle" onclick="toggleSidebar()">
       <i class="fas fa-bars"></i>
+      
     </div>
     <div class="top-logo"><a href="{{ url_for('html.home')}}" class="home-link">QuizCIT</a></div>
+    <button id="toggle-theme" class="btn btn-sm btn-outline-light" style="margin-left:auto;">
+      <i id="theme-icon" class="fas fa-moon"></i>
+    </button>
+    
+    
     
   </header>
 
@@ -36,8 +46,6 @@
         <a href="{{ url_for('html.decks')}}" class="nav-link">
           <i class="fas fa-clone nav-icon"></i><span class="link-text">All Decks</span>
         </a>
-        <a href="{{ url_for('html.faq') }}" class="nav-link">
-          <i class="fas fa-question-circle nav-icon"></i><span class="link-text">FAQ</span>
         <a href="{{ url_for('html.create_card')}}" class="nav-link">
           <i class="fas fa-clone nav-icon"></i><span class="link-text">Create Cards</span>
         </a>

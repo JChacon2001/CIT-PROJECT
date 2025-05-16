@@ -29,3 +29,35 @@ function toggleContent(id) {
     }
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    const toggleBtn = document.getElementById("toggle-theme");
+    const themeIcon = document.getElementById("theme-icon");
+    const root = document.documentElement;
+  
+    function applyTheme(isDark) {
+      if (isDark) {
+        root.classList.add("dark-mode");
+      } else {
+        root.classList.remove("dark-mode");
+      }
+  
+      if (themeIcon) {
+        themeIcon.className = isDark ? "fas fa-sun" : "fas fa-moon";
+      }
+    }
+  
+    // Load theme on first page load
+    const savedTheme = localStorage.getItem("theme");
+    applyTheme(savedTheme === "dark");
+  
+    // Toggle when clicked
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", () => {
+        const isDarkNow = root.classList.toggle("dark-mode");
+        localStorage.setItem("theme", isDarkNow ? "dark" : "light");
+        applyTheme(isDarkNow);
+      });
+    }
+  });
+  
+

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="{{ url_for('html.create_card') }}" class="btn btn-primary"> Add Cards</a>
+<a href="{{ url_for('html.create_card') }}" class="btn addcard-btn"> Add Cards</a>
 <div class="cardarray">
     {% for i in data %}
     <div class="flip-card" onclick="flipCard(this)">

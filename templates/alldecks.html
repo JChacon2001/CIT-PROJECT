@@ -1,27 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <a href="{{ url_for('html.deck_form') }}" class="btn btn-primary"> Add Deck </a>
-    <a href="{{ url_for('html.create_card') }}" class="btn btn-primary"> Add Cards</a>
-    <a href="{{ url_for('html.import_csv') }}" class="btn btn-info"> Import Deck</a>
-    <div class="decks">
-        {% for i in data %}
-        <div class="deck">
-            <a href="{{ url_for('html.deckcont', id=i.id)}}" class="title">{{i.name}}</a>
-            <div class="preview">
-                {% for j in i.cards %}
-                <p>{{ j.question }}</p>
-                {% endfor %}
-            </div>
-            <div class="eord">
-                <a href="{{ url_for('html.edit_deck', id=i.id)}}" class="btn btn-primary">Edit</a>
-                <a href="{{ url_for('html.delete_deck', id=i.id)}}" class="btn btn-danger">Delete</a>
-                <a href="{{ url_for('html.study_deck', id=i.id) }}" class="btn btn-success">Study</a>
-            </div>
-        
-        </div>
-        {% endfor %}
-    </div>
-    
+<div class="deck-controls">
+    <a href="{{ url_for('html.deck_form') }}" class="btn add-btn">Add Deck</a>
+    <a href="{{ url_for('html.create_card') }}" class="btn cards-btn">Add Cards</a>
+    <a href="{{ url_for('html.import_csv') }}" class="btn import-btn">Import Deck</a>
+  </div>
+  
 
+  <div class="decks">
+    {% for i in data %}
+    <div class="deck">
+      <a href="{{ url_for('html.deckcont', id=i.id)}}" class="title">{{i.name}}</a>
+      <div class="preview">
+        {% for j in i.cards %}
+        <p>{{ j.question }}</p>
+        {% endfor %}
+      </div>
+      <div class="eord">
+        <a href="{{ url_for('html.study_deck', id=i.id) }}" class="btn view-btn">Study</a>
+        <a href="{{ url_for('html.edit_deck', id=i.id)}}" class="btn edit-btn">Edit</a>
+        <a href="{{ url_for('html.delete_deck', id=i.id)}}" class="btn delete-btn">Delete</a>
+        
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Bottom padding -->
+  <div style="height: 3rem;"></div>
 {% endblock %}
