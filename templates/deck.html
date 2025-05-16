@@ -6,7 +6,10 @@
         <a href="{{ url_for('html.study_deck', id=data[0].id) }}" class="btn btn-sm view-btn">Study Now!</a>
     {% endif %}
     
-    <a href="{{ url_for('html.create_card') }}?Deck=1" class="btn edit-btn">Add Cards</a>
+
+<a href="{{ url_for('html.add_card', deck_id=data[0].id) }}" class="btn edit-btn"> Add Card </a>
+
+
     </div>
     
     <div class="cardarray">

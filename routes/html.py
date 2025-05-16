@@ -137,6 +137,23 @@ def edit_card(id):
 
     return render_template('edit_card.html', form=form, card=card)
 
+@html_bp.route('/card/add/<int:deck_id>', methods=['GET', 'POST'])
+def add_card(deck_id):
+    form = EditCardForm()
+    
+    if form.validate_on_submit():
+     
+        new_card = Cards(
+            question=form.question.data,
+            answer=form.answer.data,
+            deck_id=deck_id
+        )
+        db.session.add(new_card)
+        db.session.commit()
+     
+        return redirect(url_for('html.deckcont', id=deck_id))
+    return render_template('edit_card.html', form=form, deck_id=deck_id)
+
 @html_bp.route('/deck/edit/<int:id>', methods=['GET', 'POST'])
 def edit_deck(id):
     stmt = db.select(Deck).where(Deck.id == id)
