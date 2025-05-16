@@ -179,6 +179,16 @@ def delete_deck(id):
         db.session.commit()
     return redirect(url_for('html.decks'))
 
+@html_bp.route('/deck/delete_lib/<int:id>')
+def delete_deck_2(id):
+    stmt = db.select(Deck).where(Deck.id == id)
+    deck = db.session.execute(stmt).scalar()
+    if deck:
+        for cards in deck.cards:
+            db.session.delete(cards)
+        db.session.delete(deck)
+        db.session.commit()
+    return redirect(url_for('html.courses'))
 
 @html_bp.route("/import", methods=["GET", "POST"])
 def import_csv():
@@ -188,6 +198,8 @@ def import_csv():
     msg  = request.args.get("msg", "")
     form.deck.choices = [(d.id, d.name) for d in decks]
     if form.validate_on_submit():
+
+        return render_template("import.html",form=form,data=data,msg=msg) 
         deck = db.session.execute(db.select(Deck).where(Deck.id == form.deck.data)).scalar()
         f = form.csv.data
         reader = csv.DictReader(io.StringIO(f.read().decode("utf-8")))
@@ -199,6 +211,7 @@ def import_csv():
         db.session.commit() 
         msg = f"Imported {len(data)} cards into “{deck.name}”"
         return render_template("import.html",form=form,data=data,msg=msg)
+        print(msg)
     return render_template("import.html", form=form,data=data,msg=msg)
 
 from flask import redirect, url_for
