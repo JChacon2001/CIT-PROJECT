@@ -672,27 +672,34 @@ pre code {
     background-color: var(--pair-5-light);
     color: var(--text);
 }
-.import-page {
-  font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
-  margin: 0;
-  padding: 20px;
-}
-
-.import-title {
-  text-align: center;
-  color: #333;
-}
 
 .import-form {
-  background-color: white;
-  max-width: 500px;
-  margin: 40px auto;
-  padding: 30px;
+  background-color: var(--pair-5-light);
+  padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  border: 1px dashed #ccc;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px dashed var(--pair-3-light);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.import-form div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.import-message {
   text-align: center;
+  font-size: 0.95rem;
+  color: var(--pair-3-dark);
+  margin: 1rem auto;
 }
 
 .import-file-input {
@@ -701,56 +708,111 @@ pre code {
 
 .import-file-label {
   display: inline-block;
-  margin: 20px 0;
-  padding: 12px 24px;
-  background-color: #007bff;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--pair-1-light);
   color: white;
   border-radius: 5px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 500;
+  transition: background 0.2s ease;
 }
 
 .import-file-label:hover {
-  background-color: #0056b3;
+  background-color: var(--pair-1-dark);
 }
 
 .import-submit-btn {
-  margin-top: 15px;
-  padding: 10px 20px;
-  background-color: #28a745;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--pair-2-light);
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease;
 }
 
 .import-submit-btn:hover {
-  background-color: #218838;
-}
-
-.import-message {
-  text-align: center;
-  font-size: 14px;
-  color: #555;
+  background-color: var(--pair-2-dark);
 }
 
 .import-code {
-  background-color: #e9ecef;
+  background-color: var(--pair-5-dark);
   padding: 3px 6px;
   border-radius: 3px;
+  font-size: 0.85rem;
 }
 
 .import-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 2rem;
+  background-color: var(--deck-bg);
+  color: var(--deck-text);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
 }
 
 .import-table th,
 .import-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
+  border: 1px solid #ccc;
+  padding: 0.75rem 1rem;
   text-align: left;
+}
+
+.import-table th {
+  background-color: var(--pair-1-light);
+  color: white;
+}
+
+.import-button-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+html.dark-mode .import-form {
+  background-color: var(--pair-1-dark);
+  color: var(--deck-text);
+  border-color: var(--pair-2-dark);
+}
+
+html.dark-mode .import-message {
+  color: var(--pair-1-light);
+}
+
+html.dark-mode .import-file-label {
+  background-color: var(--pair-2-dark);
+}
+
+html.dark-mode .import-file-label:hover {
+  background-color: var(--pair-2-light);
+}
+
+html.dark-mode .import-submit-btn {
+  background-color: var(--pair-3-dark);
+}
+
+html.dark-mode .import-submit-btn:hover {
+  background-color: var(--pair-2-light);
+}
+
+html.dark-mode .import-code {
+  background-color: var(--pair-2-dark);
+  color: white;
+}
+
+html.dark-mode .import-table {
+  background-color: var(--deck-bg);
+  color: var(--deck-text);
+}
+
+html.dark-mode .import-table th {
+  background-color: var(--pair-1-dark);
+  color: white;
 }
 
 .addcard-btn {
@@ -863,12 +925,12 @@ html.dark-mode .page-title {
 }
 
 .edit-btn {
-  background-color: var(--pair-4-light);
+  background-color: var(--pair-3-light);
   
 }
 
 .edit-btn:hover {
-  background-color: var(--pair-4-dark);
+  background-color: var(--pair-3-dark);
 }
 
 .delete-btn {
@@ -878,6 +940,22 @@ html.dark-mode .page-title {
 .delete-btn:hover {
   background-color: #922b21;
 }
+
+.reset-btn {
+  background-color: var(--pair-4-light);
+  font-size: .7rem;
+  border-radius: 4px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.reset-btn:hover {
+  background-color: var(--pair-4-dark);
+}
+
 
 
 .deck-content {
