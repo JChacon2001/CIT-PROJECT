@@ -478,6 +478,13 @@ th {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.mb-2{
+  color: rgb(133, 90, 176);
+}
+
+.deck .title{
+  font-size:30px
+}
 .deck:hover {
   background-color: var(--deck-hover);
   transition: ease-in-out 0.15s;
