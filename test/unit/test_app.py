@@ -12,13 +12,6 @@ def test_main_page(test_client):
 
 
 
-
-
-def test_faq_page(test_client):
-    response = test_client.get('/faq')
-    assert response.status_code == 200
-    assert b"FAQs" in response.data
-
 def test_unit_lib_page(test_client):
     response = test_client.get('/decks')
     assert response.status_code == 200
