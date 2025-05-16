@@ -197,22 +197,29 @@ def import_csv():
     decks = db.session.execute(db.select(Deck)).scalars()
     msg  = request.args.get("msg", "")
     form.deck.choices = [(d.id, d.name) for d in decks]
-    if form.validate_on_submit():
 
-        return render_template("import.html",form=form,data=data,msg=msg) 
-        deck = db.session.execute(db.select(Deck).where(Deck.id == form.deck.data)).scalar()
+    if form.validate_on_submit():
+        deck = db.session.execute(
+            db.select(Deck).where(Deck.id == form.deck.data)
+        ).scalar()
+
         f = form.csv.data
         reader = csv.DictReader(io.StringIO(f.read().decode("utf-8")))
+
         for r in reader:
             q = r["question"]
             a = r["answer"]
             db.session.add(Cards(deck_id=deck.id, question=q, answer=a))
             data.append({"deck": deck.name, "question": q, "answer": a})
-        db.session.commit() 
+
+        db.session.commit()
         msg = f"Imported {len(data)} cards into “{deck.name}”"
-        return render_template("import.html",form=form,data=data,msg=msg)
-        print(msg)
-    return render_template("import.html", form=form,data=data,msg=msg)
+        
+        # PRG Pattern: Redirect to GET with msg in query params
+        return redirect(url_for("html.import_csv", msg=msg))
+
+    return render_template("import.html", form=form, data=data, msg=msg)
+
 
 from flask import redirect, url_for
 
