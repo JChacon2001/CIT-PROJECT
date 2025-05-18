@@ -37,16 +37,27 @@
     <!-- sidebar -->
     <aside class="sidebar" id="sidebar">
       <nav class="nav-menu">
-        <a href="{{ url_for('html.home')}}" class="nav-link">
-          <i class="fas fa-home nav-icon"></i><span class="link-text">Dashboard</span>
-        </a>
-        <a href="{{ url_for('html.courses')}}" class="nav-link">
-          <i class="fas fa-book nav-icon"></i><span class="link-text">Course Library</span>
-        </a>
-        <a href="{{ url_for('html.decks')}}" class="nav-link">
-          <i class="fas fa-clone nav-icon"></i><span class="link-text">All Decks</span>
-        </a>
-        </a>
+  <a href="{{ url_for('html.home') }}" class="nav-link d-flex align-items-center">
+    <i class="fas fa-home nav-icon me-2"></i>
+    <span class="link-text">Dashboard</span>
+  </a>
+  <a href="{{ url_for('html.courses') }}" class="nav-link d-flex align-items-center">
+    <i class="fas fa-book nav-icon me-2"></i>
+    <span class="link-text">Course Library</span>
+  </a>
+  <a href="{{ url_for('html.decks') }}" class="nav-link d-flex align-items-center">
+    <i class="fas fa-clone nav-icon me-2"></i>
+    <span class="link-text">All Decks</span>
+  </a>
+  <a href="{{ url_for('html.faq') }}" class="nav-link d-flex align-items-center">
+    <i class="fas fa-address-card nav-icon me-2"></i>
+    <span class="link-text">FAQ</span>
+  </a>
+
+  <div class="sidebar-divider"></div>
+</nav>
+
+
         <div class="sidebar-divider"></div>
       </nav>
     </aside>

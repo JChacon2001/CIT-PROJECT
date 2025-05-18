@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}  
+ <main class="main-content">
+    <section class="faq-header">
+      <h1>FAQs</h1>
+      <p>Need some answers?</p>
+    </section>
+
+    <div class="faq-container">
+      <nav class="faq-categories">
+        <ul>
+          <li class="active">General</li>
+          <li>Account &amp; Sync</li>
+          <li>Deck Management</li>
+          <li>Study Modes</li>
+          <li>Troubleshooting</li>
+        </ul>
+      </nav>
+
+      <section class="faq-content">
+        <!-- General -->
+        <details open>
+          <summary>How do I create a new deck?</summary>
+          <p>Click the “Add Deck” button at the top of your Dashboard, give it a name, and click “Save.” Your new deck will appear alongside your others.</p>
+        </details>
+
+        <details>
+          <summary>Can I rename or delete a deck?</summary>
+          <p>Yes. From the Dashboard, hover over a deck card and click the edit (✎) or delete (🗑) icon that appears.</p>
+        </details>
+
+        <details>
+          <summary>Where do my decks get stored?</summary>
+          <p>All your decks and cards are stored locally in your browser’s storage and sync to your account when you’re signed in.</p>
+        </details>
+
+        <!-- Account & Sync -->
+        <details>
+          <summary>How do I back up my decks?</summary>
+          <p>Go to “Unit Library,” click “Export All,” and download a JSON file you can re-import later.</p>
+        </details>
+
+        <details>
+          <summary>Why aren’t my decks syncing?</summary>
+          <p>Make sure you’re signed in and have a stable internet connection. Try refreshing the page if syncing stalls.</p>
+        </details>
+
+        <!-- Deck Management -->
+        <details>
+          <summary>How can I add cards to a deck?</summary>
+          <p>Open any deck, click “Add Card,” then fill in “Front” and “Back,” and hit “Save Card.”</p>
+        </details>
+
+        <details>
+          <summary>Can I reorder cards within a deck?</summary>
+          <p>Yes—drag the handle ☰ next to each card to move it up or down in the list.</p>
+        </details>
+
+        <!-- Study Modes -->
+        <details>
+          <summary>What study modes are available?</summary>
+          <p>We offer “Classic” (flash-through), “Quiz” (multiple-choice), and “Spaced Repetition” modes to help reinforce learning.</p>
+        </details>
+
+        <details>
+          <summary>How do I track my progress?</summary>
+          <p>Each card shows a progress bar. You can also view overall completion on the Dashboard.</p>
+        </details>
+
+        <!-- Troubleshooting -->
+        <details>
+          <summary>The app won’t open on my phone—help!</summary>
+          <p>Try clearing your browser cache or opening in incognito mode. If it still won’t load, let us know via the feedback button.</p>
+        </details>
+
+        <details>
+          <summary>I lost my account password—what now?</summary>
+          <p>Click “Forgot Password” on the sign-in page. We’ll email you a reset link right away.</p>
+        </details>
+
+      </section>
+    </div>
+  </main>
+  {% endblock %}
