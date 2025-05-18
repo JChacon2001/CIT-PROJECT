@@ -12,9 +12,10 @@
     {{ form.description() }}
   </div>
    <div>
-    {{ form.category.label }} <br>
-    {{ form.category() }}
-  </div>
+  <label for="category">Course</label> <br>
+  {{ form.category(id="category") }}
+</div>
+
   <div>
     {{ form.submit() }}
   </div>

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="main-content">
+  <h2 class="page-title">Import Flashcards</h2>
+
+  {% if msg %}
+    <p class="import-message">{{ msg }}</p>
+  {% endif %}
+
+  <form class="import-form" method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div>
+      {{ form.deck.label }}<br>
+      {{ form.deck() }}
+    </div>
+
+    <div class="import-button-row">
+      <label for="csv" class="import-file-label">Upload File</label>
+      {{ form.csv(class="import-file-input", id="csv") }}
+      {{ form.submit(class="import-submit-btn") }}
+    </div>
+  </form>
+
+  <p style="margin-top: 1rem;" class="csv-req">
+    <strong>CSV header must be</strong> 
+    <code class="import-code">question,answer</code>
+  </p>
+
+  {% if data %}
+    <h3 class="page-title">Imported Data</h3>
+    <table class="import-table">
+      <thead>
+        <tr>
+          <th>Deck</th>
+          <th>Question</th>
+          <th>Answer</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data %}
+          <tr>
+            <td>{{ row.deck }}</td>
+            <td><pre><code>{{ row.question }}</td></code></pre>
+            <td><pre><code>{{ row.answer }}</td></code></pre>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+</div>
+{% endblock %}

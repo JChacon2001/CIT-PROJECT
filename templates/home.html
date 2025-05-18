@@ -7,30 +7,35 @@
         <h1>Dashboard</h1>
       </header>
 
-      <!-- Cards -->
-      <section class="card-section">
-        {% for i in top4 %}
-          <a href="{{ url_for('html.deckcont', id=i.id) }}"
-             class="card
-                    {% if loop.index == 1 %}blue
-                    {% elif loop.index == 2 %}plum
-                    {% elif loop.index == 3 %}pink
-                    {% elif loop.index == 4 %}green
-                    {% endif %}">
-            <div class="card-body">
-              <i class="fas fa-folder card-icon"></i>
-              <div class="card-title">{{ i.name }}</div>
-            </div>
-            <div class="card-footer">
-              <span class="arrow">›</span>
-            </div>
-          </a>
-        {% endfor %}
-      </section>
+     <section class="card-section">
+  <div class="card-grid">
+    {% for i in top4 %}
+      <a href="{{ url_for('html.deckcont', id=i.id) }}"
+         class="card
+                {% if loop.index == 1 %}blue
+                {% elif loop.index == 2 %}plum
+                {% elif loop.index == 3 %}pink
+                {% elif loop.index == 4 %}green
+                {% endif %}">
+        <div class="card-body">
+          <i class="fas fa-folder card-icon"></i>
+          <div class="card-title">{{ i.name }}</div>
+        </div>
+        <div class="card-footer">
+          <span class="arrow">›</span>
+        </div>
+      </a>
+    {% endfor %}
+
+    {% for _ in range(4 - top4|length) %}
+      <div class="card placeholder-card"></div>
+    {% endfor %}
+  </div>
+</section>
 
       <!-- Tables -->
       <section class="table-section">
-        <h2>Course Deck Example</h2>
+        <h2>Course Decks</h2>
         <table>
           <thead>
             <tr>
@@ -44,36 +49,25 @@
           <tbody>
             {% for i in Deck %}
               <tr>
+                <!-- <td><a href="{{ url_for('html.deckcont', id=i.id) }}">{{ i.name }}</a></td> -->
                 <td><a href="{{ url_for('html.deckcont', id=i.id) }}">{{ i.name }}</a></td>
-                <td>{{ i.cards|length }}</td>
-                <td>0%</td>
-                <td>2023/04/10</td>
-                <td>2024/03/01</td>
+                <td>{{ i.total }}</td>
+                <td>{{i.percent}}%</td>
+                <td>{{i.upload_date.strftime('%Y-%m-%d')}}</td>
+                <td>
+                  {% if i.last_studied %}
+                  {{ i.last_studied.strftime('%Y-%m-%d') }}
+                {% else %}
+                  None
+                {% endif %}
+                </td>
               </tr>
             {% endfor %}
           </tbody>
         </table>
       </section>
 
-      <section class="table-section">
-        <h2>Course Deck Example</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Deck Name</th>
-              <th># of Cards</th>
-              <th>Completion Rate</th>
-              <th>Upload Date</th>
-              <th>Last Studied</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Deck 4</td><td>22</td><td>60%</td><td>2023/05/12</td><td>2024/03/30</td></tr>
-            <tr><td>Deck 5</td><td>45</td><td>95%</td><td>2023/06/18</td><td>2024/04/20</td></tr>
-            <tr><td>Deck 6</td><td>35</td><td>85%</td><td>2023/07/25</td><td>2024/04/25</td></tr>
-          </tbody>
-        </table>
-      </section>
+    
     </main>
   </div>
 {% endblock %}

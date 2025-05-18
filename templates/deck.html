@@ -1,31 +1,37 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="cardarray">
-        {% for i in data %}
-        <div class="flip-card" onclick="flipCard(this)">
-            <div class="flip-card-inner">
-            <div class="flip-card-front">
-                <div class="options">
-                    <a href="{{ url_for('html.edit_card', id=i.id)}}" >Edit</a>
-                    <a href="{{ url_for('html.delete_card', id=i.id) }}" onclick="return confirm('Really delete this card?');">Delete</a>
-                </div>
-                <h2> {{ i.question }}</h2>
-            </div>
-            <div class="flip-card-back">
-                <div class="options">
-                    <a href="{{ url_for('html.edit_card', id=i.id)}}" >Edit</a>
-                    <a href="{{ url_for('html.delete_card', id=i.id) }}" onclick="return confirm('Really delete this card?');">Delete</a>
-                </div>
-                
-                <h2>{{ i.answer }}</h2>
-            </div>
-            </div>
-        </div>
+    {% if data %}
+    <div class="card-controls">
+        <a href="{{ url_for('html.study_deck', id=data[0].id) }}" class="btn btn-sm view-btn">Study Now!</a>
+    {% endif %}
+    
 
-        {% endfor %}
+<a href="{{ url_for('html.add_card', deck_id=data[0].id) }}" class="btn edit-btn"> Add Card </a>
+
+
     </div>
     
+    <div class="cardarray">
+        {% for i in data %}
+            <div class="flip-card" onclick="flipCard(this)">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <a href="{{ url_for('html.edit_card', id=i.id) }}" class="card-btn edit">Edit</a>
+                        <a href="{{ url_for('html.delete_card', id=i.id) }}" class="card-btn delete"
+                           onclick="return confirm('Really delete this card?');">Delete</a>
+                        <pre><code class="language-python">{{ i.question }}</code></pre>
+                    </div>
+                    <div class="flip-card-back">
+                        <a href="{{ url_for('html.edit_card', id=i.id) }}" class="card-btn edit">Edit</a>
+                        <a href="{{ url_for('html.delete_card', id=i.id) }}" class="card-btn delete"
+                           onclick="return confirm('Really delete this card?');">Delete</a>
+                        <pre><code class="language-python">{{ i.answer }}</code></pre>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 {% endblock %}
