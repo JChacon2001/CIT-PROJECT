@@ -357,3 +357,45 @@ def reset_completion(id):
     db.session.query(Cards).filter(Cards.deck_id == id).update({Cards.completed: False})
     db.session.commit()
     return redirect(url_for("html.decks"))
+
+@html_bp.route("/search")
+def search_all():
+    q = request.args.get("q", "").strip()
+    if not q:
+      
+        return redirect(url_for("html.decks"))
+
+    like = f"%{q}%"
+    categories = (
+        Category.query
+        .filter(Category.name.ilike(like))
+        .order_by(Category.name)
+        .all()
+    )
+
+    decks = (
+        Deck.query
+        .filter(
+            (Deck.name.ilike(like)) |
+            (Deck.description.ilike(like))
+        )
+        .order_by(Deck.name)
+        .all()
+    )
+    cards = (
+        Cards.query
+        .filter(
+            (Cards.question.ilike(like)) |
+            (Cards.answer.ilike(like))
+        )
+        .order_by(Cards.created.desc())
+        .all()
+    )
+
+    return render_template(
+        "search.html",
+        q=q,
+        categories=categories,
+        decks=decks,
+        cards=cards
+    )
