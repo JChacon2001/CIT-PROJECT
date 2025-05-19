@@ -84,9 +84,14 @@ def decks():
 
 @html_bp.route("/decks/<int:id>")
 def deckcont(id):
-    stmt = db.select(Cards).where(Cards.deck_id == id)
-    exec = db.session.execute(stmt).scalars().all()
-    return render_template("deck.html", data=exec)
+ 
+    deck = db.session.get(Deck, id)
+    if not deck:
+        return render_template("page_not_found.html"), 404
+
+    cards = db.session.scalars(db.select(Cards).where(Cards.deck_id == id)).all()
+
+    return render_template("deck.html", deck_id=id,deck_name=deck.name,cards=cards)
 
 @html_bp.route("/deck/new", methods=['GET', 'POST'])
 def deck_form():
