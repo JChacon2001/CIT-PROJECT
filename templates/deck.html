@@ -1,13 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <h1 class="page-title">{{ deck_name }}</h1>
     {% if data %}
+
+
     <div class="card-controls">
         <a href="{{ url_for('html.study_deck', id=data[0].id) }}" class="btn btn-sm view-btn">Study Now!</a>
     {% endif %}
     
 
-<a href="{{ url_for('html.add_card', deck_id=data[0].id) }}" class="btn edit-btn"> Add Card </a>
+<a href="{{ url_for('html.add_card', deck_id=deck_id) }}" class="btn edit-btn"> Add Card </a>
 
 
     </div>

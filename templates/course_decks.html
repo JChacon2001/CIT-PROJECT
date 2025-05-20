@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="page-title">Decks in {{ category }}</h1>
+<div class="deck-controls">
+    <a href="{{ url_for('html.deck_form') }}" class="btn add-btn">Add Deck</a>
+    <a href="{{ url_for('html.create_card') }}" class="btn cards-btn">Add Cards</a>
+    <a href="{{ url_for('html.import_csv') }}" class="btn import-btn">Import Deck</a>
+</div>
+
+
+
+<div class="decks">
+  {% for i in decks %}
+  <div class="deck">
+    <a href="{{ url_for('html.deckcont', id=i.id)}}" class="title">{{ i.name }}</a>
+
+    <div class="progress mb-2" style="height: 20px;">
+      <div class="progress-bar 
+        {% if i.percent >= 80 %} bg-success 
+        {% elif i.percent >= 50 %} bg-warning 
+        {% else %} bg-danger 
+        {% endif %}" 
+        role="progressbar"
+        style="width: {{ i.percent }}%;" 
+        aria-valuenow="{{ i.percent }}" 
+        aria-valuemin="0" 
+        aria-valuemax="100">
+        {{ i.percent }}%
+      </div>
+    </div>
+
+    <p class="mb-2"><strong>{{ i.completed }}</strong> out of <strong>{{ i.total }}</strong> cards completed</p>
+
+    {% if i.last_studied %}
+      <p class="text-muted"><small>Last studied: {{ i.last_studied.strftime('%Y-%m-%d') }}</small></p>
+    {% endif %}
+
+    <div class="eord">
+      <a href="{{ url_for('html.study_deck', id=i.id) }}" class="btn view-btn">Study</a>
+      <a href="{{ url_for('html.edit_deck', id=i.id)}}" class="btn edit-btn">Edit</a>
+      <a href="{{ url_for('html.delete_deck', id=i.id)}}" class="btn delete-btn">Delete</a>
+      <form action="{{ url_for('html.reset_completion', id=i.id) }}" method="POST" style="display: inline;">
+        <button type="submit" class="btn reset-btn"
+          onclick="return confirm('Are you sure you want to reset progress for this deck?');">
+          Reset
+        </button>
+      </form>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div style="height: 3rem;"></div>
+{% endblock %}
+
