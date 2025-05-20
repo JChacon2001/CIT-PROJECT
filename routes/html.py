@@ -143,9 +143,9 @@ def edit_card(id):
         card.question = form.question.data
         card.answer = form.answer.data
         db.session.commit()
-        return redirect(url_for('html.deckcont', id=card.deck_id))
+        return redirect(url_for('html.deckcont', id=card))
 
-    return render_template('edit_card.html', form=form, card=card, deck_id=card.deck_id)
+    return render_template('edit_card.html', form=form, card=card, deck_id=card)
 
 @html_bp.route('/card/add/<int:deck_id>', methods=['GET', 'POST'])
 def add_card(deck_id):
