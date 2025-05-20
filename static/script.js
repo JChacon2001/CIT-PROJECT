@@ -61,3 +61,15 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   
 
+
+function toggleCourse(courseId) {
+  const content = document.getElementById(`course-${courseId}`);
+  const arrow = content.previousElementSibling.querySelector('.toggle-arrow');
+  if (content.style.display === "none" || content.style.display === "") {
+    content.style.display = "block";
+    arrow.textContent = "▼";
+  } else {
+    content.style.display = "none";
+    arrow.textContent = "▼";
+  }
+}

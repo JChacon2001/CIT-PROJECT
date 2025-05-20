@@ -133,6 +133,7 @@ body {
   position: sticky;
   top: 64px; /* height of the top bar */
   height: calc(100vh - 64px);
+  padding-top: 1rem; 
   overflow-y: auto;
   width: 260px;
   background-color: var(--bar);
@@ -1035,3 +1036,138 @@ html.dark-mode .page-title {
   margin-bottom: 2rem;
 }
 
+/* ===== Course Deck Page Styling ===== */
+
+.course-page-title {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 2rem;
+  color: #333;
+}
+
+.course-deck-controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 2rem 0 1rem;
+}
+
+.course-deck-controls .btn {
+  padding: 0.5rem 1.5rem;
+  font-weight: bold;
+}
+
+.course-deck-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.course-deck-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.course-deck-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+  margin-bottom: 0.75rem;
+}
+
+.course-deck-title:hover {
+  text-decoration: underline;
+}
+
+.course-progress {
+  background-color: #e9ecef;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 20px;
+  margin-bottom: 0.5rem;
+}
+
+.course-progress-bar {
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  height: 100%;
+}
+
+/* Optional color reuse from global style */
+.bg-success {
+  background-color: #28a745 !important;
+}
+
+.bg-warning {
+  background-color: #ffc107 !important;
+}
+
+.bg-danger {
+  background-color: #dc3545 !important;
+}
+
+.course-completion,
+.course-last-studied {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.course-deck-actions {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.course-deck-actions .btn {
+  flex: 1;
+  text-align: center;
+  padding: 0.5rem;
+  font-weight: 600;
+}
+
+.bottom-padding {
+  height: 3rem;
+}
+
+.course-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--pair-2-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.course-title .toggle-arrow {
+  font-size: 1rem;
+  margin-left: 0.5rem;
+  color: var(--pair-2-dark);
+}
+
+
+
+.course-title a {
+  color: var(--pair-2-light);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.course-title a:hover {
+  color: var(--pair-2-dark);
+  text-decoration: underline;
+}
+
+html.dark-mode .course-title,
+html.dark-mode .course-title a {
+  color: white;
+}

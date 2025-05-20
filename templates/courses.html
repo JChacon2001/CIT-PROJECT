@@ -1,49 +1,56 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="page-title">Courses and Decks</h1>
+<h1 class="page-title">Courses</h1>
 
 <div class="course-list">
   {% if categories %}
     {% for course in categories %}
       <div class="course-box">
-        <h2 class="course-title">{{ course.name }}</h2>
+        <h2 class="course-title" onclick="toggleCourse('{{ course.id }}')">
+          <a href="{{ url_for('html.course_decks', category_id=course.id) }}">
+            {{ course.name }}
+          </a>
+          <span class="toggle-arrow">▼</span>
+        </h2>
 
-        {% if course.decks %}
-          <div class="deck-list">
-            {% for deck in course.decks %}
-              <div class="deck-box">
-                <div class="deck-header" onclick="toggleContent('{{ deck.id }}')">
-                  <span class="deck-name">{{ deck.name }}</span>
-                  <span class="toggle-arrow">▼</span>
-                </div>
+        <div class="course-decks" id="course-{{ course.id }}">
+          {% if course.decks %}
+            <div class="deck-list">
+              {% for deck in course.decks %}
+                <div class="deck-box">
+                  <div class="deck-header" onclick="toggleContent('{{ deck.id }}')">
+                    <span class="deck-name">{{ deck.name }}</span>
+                    <span class="toggle-arrow">▼</span>
+                  </div>
 
-                <div class="deck-actions">
-                  <a href="{{ url_for('html.deckcont', id=deck.id) }}" class="btn view-btn">View Deck</a>
-                  <a href="{{ url_for('html.edit_deck', id=deck.id) }}" class="btn edit-btn">Edit</a>
-                  <a href="{{ url_for('html.delete_deck_2', id=deck.id) }}" class="btn delete-btn">Delete</a>
-                </div>
+                  <div class="deck-actions">
+                    <a href="{{ url_for('html.deckcont', id=deck.id) }}" class="btn view-btn">View Deck</a>
+                    <a href="{{ url_for('html.edit_deck', id=deck.id) }}" class="btn edit-btn">Edit</a>
+                    <a href="{{ url_for('html.delete_deck_2', id=deck.id) }}" class="btn delete-btn">Delete</a>
+                  </div>
 
-                <div class="deck-content" id="content-{{ deck.id }}">
-                  {% if deck.cards %}
-                    <div class="card-list">
-                      {% for card in deck.cards %}
-                        <div class="card-item">
-                          <p><strong>Q:</strong> {{ card.question }}</p>
-                          <p><strong>A:</strong> {{ card.answer }}</p>
-                        </div>
-                      {% endfor %}
-                    </div>
-                  {% else %}
-                    <p class="empty-msg">No cards in this deck.</p>
-                  {% endif %}
+                  <div class="deck-content" id="content-{{ deck.id }}">
+                    {% if deck.cards %}
+                      <div class="card-list">
+                        {% for card in deck.cards %}
+                          <div class="card-item">
+                            <p><strong>Q:</strong> {{ card.question }}</p>
+                            <p><strong>A:</strong> {{ card.answer }}</p>
+                          </div>
+                        {% endfor %}
+                      </div>
+                    {% else %}
+                      <p class="empty-msg">No cards in this deck.</p>
+                    {% endif %}
+                  </div>
                 </div>
-              </div>
-            {% endfor %}
-          </div>
-        {% else %}
-          <p class="empty-msg">No decks in this course.</p>
-        {% endif %}
+              {% endfor %}
+            </div>
+          {% else %}
+            <p class="empty-msg">No decks in this course.</p>
+          {% endif %}
+        </div>
       </div>
     {% endfor %}
   {% else %}
@@ -52,4 +59,17 @@
 </div>
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
+<script>
+function toggleCourse(courseId) {
+  const content = document.getElementById(`course-${courseId}`);
+  const arrow = content.previousElementSibling.querySelector('.toggle-arrow');
+  if (content.style.display === "none" || content.style.display === "") {
+    content.style.display = "block";
+    arrow.textContent = "▼";
+  } else {
+    content.style.display = "none";
+    arrow.textContent = "►";
+  }
+}
+</script>
 {% endblock %}

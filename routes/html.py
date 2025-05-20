@@ -396,3 +396,33 @@ def search_all():
         decks=decks,
         cards=cards
     )
+
+
+@html_bp.route("/course/<int:category_id>")
+def course_decks(category_id):
+    category = db.session.execute(
+        db.select(Category)
+        .options(db.joinedload(Category.decks).joinedload(Deck.cards))
+        .where(Category.id == category_id)
+    ).unique().scalars().first()
+
+    if not category:
+        return "Course not found", 404
+
+    decks = []
+    for deck in category.decks:
+        total = len(deck.cards)
+        completed = sum(1 for card in deck.cards if card.completed)
+        percent = round((completed / total) * 100) if total else 0
+
+        decks.append({
+            "id": deck.id,
+            "name": deck.name,
+            "upload_date": deck.upload_date,
+            "last_studied": deck.last_studied,
+            "total": total,
+            "completed": completed,
+            "percent": percent,
+        })
+
+    return render_template("course_decks.html", category=category.name, decks=decks)
