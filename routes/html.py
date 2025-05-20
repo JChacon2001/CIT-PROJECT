@@ -84,14 +84,10 @@ def decks():
 
 @html_bp.route("/decks/<int:id>")
 def deckcont(id):
- 
-    deck = db.session.get(Deck, id)
-    if not deck:
-        return render_template("page_not_found.html"), 404
-
-    cards = db.session.scalars(db.select(Cards).where(Cards.deck_id == id)).all()
-
-    return render_template("deck.html", deck_id=id,deck_name=deck.name,cards=cards)
+    deck = db.session.get(Deck, id)  
+    stmt = db.select(Cards).where(Cards.deck_id == deck.id)
+    res = db.session.execute(stmt).scalars().all()
+    return render_template("deck.html", deck=deck, data=res, deck_id=deck.id)
 
 @html_bp.route("/deck/new", methods=['GET', 'POST'])
 def deck_form():
@@ -105,12 +101,12 @@ def deck_form():
         if category is None:
             category = Category(name=cat_name)
             db.session.add(category)
-            db.session.commit()  # Commit so we have category.id
+            db.session.commit()  
 
         new_deck = Deck(
             name=form.name.data,
             description=form.description.data,
-            category_id=category.id  # 🔗 Link here!
+            category_id=category.id  
         )
         db.session.add(new_deck)
         db.session.commit()
@@ -133,7 +129,7 @@ def create_card():
         new_card = Cards(question=form.question.data, answer=form.answer.data,deck_id=deck_id)
         db.session.add(new_card)
         db.session.commit()
-        return redirect(url_for('html.decks', id=deck_id))
+        return redirect(url_for('html.deckcont', id=deck_id))
 
     return render_template("create_card.html", form=form)
 
@@ -141,14 +137,15 @@ def create_card():
 def edit_card(id):
     stmt = db.select(Cards).where(Cards.id == id)
     card = db.session.execute(stmt).scalar()
-    form = EditCardForm(obj=card)
+    form = EditCardForm(obj=card if request.method == 'GET' else None)
+
     if form.validate_on_submit():
         card.question = form.question.data
-        card.answer   = form.answer.data
+        card.answer = form.answer.data
         db.session.commit()
-        return redirect(url_for('html.decks', id=card.deck_id))
+        return redirect(url_for('html.deckcont', id=card.deck_id))
 
-    return render_template('edit_card.html', form=form, card=card)
+    return render_template('edit_card.html', form=form, card=card, deck_id=card.deck_id)
 
 @html_bp.route('/card/add/<int:deck_id>', methods=['GET', 'POST'])
 def add_card(deck_id):
@@ -250,9 +247,6 @@ def import_csv():
 
     return render_template("import.html", form=form, data=data, msg=msg)
 
-
-from flask import redirect, url_for
-
 @html_bp.route("/study/<int:id>", methods=["GET", "POST"])
 def study_deck(id):
     form = StudyForm()
@@ -353,8 +347,6 @@ def courses():
     ).all()
     categories_with_decks = [c for c in categories if c.decks]
     return render_template("courses.html", categories=categories_with_decks)
-    res = db.session.execute(db.select(Category)).scalars()
-    return render_template("courses.html", data=res)
 
 
 @html_bp.route("/deck/<int:id>/reset", methods=["POST"])
