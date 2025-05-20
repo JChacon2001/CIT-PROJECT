@@ -73,3 +73,13 @@ function toggleCourse(courseId) {
     arrow.textContent = "▼";
   }
 }
+
+
+function openCourseModal() {
+  document.getElementById("courseModal").style.display = "flex";
+}
+
+function closeCourseModal() {
+  document.getElementById("courseModal").style.display = "none";
+}
+
