@@ -87,7 +87,7 @@ def deckcont(id):
     deck = db.session.get(Deck, id)  
     stmt = db.select(Cards).where(Cards.deck_id == deck.id)
     res = db.session.execute(stmt).scalars().all()
-    return render_template("deck.html", deck=deck, data=res, deck_id=deck.id)
+    return render_template("deck.html", deck=deck, data=res, deck_id=deck.id,deck_name=deck.name)
 
 @html_bp.route("/deck/new", methods=['GET', 'POST'])
 def deck_form():

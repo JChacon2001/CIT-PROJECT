@@ -885,7 +885,7 @@ html.dark-mode .import-table th {
 
 .page-title {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-size: 2rem;
   color: var(--pair-1-light);
 }
