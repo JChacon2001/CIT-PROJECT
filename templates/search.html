@@ -1,76 +1,78 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="page-title">Search Results for “{{ q }}”</div>
-
-<div class="search-results">
-
   {# Categories #}
-  <div class="result-section">
-  <h4 class="section-title">Matching Courses</h4>
+  <h4>Categories</h4>
   {% if categories %}
-    <div class="card-section">
+    <ul class="list-group mb-3">
       {% for cat in categories %}
-      <a href="{{ url_for('html.courses') }}#cat-{{ cat.id }}" class="card green category-card">
-        <div class="category-card-body">
-          <i class="fas fa-book card-icon"></i>
-          {{ cat.name }}
+      <li class="list-group-item">
+        {# Corrected link to point to the specific course's decks page #}
+        <a href="{{ url_for('html.course_decks', category_id=cat.id) }}">{{ cat.name }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p><em>No categories found matching “{{ q }}”.</em></p>
+  {% endif %}
+
+  {# Decks #}
+  <h4>Decks</h4>
+  {% if decks %}
+    <div class="row mb-3">
+      {% for deck in decks %}
+      <div class="col-md-4">
+        <div class="card mb-2">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="{{ url_for('html.deckcont', id=deck.id) }}">
+                {{ deck.name }}
+              </a>
+            </h5>
+            {# In the previous response, we added a link to the deck's category here. #}
+            {# You can keep or remove this based on your preference for this page. #}
+            {% if deck.category and deck.category.id and deck.category.name %}
+              <p class="card-text category-link">
+                <small>
+                  Course: <a href="{{ url_for('html.course_decks', category_id=deck.category.id) }}">{{ deck.category.name }}</a>
+                </small>
+              </p>
+            {% endif %}
+            {% if deck.description %}
+            <p class="card-text">{{ deck.description }}</p>
+            {% endif %}
+          </div>
         </div>
-      </a>
+      </div>
       {% endfor %}
     </div>
   {% else %}
-    <p class="empty-msg"><em>No categories found matching “{{ q }}”.</em></p>
+    <p><em>No decks found matching “{{ q }}”.</em></p>
   {% endif %}
-</div>
-
-
-  {# Decks #}
-  <div class="result-section">
-    <h4 class="section-title">Matching Decks</h4>
-    {% if decks %}
-      <div class="card-section">
-        {% for deck in decks %}
-        <a href="{{ url_for('html.deckcont', id=deck.id) }}" class="card blue">
-          <div class="card-body">
-            <i class="fas fa-clone card-icon"></i>
-            {{ deck.name }}
-          </div>
-          {% if deck.description %}
-          <div class="card-footer">
-            {{ deck.description }}
-          </div>
-          {% endif %}
-        </a>
-        {% endfor %}
-      </div>
-    {% else %}
-      <p class="empty-msg"><em>No decks found matching “{{ q }}”.</em></p>
-    {% endif %}
-  </div>
 
   {# Cards #}
-  <div class="result-section">
-    <h4 class="section-title">Matching Cards</h4>
-    {% if cards %}
-      <ul class="list-group custom-list">
-        {% for card in cards %}
-        <li class="list-group-item list-hover">
-          <p><strong>Q:</strong> {{ card.question }}</p>
-          <p><strong>A:</strong> {{ card.answer }}</p>
-          <small>In deck: 
-            <a href="{{ url_for('html.deckcont', id=card.deck_id) }}">
-              {{ card.deck.name }}
-            </a>
-          </small>
-        </li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p class="empty-msg"><em>No cards found matching “{{ q }}”.</em></p>
-    {% endif %}
-  </div>
-
-</div>
+  <h4>Cards</h4>
+  {% if cards %}
+    <ul class="list-group">
+      {% for card in cards %}
+      <li class="list-group-item">
+        <strong>Q:</strong> {{ card.question }}<br/>
+        <strong>A:</strong> {{ card.answer }}<br/>
+        <small>
+          In deck
+          <a href="{{ url_for('html.deckcont', id=card.deck_id) }}">
+            {{ card.deck.name }}
+          </a>
+          {# Optionally, add category link for the card's deck too #}
+          {% if card.deck and card.deck.category and card.deck.category.id and card.deck.category.name %}
+            (Course: <a href="{{ url_for('html.course_decks', category_id=card.deck.category.id) }}">{{ card.deck.category.name }}</a>)
+          {% endif %}
+        </small>
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p><em>No cards found matching “{{ q }}”.</em></p>
+  {% endif %}
 
 {% endblock %}
