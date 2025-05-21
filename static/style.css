@@ -109,6 +109,7 @@ body {
 
 .sidebar-toggle {
   font-size: 1.5rem;
+  padding-top: 1rem; 
   background: none;
   color: white;
   cursor: pointer;
@@ -223,19 +224,6 @@ body {
   margin-bottom: 2rem;
   padding-top: 1rem;
 }
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-}
-
-
-
-.placeholder-card {
-  background: transparent;
-  border: 2px dashed #ccc;
-  visibility: hidden; /* keeps the layout spacing but hides the card */
-}
 
 .card {
   text-decoration: none;
@@ -324,47 +312,74 @@ th {
 }
 
 /* FLIP CARD + FAQ STYLES */
+/* FAQ Page Styles */
+
 .faq-header {
   background: var(--bg-light);
-  padding: 2rem 1rem;
+  padding: 3rem 1rem;
   text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
+
 .faq-header h1 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--color-primary);
 }
+
 .faq-header p {
-  color: #555;
+  font-size: 1rem;
+  color: var(--color-secondary);
+  margin: 0;
 }
 
 .faq-container {
   display: flex;
-  padding: 1rem;
-  gap: 2rem;
+  gap: 2.5rem;
+  padding: 2rem 1rem;
 }
 
 .faq-categories {
-  width: 180px;
+  flex: 0 0 180px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 1rem 0;
 }
+
 .faq-categories ul {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
+
 .faq-categories li {
-  padding: 0.5rem 0;
+  padding: 0.75rem 1.25rem;
   cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--text-color, #333);
+  transition: background 0.2s, color 0.2s;
 }
+
+.faq-categories li:hover {
+  background: var(--bg-light);
+}
+
 .faq-categories li.active {
-  font-weight: bold;
+  font-weight: 600;
+  color: var(--color-primary);
   position: relative;
 }
+
 .faq-categories li.active::before {
   content: '';
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   background: var(--color-secondary);
   border-radius: 50%;
   position: absolute;
-  left: -12px;
+  left: 8px;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -372,36 +387,76 @@ th {
 .faq-content {
   flex: 1;
 }
+
 .faq-content details {
-  background: var(--bg-light);
-  margin-bottom: 0.5rem;
-  border-radius: 4px;
+  background: #fff;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
+
 .faq-content summary {
-  list-style: none;
-  padding: 1rem;
-  font-weight: bold;
+  padding: 1.25rem 1.5rem;
+  font-weight: 500;
   cursor: pointer;
   position: relative;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--text-color, #222);
+  transition: background 0.2s;
 }
+
+.faq-content summary:hover {
+  background: var(--bg-light);
+}
+
 .faq-content summary::-webkit-details-marker {
   display: none;
 }
+
 .faq-content summary::after {
   content: '+';
   position: absolute;
-  right: 1rem;
+  right: 1.5rem;
   font-size: 1.2rem;
   color: var(--color-primary);
+  transition: transform 0.2s;
 }
+
 .faq-content details[open] summary::after {
   content: '−';
+  transform: rotate(180deg);
 }
+
 .faq-content p {
-  padding: 0 1rem 1rem;
-  line-height: 1.5;
-  color: #444;
+  padding: 0 1.5rem 1.25rem;
+  line-height: 1.6;
+  color: var(--text-color, #444);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .faq-container {
+    flex-direction: column;
+  }
+  .faq-categories {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+.faq-categories li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.faq-categories li a:hover,
+.faq-categories li a:focus {
+  text-decoration: underline;
 }
 
 .flip-card {
@@ -540,11 +595,7 @@ html.dark-mode .title {
 .preview::-webkit-scrollbar{
   display:none
 }
-.csv-req {
-  align-items: center;
-  padding-left: 20rem;
-  padding-bottom: 2rem;
-}
+
 .preview p {
   font-size: 16px;
   margin: 0;
@@ -750,12 +801,6 @@ pre code {
   transition: background 0.2s ease;
 }
 
-.import-table td:first-child,
-.import-table th:first-child {
-  width: 10%;
-}
-
-
 .import-submit-btn:hover {
   background-color: var(--pair-2-dark);
 }
@@ -885,8 +930,9 @@ html.dark-mode .import-table th {
 
 .page-title {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   font-size: 2rem;
+  padding-top: 1rem;
   color: var(--pair-1-light);
 }
 html.dark-mode .page-title {
@@ -1012,7 +1058,6 @@ html.dark-mode .page-title {
 .card-controls {
   display: flex;
   gap: 1rem;
-  margin-bottom: 1rem;
   flex-wrap: wrap;
   padding-left: .5rem;
 }
@@ -1036,7 +1081,29 @@ html.dark-mode .page-title {
   margin-bottom: 2rem;
 }
 
-/* ===== Course Deck Page Styling ===== */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.placeholder-card {
+  background: transparent;
+  border: 2px dashed #ccc;
+  visibility: hidden; /* keeps the layout spacing but hides the card */
+}
+.csv-req {
+  align-items: center;
+  padding-left: 20rem;
+  padding-bottom: 2rem;
+}
+
+.import-table td:first-child,
+.import-table th:first-child {
+  width: 10%;
+}
+
 
 .course-page-title {
   text-align: center;
@@ -1100,8 +1167,6 @@ html.dark-mode .page-title {
   text-align: center;
   height: 100%;
 }
-
-/* Optional color reuse from global style */
 .bg-success {
   background-color: #28a745 !important;
 }
@@ -1154,8 +1219,6 @@ html.dark-mode .page-title {
   color: var(--pair-2-dark);
 }
 
-
-
 .course-title a {
   color: var(--pair-2-light);
   text-decoration: none;
@@ -1171,6 +1234,7 @@ html.dark-mode .course-title,
 html.dark-mode .course-title a {
   color: white;
 }
+
 
 .course-controls {
   display: flex;
@@ -1245,6 +1309,7 @@ html.dark-mode .add-course-btn {
 .cancel-btn {
   background-color: #6c757d;
 }
+
 .cancel-btn:hover {
   background-color: #5a6268;
 }
@@ -1258,4 +1323,178 @@ html.dark-mode .modal-box input {
   background-color: #222;
   color: white;
   border-color: #555;
+}
+
+.search-form {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0;
+}
+
+.search-group {
+  display: flex;
+  align-items: center;
+  background-color: var(--pair-1-light);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.search-icon {
+  padding: 0.4rem 0.6rem;
+  color: white;
+  background-color: transparent; /* Match bar background */
+}
+
+.search-input {
+  padding: 0.4rem 0.6rem;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: white;
+  width: 160px;
+}
+
+.search-input::placeholder {
+  color: #ccc;
+}
+
+.search-button {
+  background-color: var(--pair-2-light);
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.search-button:hover {
+  background-color: var(--pair-2-dark);
+}
+
+/* Dark Mode Support */
+html.dark-mode .search-group {
+  background-color: var(--pair-1-dark);
+}
+
+html.dark-mode .search-input {
+  color: white;
+}
+
+html.dark-mode .search-button {
+  background-color: var(--pair-3-dark);
+}
+
+html.dark-mode .search-button:hover {
+  background-color: var(--pair-3-light);
+}
+
+.search-results {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.result-section {
+  margin-bottom: 2.5rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--pair-1-light);
+}
+
+html.dark-mode .section-title {
+  color: white;
+}
+
+.custom-list .list-group-item {
+  background-color: var(--pair-5-light);
+  border: 1px solid #ccc;
+  color: var(--text);
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.custom-list .list-group-item a {
+  color: var(--pair-2-light);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.custom-list .list-group-item a:hover {
+  text-decoration: underline;
+}
+
+
+html.dark-mode .custom-list .list-group-item {
+  background-color: var(--pair-1-dark);
+  color: white;
+  border-color: #444;
+}
+
+html.dark-mode .custom-list .list-group-item a {
+  color: var(--pair-4-light);
+}
+
+.category-card {
+  background-color: var(--pair-4-light);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.category-card:hover {
+  background-color: var(--pair-4-dark);
+  transform: translateY(-2px);
+}
+
+html.dark-mode .category-card {
+  background-color: var(--pair-4-dark);
+}
+
+html.dark-mode .category-card:hover {
+  background-color: var(--pair-4-light);
+}
+
+.category-card-body {
+  padding: 1.5rem 1.5rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: white;
+
+}
+
+.deck-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.card-controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cardarray {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 1rem;
+}
+
+.file-name-display {
+  
+  font-style: italic;
+  color: #555;
 }
