@@ -133,7 +133,6 @@ body {
   position: sticky;
   top: 64px; /* height of the top bar */
   height: calc(100vh - 64px);
-  padding-top: 1rem; 
   overflow-y: auto;
   width: 260px;
   background-color: var(--bar);
@@ -223,19 +222,6 @@ body {
   margin-bottom: 2rem;
   padding-top: 1rem;
 }
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-}
-
-
-
-.placeholder-card {
-  background: transparent;
-  border: 2px dashed #ccc;
-  visibility: hidden; /* keeps the layout spacing but hides the card */
-}
 
 .card {
   text-decoration: none;
@@ -324,47 +310,74 @@ th {
 }
 
 /* FLIP CARD + FAQ STYLES */
+/* FAQ Page Styles */
+
 .faq-header {
   background: var(--bg-light);
-  padding: 2rem 1rem;
+  padding: 3rem 1rem;
   text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
+
 .faq-header h1 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--color-primary);
 }
+
 .faq-header p {
-  color: #555;
+  font-size: 1rem;
+  color: var(--color-secondary);
+  margin: 0;
 }
 
 .faq-container {
   display: flex;
-  padding: 1rem;
-  gap: 2rem;
+  gap: 2.5rem;
+  padding: 2rem 1rem;
 }
 
 .faq-categories {
-  width: 180px;
+  flex: 0 0 180px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 1rem 0;
 }
+
 .faq-categories ul {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
+
 .faq-categories li {
-  padding: 0.5rem 0;
+  padding: 0.75rem 1.25rem;
   cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--text-color, #333);
+  transition: background 0.2s, color 0.2s;
 }
+
+.faq-categories li:hover {
+  background: var(--bg-light);
+}
+
 .faq-categories li.active {
-  font-weight: bold;
+  font-weight: 600;
+  color: var(--color-primary);
   position: relative;
 }
+
 .faq-categories li.active::before {
   content: '';
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   background: var(--color-secondary);
   border-radius: 50%;
   position: absolute;
-  left: -12px;
+  left: 8px;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -372,36 +385,76 @@ th {
 .faq-content {
   flex: 1;
 }
+
 .faq-content details {
-  background: var(--bg-light);
-  margin-bottom: 0.5rem;
-  border-radius: 4px;
+  background: #fff;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
+
 .faq-content summary {
-  list-style: none;
-  padding: 1rem;
-  font-weight: bold;
+  padding: 1.25rem 1.5rem;
+  font-weight: 500;
   cursor: pointer;
   position: relative;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--text-color, #222);
+  transition: background 0.2s;
 }
+
+.faq-content summary:hover {
+  background: var(--bg-light);
+}
+
 .faq-content summary::-webkit-details-marker {
   display: none;
 }
+
 .faq-content summary::after {
   content: '+';
   position: absolute;
-  right: 1rem;
+  right: 1.5rem;
   font-size: 1.2rem;
   color: var(--color-primary);
+  transition: transform 0.2s;
 }
+
 .faq-content details[open] summary::after {
   content: '−';
+  transform: rotate(180deg);
 }
+
 .faq-content p {
-  padding: 0 1rem 1rem;
-  line-height: 1.5;
-  color: #444;
+  padding: 0 1.5rem 1.25rem;
+  line-height: 1.6;
+  color: var(--text-color, #444);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .faq-container {
+    flex-direction: column;
+  }
+  .faq-categories {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+.faq-categories li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.faq-categories li a:hover,
+.faq-categories li a:focus {
+  text-decoration: underline;
 }
 
 .flip-card {
@@ -540,11 +593,7 @@ html.dark-mode .title {
 .preview::-webkit-scrollbar{
   display:none
 }
-.csv-req {
-  align-items: center;
-  padding-left: 20rem;
-  padding-bottom: 2rem;
-}
+
 .preview p {
   font-size: 16px;
   margin: 0;
@@ -750,12 +799,6 @@ pre code {
   transition: background 0.2s ease;
 }
 
-.import-table td:first-child,
-.import-table th:first-child {
-  width: 10%;
-}
-
-
 .import-submit-btn:hover {
   background-color: var(--pair-2-dark);
 }
@@ -780,7 +823,7 @@ pre code {
 
 .import-table th,
 .import-table td {
-  border: 1px solid black;
+  border: 1px solid #ccc;
   padding: 0.75rem 1rem;
   text-align: left;
 }
@@ -879,13 +922,13 @@ html.dark-mode .import-table th {
   gap: 1rem;
   margin-bottom: 1rem;
   flex-wrap: wrap;
-  padding-left: 2.25rem;
+  padding-left: 1rem;
 }
 
 
 .page-title {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   font-size: 2rem;
   color: var(--pair-1-light);
 }
@@ -1036,226 +1079,3 @@ html.dark-mode .page-title {
   margin-bottom: 2rem;
 }
 
-/* ===== Course Deck Page Styling ===== */
-
-.course-page-title {
-  text-align: center;
-  margin-top: 2rem;
-  font-size: 2rem;
-  color: #333;
-}
-
-.course-deck-controls {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin: 2rem 0 1rem;
-}
-
-.course-deck-controls .btn {
-  padding: 0.5rem 1.5rem;
-  font-weight: bold;
-}
-
-.course-deck-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-  padding: 1rem;
-}
-
-.course-deck-card {
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.course-deck-title {
-  font-size: 1.25rem;
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
-  margin-bottom: 0.75rem;
-}
-
-.course-deck-title:hover {
-  text-decoration: underline;
-}
-
-.course-progress {
-  background-color: #e9ecef;
-  border-radius: 10px;
-  overflow: hidden;
-  height: 20px;
-  margin-bottom: 0.5rem;
-}
-
-.course-progress-bar {
-  color: #fff;
-  font-weight: bold;
-  text-align: center;
-  height: 100%;
-}
-
-/* Optional color reuse from global style */
-.bg-success {
-  background-color: #28a745 !important;
-}
-
-.bg-warning {
-  background-color: #ffc107 !important;
-}
-
-.bg-danger {
-  background-color: #dc3545 !important;
-}
-
-.course-completion,
-.course-last-studied {
-  font-size: 0.95rem;
-  color: #555;
-}
-
-.course-deck-actions {
-  margin-top: 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.course-deck-actions .btn {
-  flex: 1;
-  text-align: center;
-  padding: 0.5rem;
-  font-weight: 600;
-}
-
-.bottom-padding {
-  height: 3rem;
-}
-
-.course-title {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: var(--pair-2-light);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-}
-
-.course-title .toggle-arrow {
-  font-size: 1rem;
-  margin-left: 0.5rem;
-  color: var(--pair-2-dark);
-}
-
-
-
-.course-title a {
-  color: var(--pair-2-light);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.course-title a:hover {
-  color: var(--pair-2-dark);
-  text-decoration: underline;
-}
-
-html.dark-mode .course-title,
-html.dark-mode .course-title a {
-  color: white;
-}
-
-.course-controls {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-}
-
-.add-course-btn {
-  background-color: var(--pair-1-light);
-  color: white;
-  font-weight: bold;
-  padding: 0.5rem 1.25rem;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: background-color 0.2s ease;
-}
-
-.add-course-btn:hover {
-  background-color: var(--pair-1-dark);
-}
-
-html.dark-mode .add-course-btn {
-  background-color: var(--pair-2-dark);
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-box {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
-}
-
-.modal-box h2 {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  color: var(--pair-1-light);
-}
-
-.modal-box .form-group {
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-box input {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-.modal-buttons {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.cancel-btn {
-  background-color: #6c757d;
-}
-.cancel-btn:hover {
-  background-color: #5a6268;
-}
-
-html.dark-mode .modal-box {
-  background-color: var(--bar);
-  color: white;
-}
-
-html.dark-mode .modal-box input {
-  background-color: #222;
-  color: white;
-  border-color: #555;
-}
