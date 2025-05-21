@@ -2,19 +2,17 @@
 
 {% block content %}
     <h1 class="page-title">{{ deck_name }}</h1>
-    {% if data %}
 
 
+   <div class="deck-wrapper">
     <div class="card-controls">
+    {% if data %}
         <a href="{{ url_for('html.study_deck', id=data[0].id) }}" class="btn btn-sm view-btn">Study Now!</a>
     {% endif %}
-    
+    <a href="{{ url_for('html.add_card', deck_id=deck_id) }}" class="btn edit-btn"> Add Card </a>
+</div>
 
-<a href="{{ url_for('html.add_card', deck_id=deck_id) }}" class="btn edit-btn"> Add Card </a>
 
-
-    </div>
-    
     <div class="cardarray">
         {% for i in data %}
             <div class="flip-card" onclick="flipCard(this)">
@@ -35,6 +33,8 @@
             </div>
         {% endfor %}
     </div>
+
+
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 {% endblock %}

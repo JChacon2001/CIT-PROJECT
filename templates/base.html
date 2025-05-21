@@ -28,26 +28,26 @@
     <button id="toggle-theme" class="btn btn-sm btn-outline-light" style="margin-left:auto;">
       <i id="theme-icon" class="fas fa-moon"></i>
     </button>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark">
   <div class="container-fluid">
-    <!-- your other nav items… -->
 
-    <form class="d-flex ms-auto" method="get" action="{{ url_for('html.search_all') }}">
-      <div class="input-group input-group-sm">
-        <span class="input-group-text bg-dark border-secondary text-white">
-          <i class="fas fa-search"></i>
-        </span>
-        <input
-          class="form-control bg-dark border-secondary text-white"
-          type="search"
-          name="q"
-          placeholder="Search all…"
-          aria-label="Search"
-          value="{{ request.args.get('q','') }}"
-        >
-        <button class="btn btn-secondary" type="submit">Go</button>
-      </div>
-    </form>
+<!-- search bar-->
+
+    <form class="search-form" method="get" action="{{ url_for('html.search_all') }}">
+  <div class="search-group">
+    <i class="fas fa-search search-icon"></i>
+    <input
+      class="search-input"
+      type="search"
+      name="q"
+      placeholder="Search all…"
+      aria-label="Search"
+      value="{{ request.args.get('q','') }}"
+    >
+    <button class="search-button" type="submit">Go</button>
+  </div>
+</form>
+
   </div>
 </nav>
 
