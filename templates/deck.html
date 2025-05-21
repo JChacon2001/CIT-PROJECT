@@ -7,7 +7,7 @@
    <div class="deck-wrapper">
     <div class="card-controls">
     {% if data %}
-        <a href="{{ url_for('html.study_deck', id=data[0].id) }}" class="btn btn-sm view-btn">Study Now!</a>
+        <a href="{{ url_for('html.study_deck', id=deck_id) }}" class="btn btn-sm view-btn">Study Now!</a>
     {% endif %}
     <a href="{{ url_for('html.add_card', deck_id=deck_id) }}" class="btn edit-btn"> Add Card </a>
 </div>
