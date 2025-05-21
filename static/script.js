@@ -83,3 +83,8 @@ function closeCourseModal() {
   document.getElementById("courseModal").style.display = "none";
 }
 
+
+  document.getElementById('csv').addEventListener('change', function() {
+    const fileName = this.files[0] ? this.files[0].name : 'No file selected';
+    document.getElementById('file-name-display').textContent = fileName;
+  });

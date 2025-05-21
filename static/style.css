@@ -1199,122 +1199,41 @@ html.dark-mode .page-title {
   font-weight: 600;
 }
 
-
-
-
-
 .bottom-padding {
-
-
   height: 3rem;
-
-
 }
-
-
-
-
 
 .course-title {
-
-
   font-size: 1.5rem;
-
-
   margin-bottom: 1rem;
-
-
   color: var(--pair-2-light);
-
-
   display: flex;
-
-
   align-items: center;
-
-
   justify-content: space-between;
-
-
   cursor: pointer;
-
-
 }
-
-
-
-
 
 .course-title .toggle-arrow {
-
-
   font-size: 1rem;
-
-
   margin-left: 0.5rem;
-
-
   color: var(--pair-2-dark);
-
-
 }
-
-
-
-
-
-
-
-
-
-
 
 .course-title a {
-
-
   color: var(--pair-2-light);
-
-
   text-decoration: none;
-
-
   transition: color 0.2s ease;
-
-
 }
-
-
-
-
 
 .course-title a:hover {
-
-
   color: var(--pair-2-dark);
-
-
   text-decoration: underline;
-
-
 }
-
-
-
-
 
 html.dark-mode .course-title,
-
-
 html.dark-mode .course-title a {
-
-
   color: white;
-
-
 }
-
-
-
 
 
 .course-controls {
@@ -1572,4 +1491,10 @@ html.dark-mode .category-card:hover {
   width: 100%;
   max-width: 1200px;
   margin-top: 1rem;
+}
+
+.file-name-display {
+  
+  font-style: italic;
+  color: #555;
 }
