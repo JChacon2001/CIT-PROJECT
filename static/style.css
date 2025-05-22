@@ -1,6 +1,5 @@
 @import url('https://fontlibrary.org//face/rosa-sans');
 
-
 :root {
   --bar: #080B0C;
   --bg: #f4f4f4;
@@ -25,7 +24,6 @@
   --deck-bg: #ffffff;
   --deck-text: #1a1a1a;
   --deck-hover: #f0f0f0;
-
 }
 
 .dark-mode {
@@ -56,6 +54,7 @@
 html.dark-mode .deck-box {
   background-color: var(--pair-1-dark);
 }
+
 html.dark-mode .deck-name {
   color: white;
 }
@@ -93,7 +92,6 @@ body {
   flex-direction: column;
 }
 
-/* TOP BAR */
 .top-bar {
   display: flex;
   align-items: center;
@@ -122,24 +120,21 @@ body {
   padding-left: 1.5rem;
 }
 
-/* WRAPPER LAYOUT */
 .wrapper {
   display: flex;
   min-height: 100vh;
-  margin-top: 64px; /* top bar offset */
+  margin-top: 64px; 
 }
 
-/* SIDEBAR */
 .sidebar {
   position: sticky;
-  top: 64px; /* height of the top bar */
+  top: 64px; 
   height: calc(100vh - 64px);
   padding-top: 1rem; 
   overflow-y: auto;
   width: 260px;
   background-color: var(--bar);
   color: white;
-
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -157,7 +152,6 @@ body {
   margin: 0.5rem 0;
 }
 
-/* nav menu */
 .nav-menu {
   display: flex;
   flex-direction: column;
@@ -173,6 +167,7 @@ body {
   transition: background 0.3s, padding 0.3s;
   min-height: 48px;
 }
+
 .home-link {
   color: white;
 }
@@ -205,7 +200,6 @@ body {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* MAIN CONTENT */
 .main-content {
   flex-grow: 1;
   padding: 2rem;
@@ -216,7 +210,6 @@ body {
   margin-left: 80px;
 }
 
-/* CARD STYLING */
 .card-section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -280,8 +273,6 @@ body {
 .card.green { background-color: var(--pair-4-light); }
 .card.green .card-footer { background-color: var(--pair-4-dark);; }
 
-
-/* tables */
 .table-section {
   margin-bottom: 2rem;
 }
@@ -310,9 +301,6 @@ th {
   background-color: var(--pair-1-light);
   color: white;
 }
-
-/* FLIP CARD + FAQ STYLES */
-/* FAQ Page Styles */
 
 .faq-header {
   background: var(--bg-light);
@@ -446,6 +434,7 @@ th {
     margin-bottom: 1rem;
   }
 }
+
 .faq-categories li a {
   display: block;
   width: 100%;
@@ -474,7 +463,6 @@ th {
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
-  
 }
 
 .flip-card-inner h1{
@@ -503,7 +491,6 @@ th {
 .flip-card-front {
   background-color: var(--pair-5-light);
   color: var(--text);
-
 }
 
 .flip-card-back {
@@ -523,8 +510,6 @@ th {
   height: 100vh;
 }
 
-/* styles created from user */
-
 .options {
   position:absolute;
 }
@@ -532,6 +517,12 @@ th {
 .cardarray{
   display:flex;
   flex-wrap: wrap;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 1rem;
 }
 
 .deck {
@@ -545,6 +536,7 @@ th {
   border-radius: 15px;
   padding: 15px;
   transition: background-color 0.3s ease, color 0.3s ease;
+  margin-left: 1em;
 }
 
 .mb-2{
@@ -552,7 +544,8 @@ th {
 }
 
 .deck .title{
-  font-size:30px
+  font-size:30px;
+  color: var(--pair-2-light)
 }
 .deck:hover {
   background-color: var(--deck-hover);
@@ -564,11 +557,6 @@ html.dark-mode .title {
   color: white;
 }
 
-
-.deck .title{
-  font-size:30px;
-  color: var(--pair-2-light)
-}
 .deck .eord{
   position:absolute;
   bottom:10px
@@ -578,11 +566,7 @@ html.dark-mode .title {
   font-size:10px;
 }
 
-
-
-
 .preview {
-
   width: 80%;
   margin-left: auto;
   margin-right: auto;
@@ -628,7 +612,6 @@ html.dark-mode .title {
   text-align:center;
   border-radius: 25px;
   padding:20px;
-
 }
 
 .term-set-title {
@@ -636,6 +619,7 @@ html.dark-mode .title {
   color: #2d3f50;
   margin-bottom: 16px;
 }
+
 .term-list {
   display: flex;
   flex-direction: column;
@@ -643,6 +627,7 @@ html.dark-mode .title {
   max-width: 800px;
   margin: 0 auto;
 }
+
 .term-item {
   background-color: var(--pair-5-light);
   color: var(--text);
@@ -653,11 +638,13 @@ html.dark-mode .title {
   padding: 16px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
+
 .term {
   flex: 1;
   color: var(--text);
   font-weight: 500;
 }
+
 .definition {
   flex: 2;
   color: var(--text);
@@ -665,7 +652,6 @@ html.dark-mode .title {
   border-left: 1px solid #eceef0;
 }
 
-/* Table header styling */
 table thead th {
   background-color: var(--pair-1-light);
   color: white;
@@ -680,9 +666,6 @@ table tbody td a {
   padding: 1em;
   border: 1px solid #ccc;
   border-radius: 0.5em;
-}
-.deck {
-  margin-left: 1em;
 }
 
 .card-btn {
@@ -708,10 +691,11 @@ table tbody td a {
 }
 
 .deck-box {
-    border: 1px solid #ccc;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
+  background-color: #fff;
+  border-left: 5px solid var(--pair-3-light);
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+  border-radius: 8px;
 }
 .deck-title {
     cursor: pointer;
@@ -911,6 +895,7 @@ html.dark-mode .import-table th {
 .import-btn {
   background-color: var(--pair-3-light);
 }
+
 .import-btn:hover {
   background-color: var(--pair-3-dark);
 }
@@ -926,7 +911,6 @@ html.dark-mode .import-table th {
   flex-wrap: wrap;
   padding-left: 2.25rem;
 }
-
 
 .page-title {
   text-align: center;
@@ -945,20 +929,6 @@ html.dark-mode .page-title {
   padding: 1.5rem;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-}
-
-.course-title {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: var(--pair-2-light);
-}
-
-.deck-box {
-  background-color: #fff;
-  border-left: 5px solid var(--pair-3-light);
-  padding: 1rem;
-  margin-bottom: 1.25rem;
-  border-radius: 8px;
 }
 
 .deck-header {
@@ -1026,8 +996,6 @@ html.dark-mode .page-title {
   background-color: var(--pair-4-dark);
 }
 
-
-
 .deck-content {
   margin-top: 0.75rem;
   padding-left: 1rem;
@@ -1059,8 +1027,10 @@ html.dark-mode .page-title {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  justify-content: center;
   padding-left: .5rem;
 }
+
 .study-controls {
   display: flex;
   justify-content: center;
@@ -1476,22 +1446,8 @@ html.dark-mode .category-card:hover {
   margin-top: 1rem;
 }
 
-.card-controls {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
 
-.cardarray {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  justify-content: center;
-  width: 100%;
-  max-width: 1200px;
-  margin-top: 1rem;
-}
+
 
 .file-name-display {
   
