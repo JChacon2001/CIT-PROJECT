@@ -11,7 +11,7 @@
   {% if categories %}
     <div class="card-section">
       {% for cat in categories %}
-      <a href="{{ url_for('html.courses') }}#cat-{{ cat.id }}" class="card green category-card">
+      <a href="{{ url_for('html.course_decks', category_id=cat.id) }}" class="card green category-card">
         <div class="category-card-body">
           <i class="fas fa-book card-icon"></i>
           {{ cat.name }}
