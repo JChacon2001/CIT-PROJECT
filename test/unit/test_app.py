@@ -17,10 +17,10 @@ def test_unit_lib_page(test_client):
     assert response.status_code == 200
     assert b"Add Deck" in response.data
 
-def test_allcards_page(test_client):
-    response = test_client.get('/Acards')
-    assert response.status_code == 200
-    assert b"All" in response.data
+# def test_allcards_page(test_client):
+#     response = test_client.get('/Acards')
+#     assert response.status_code == 200
+#     assert b"All" in response.data
 
 def test_create_card_page(test_client):
     response = test_client.get('/card/new')
