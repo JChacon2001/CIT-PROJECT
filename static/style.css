@@ -1,5 +1,6 @@
 @import url('https://fontlibrary.org//face/rosa-sans');
 
+
 :root {
   --bar: #080B0C;
   --bg: #f4f4f4;
@@ -24,6 +25,7 @@
   --deck-bg: #ffffff;
   --deck-text: #1a1a1a;
   --deck-hover: #f0f0f0;
+
 }
 
 .dark-mode {
@@ -51,13 +53,7 @@
   --deck-hover: #2a2a2a;
 }
 
-html.dark-mode .deck-box {
-  background-color: var(--pair-1-dark);
-}
 
-html.dark-mode .deck-name {
-  color: white;
-}
 
 html.dark-mode .card-item p {
   color: black;
@@ -123,12 +119,12 @@ body {
 .wrapper {
   display: flex;
   min-height: 100vh;
-  margin-top: 64px; 
+  margin-top: 64px; /* top bar offset */
 }
 
 .sidebar {
   position: sticky;
-  top: 64px; 
+  top: 64px; /* height of the top bar */
   height: calc(100vh - 64px);
   padding-top: 1rem; 
   overflow-y: auto;
@@ -210,6 +206,7 @@ body {
   margin-left: 80px;
 }
 
+/* CARD STYLING */
 .card-section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -273,6 +270,80 @@ body {
 .card.green { background-color: var(--pair-4-light); }
 .card.green .card-footer { background-color: var(--pair-4-dark);; }
 
+.card-btn {
+  position: absolute;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.card-btn.edit {
+  background-color: #302F4D;
+  top: 10px;
+  left: 10px;
+}
+
+.card-btn.delete {
+  background-color: #dc3545;
+  top: 10px;
+  right: 10px;
+}
+
+.card-center-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+.card-list {
+  margin-top: 0.5rem;
+}
+
+.card-item {
+  background-color: var(--pair-5-dark);
+  color: black;
+  margin-bottom: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 6px;
+}
+
+.card-controls {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-left: .5rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.card-controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cardarray {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 1rem;
+}
+
+
+/* tables */
 .table-section {
   margin-bottom: 2rem;
 }
@@ -301,6 +372,56 @@ th {
   background-color: var(--pair-1-light);
   color: white;
 }
+
+.import-table td:first-child,
+.import-table th:first-child {
+  width: 10%;
+}
+
+html.dark-mode .import-table {
+  background-color: var(--deck-bg);
+  color: var(--deck-text);
+}
+
+html.dark-mode .import-table th {
+  background-color: var(--pair-1-dark);
+  color: white;
+}
+
+.import-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  background-color: var(--pair-5-light);
+  color: var(--text);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+}
+
+.import-table th,
+.import-table td {
+  border: 1px solid black;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.import-table th {
+  background-color: var(--pair-2-light);
+  color: white;
+  font-weight: bold;
+}
+
+table thead th {
+  background-color: var(--pair-1-light);
+  color: white;
+}
+
+table tbody td a {
+  color: var(--pair-3-dark);
+}
+
+/* faq page */
 
 .faq-header {
   background: var(--bg-light);
@@ -434,7 +555,6 @@ th {
     margin-bottom: 1rem;
   }
 }
-
 .faq-categories li a {
   display: block;
   width: 100%;
@@ -448,6 +568,7 @@ th {
   text-decoration: underline;
 }
 
+/* flip card */
 .flip-card {
   background-color: transparent;
   width: 300px;
@@ -463,6 +584,7 @@ th {
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
+  
 }
 
 .flip-card-inner h1{
@@ -491,6 +613,7 @@ th {
 .flip-card-front {
   background-color: var(--pair-5-light);
   color: var(--text);
+
 }
 
 .flip-card-back {
@@ -503,26 +626,11 @@ th {
   color:rgb(215, 255, 68);
 }
 
-.card-center-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
+
+/* deck */
 
 .options {
   position:absolute;
-}
-
-.cardarray{
-  display:flex;
-  flex-wrap: wrap;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  justify-content: center;
-  width: 100%;
-  max-width: 1200px;
-  margin-top: 1rem;
 }
 
 .deck {
@@ -539,13 +647,19 @@ th {
   margin-left: 1em;
 }
 
+html.dark-mode .deck-box {
+  background-color: var(--pair-1-dark);
+}
+html.dark-mode .deck-name {
+  color: white;
+}
+
 .mb-2{
   color: rgb(133, 90, 176);
 }
 
 .deck .title{
-  font-size:30px;
-  color: var(--pair-2-light)
+  font-size:30px
 }
 .deck:hover {
   background-color: var(--deck-hover);
@@ -557,32 +671,13 @@ html.dark-mode .title {
   color: white;
 }
 
+.deck .title{
+  font-size:30px;
+  color: var(--pair-2-light)
+}
 .deck .eord{
   position:absolute;
   bottom:10px
-}
-
-.eord a{
-  font-size:10px;
-}
-
-.preview {
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  height:60%;
-  overflow:scroll;
-  background-color: transparent;
-  color: inherit;
-}
-
-.preview::-webkit-scrollbar{
-  display:none
-}
-
-.preview p {
-  font-size: 16px;
-  margin: 0;
 }
 
 .decks {
@@ -590,112 +685,11 @@ html.dark-mode .title {
   flex-wrap: wrap;
 }
 
-.text-muted{
-  color: red;
-}
-
-.Acards p {
-  font-size: 24px;
-}
-
-.next-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.create_deck{
-  margin-left:auto;
-  margin-right:auto;
-  width:50%;
-  text-align:center;
-  border-radius: 25px;
-  padding:20px;
-}
-
-.term-set-title {
-  font-size: 1.5rem;
-  color: #2d3f50;
-  margin-bottom: 16px;
-}
-
-.term-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.term-item {
-  background-color: var(--pair-5-light);
-  color: var(--text);
-  border: 1px solid #eceef0;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  padding: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.term {
-  flex: 1;
-  color: var(--text);
-  font-weight: 500;
-}
-
-.definition {
-  flex: 2;
-  color: var(--text);
-  padding-left: 16px;
-  border-left: 1px solid #eceef0;
-}
-
-table thead th {
-  background-color: var(--pair-1-light);
-  color: white;
-}
-
-table tbody td a {
-  color: var(--pair-3-dark);
-}
-
- .category {
-  margin-bottom: 2em;
-  padding: 1em;
-  border: 1px solid #ccc;
-  border-radius: 0.5em;
-}
-
-.card-btn {
-  position: absolute;
-  padding: 6px 12px;
-  font-size: 0.8rem;
-  color: white;
-  border-radius: 4px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  text-align: center;
-}
-
-.card-btn.edit {
-  background-color: #302F4D;
-  top: 10px;
-  left: 10px;
-}
-
-.card-btn.delete {
-  background-color: #dc3545;
-  top: 10px;
-  right: 10px;
-}
-
 .deck-box {
-  background-color: #fff;
-  border-left: 5px solid var(--pair-3-light);
-  padding: 1rem;
-  margin-bottom: 1.25rem;
-  border-radius: 8px;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
 }
 .deck-title {
     cursor: pointer;
@@ -708,70 +702,58 @@ table tbody td a {
     padding: 10px;
     background-color: var(--pair-5-light);
     color: black;
+    margin-top: 0.75rem;
+    padding-left: 1rem;
 }
 
-pre code {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    display: block;
-    width: 100%;
-    font-family: monospace;
-    font-size: 1em;
-    background-color: #f5f5f5;
-    padding: 1em;
-    border-radius: 8px;
-    box-sizing: border-box;
-    height: 100%;
-    background-color: var(--pair-5-light);
-    color: var(--text);
+.deck-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  padding-left: 2.25rem;
 }
 
-.import-form {
-  background-color: var(--pair-5-light);
-  padding: 2rem;
-  border-radius: 10px;
-  max-width: 500px;
-  margin: 0 auto;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border: 1px dashed var(--pair-3-light);
-  color: var(--text);
+.deck-box {
+  background-color: #fff;
+  border-left: 5px solid var(--pair-3-light);
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+  border-radius: 8px;
+}
+
+.deck-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--pair-1-dark);
+  cursor: pointer;
+}
+
+.deck-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.deck-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
+  margin-top: 1rem;
 }
 
-.import-form div {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* btns */
+
+.cancel-btn {
+  background-color: #6c757d;
 }
 
-.import-message {
-  text-align: center;
-  font-size: 0.95rem;
-  color: var(--pair-3-dark);
-  margin: 1rem auto;
-}
-
-.import-file-input {
-  display: none;
-}
-
-.import-file-label {
-  display: inline-block;
-  padding: 0.6rem 1.2rem;
-  background-color: var(--pair-1-light);
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background 0.2s ease;
-}
-
-.import-file-label:hover {
-  background-color: var(--pair-1-dark);
+.cancel-btn:hover {
+  background-color: #5a6268;
 }
 
 .import-submit-btn {
@@ -789,85 +771,12 @@ pre code {
   background-color: var(--pair-2-dark);
 }
 
-.import-code {
-  background-color: var(--pair-5-dark);
-  padding: 3px 6px;
-  border-radius: 3px;
-  font-size: 0.85rem;
-}
-
-.import-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 2rem;
-  background-color: var(--pair-5-light);
-  color: var(--text);
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: 0 0 8px rgba(0,0,0,0.05);
-}
-
-.import-table th,
-.import-table td {
-  border: 1px solid black;
-  padding: 0.75rem 1rem;
-  text-align: left;
-}
-
-.import-table th {
-  background-color: var(--pair-2-light);
-  color: white;
-  font-weight: bold;
-}
-
-
-.import-button-row {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-html.dark-mode .import-form {
-  background-color: var(--pair-1-dark);
-  color: var(--deck-text);
-  border-color: var(--pair-2-dark);
-}
-
-html.dark-mode .import-message {
-  color: var(--pair-1-light);
-}
-
-html.dark-mode .import-file-label {
-  background-color: var(--pair-2-dark);
-}
-
-html.dark-mode .import-file-label:hover {
-  background-color: var(--pair-2-light);
-}
-
 html.dark-mode .import-submit-btn {
   background-color: var(--pair-3-dark);
 }
 
 html.dark-mode .import-submit-btn:hover {
   background-color: var(--pair-2-light);
-}
-
-html.dark-mode .import-code {
-  background-color: var(--pair-2-dark);
-  color: white;
-}
-
-html.dark-mode .import-table {
-  background-color: var(--deck-bg);
-  color: var(--deck-text);
-}
-
-html.dark-mode .import-table th {
-  background-color: var(--pair-1-dark);
-  color: white;
 }
 
 .addcard-btn {
@@ -895,56 +804,12 @@ html.dark-mode .import-table th {
 .import-btn {
   background-color: var(--pair-3-light);
 }
-
 .import-btn:hover {
   background-color: var(--pair-3-dark);
 }
 .btn,
 .btn:hover {
   color: #fff;
-}
-
-.deck-controls {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-  padding-left: 2.25rem;
-}
-
-.page-title {
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 2rem;
-  padding-top: 1rem;
-  color: var(--pair-1-light);
-}
-html.dark-mode .page-title {
-  color: white;
-}
-
-.course-box {
-  margin-bottom: 2.5rem;
-  background-color: var(--pair-5-light);
-  padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-}
-
-.deck-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-  font-size: 1.1rem;
-  color: var(--pair-1-dark);
-  cursor: pointer;
-}
-
-.deck-actions {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
 }
 
 .btn {
@@ -996,21 +861,282 @@ html.dark-mode .page-title {
   background-color: var(--pair-4-dark);
 }
 
-.deck-content {
-  margin-top: 0.75rem;
-  padding-left: 1rem;
+.course-deck-controls .btn {
+  padding: 0.5rem 1.5rem;
+  font-weight: bold;
 }
 
-.card-list {
-  margin-top: 0.5rem;
+.course-deck-actions .btn {
+  flex: 1;
+  text-align: center;
+  padding: 0.5rem;
+  font-weight: 600;
 }
 
-.card-item {
-  background-color: var(--pair-5-dark);
-  color: black;
-  margin-bottom: 0.5rem;
-  padding: 0.75rem;
+.add-course-btn {
+  background-color: var(--pair-1-light);
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem 1.25rem;
   border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.add-course-btn:hover {
+  background-color: var(--pair-1-dark);
+}
+
+html.dark-mode .add-course-btn {
+  background-color: var(--pair-2-dark);
+}
+
+.next-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* import */
+.import-form {
+  background-color: var(--pair-5-light);
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px dashed var(--pair-3-light);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.import-form div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.import-message {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--pair-3-dark);
+  margin: 1rem auto;
+}
+
+.import-file-input {
+  display: none;
+}
+
+.import-file-label {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--pair-1-light);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.import-file-label:hover {
+  background-color: var(--pair-1-dark);
+}
+
+.import-code {
+  background-color: var(--pair-5-dark);
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-size: 0.85rem;
+}
+
+.import-button-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+html.dark-mode .import-form {
+  background-color: var(--pair-1-dark);
+  color: var(--deck-text);
+  border-color: var(--pair-2-dark);
+}
+
+html.dark-mode .import-message {
+  color: var(--pair-1-light);
+}
+
+html.dark-mode .import-file-label {
+  background-color: var(--pair-2-dark);
+}
+
+html.dark-mode .import-file-label:hover {
+  background-color: var(--pair-2-light);
+}
+
+html.dark-mode .import-code {
+  background-color: var(--pair-2-dark);
+  color: white;
+} 
+
+/* term */
+.term-set-title {
+  font-size: 1.5rem;
+  color: #2d3f50;
+  margin-bottom: 16px;
+}
+.term-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.term-item {
+  background-color: var(--pair-5-light);
+  color: var(--text);
+  border: 1px solid #eceef0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.term {
+  flex: 1;
+  color: var(--text);
+  font-weight: 500;
+}
+.definition {
+  flex: 2;
+  color: var(--text);
+  padding-left: 16px;
+  border-left: 1px solid #eceef0;
+}
+
+
+/* small stylings */
+.eord a{
+  font-size:10px;
+}
+
+.preview {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  height:60%;
+  overflow:scroll;
+  background-color: transparent;
+  color: inherit;
+}
+
+.preview::-webkit-scrollbar{
+  display:none
+}
+
+.preview p {
+  font-size: 16px;
+  margin: 0;
+}
+
+.text-muted{
+  color: red;
+}
+
+.Acards p {
+  font-size: 24px;
+}
+
+.bottom-padding {
+  height: 3rem;
+}
+
+.create_deck{
+  margin-left:auto;
+  margin-right:auto;
+  width:50%;
+  text-align:center;
+  border-radius: 25px;
+  padding:20px;
+}
+
+ .category {
+  margin-bottom: 2em;
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+}
+
+pre code {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    display: block;
+    width: 100%;
+    font-family: monospace;
+    font-size: 1em;
+    background-color: #f5f5f5;
+    padding: 1em;
+    border-radius: 8px;
+    box-sizing: border-box;
+    height: 100%;
+    background-color: var(--pair-5-light);
+    color: var(--text);
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  padding-top: 1rem;
+  color: var(--pair-1-light);
+}
+
+html.dark-mode .page-title {
+  color: white;
+}
+
+.placeholder-card {
+  background: transparent;
+  border: 2px dashed #ccc;
+  visibility: hidden; 
+}
+.csv-req {
+  align-items: center;
+  padding-left: 20rem;
+  padding-bottom: 2rem;
+}
+
+.bg-success {
+  background-color: #28a745 !important;
+}
+
+.bg-warning {
+  background-color: #ffc107 !important;
+}
+
+.bg-danger {
+  background-color: #dc3545 !important;
+}
+
+/* course */
+.course-box {
+  margin-bottom: 2.5rem;
+  background-color: var(--pair-5-light);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.course-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--pair-2-light);
 }
 
 .empty-msg {
@@ -1021,14 +1147,6 @@ html.dark-mode .page-title {
 .toggle-arrow {
   font-size: 0.9rem;
   color: var(--pair-2-dark);
-}
-
-.card-controls {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding-left: .5rem;
 }
 
 .study-controls {
@@ -1051,30 +1169,6 @@ html.dark-mode .page-title {
   margin-bottom: 2rem;
 }
 
-
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-}
-
-.placeholder-card {
-  background: transparent;
-  border: 2px dashed #ccc;
-  visibility: hidden; /* keeps the layout spacing but hides the card */
-}
-.csv-req {
-  align-items: center;
-  padding-left: 20rem;
-  padding-bottom: 2rem;
-}
-
-.import-table td:first-child,
-.import-table th:first-child {
-  width: 10%;
-}
-
-
 .course-page-title {
   text-align: center;
   margin-top: 2rem;
@@ -1087,11 +1181,6 @@ html.dark-mode .page-title {
   gap: 1rem;
   justify-content: center;
   margin: 2rem 0 1rem;
-}
-
-.course-deck-controls .btn {
-  padding: 0.5rem 1.5rem;
-  font-weight: bold;
 }
 
 .course-deck-list {
@@ -1137,17 +1226,6 @@ html.dark-mode .page-title {
   text-align: center;
   height: 100%;
 }
-.bg-success {
-  background-color: #28a745 !important;
-}
-
-.bg-warning {
-  background-color: #ffc107 !important;
-}
-
-.bg-danger {
-  background-color: #dc3545 !important;
-}
 
 .course-completion,
 .course-last-studied {
@@ -1160,17 +1238,6 @@ html.dark-mode .page-title {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-}
-
-.course-deck-actions .btn {
-  flex: 1;
-  text-align: center;
-  padding: 0.5rem;
-  font-weight: 600;
-}
-
-.bottom-padding {
-  height: 3rem;
 }
 
 .course-title {
@@ -1205,31 +1272,13 @@ html.dark-mode .course-title a {
   color: white;
 }
 
-
 .course-controls {
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
 }
 
-.add-course-btn {
-  background-color: var(--pair-1-light);
-  color: white;
-  font-weight: bold;
-  padding: 0.5rem 1.25rem;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: background-color 0.2s ease;
-}
-
-.add-course-btn:hover {
-  background-color: var(--pair-1-dark);
-}
-
-html.dark-mode .add-course-btn {
-  background-color: var(--pair-2-dark);
-}
-
+/* add course modal */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -1276,14 +1325,6 @@ html.dark-mode .add-course-btn {
   gap: 1rem;
 }
 
-.cancel-btn {
-  background-color: #6c757d;
-}
-
-.cancel-btn:hover {
-  background-color: #5a6268;
-}
-
 html.dark-mode .modal-box {
   background-color: var(--bar);
   color: white;
@@ -1295,6 +1336,7 @@ html.dark-mode .modal-box input {
   border-color: #555;
 }
 
+/* search */
 .search-form {
   display: flex;
   justify-content: flex-end;
@@ -1314,7 +1356,7 @@ html.dark-mode .modal-box input {
 .search-icon {
   padding: 0.4rem 0.6rem;
   color: white;
-  background-color: transparent; /* Match bar background */
+  background-color: transparent;
 }
 
 .search-input {
@@ -1344,7 +1386,6 @@ html.dark-mode .modal-box input {
   background-color: var(--pair-2-dark);
 }
 
-/* Dark Mode Support */
 html.dark-mode .search-group {
   background-color: var(--pair-1-dark);
 }
@@ -1398,7 +1439,6 @@ html.dark-mode .section-title {
   text-decoration: underline;
 }
 
-
 html.dark-mode .custom-list .list-group-item {
   background-color: var(--pair-1-dark);
   color: white;
@@ -1436,21 +1476,4 @@ html.dark-mode .category-card:hover {
   gap: 0.75rem;
   color: white;
 
-}
-
-.deck-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  margin-top: 1rem;
-}
-
-
-
-
-.file-name-display {
-  
-  font-style: italic;
-  color: #555;
 }
