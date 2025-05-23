@@ -10,7 +10,7 @@
 
 # QuizCIT – Flashcards for IT Students
 
-**QuizCIT** is a web-based flashcard application designed for All students. Users can create, edit, and review flashcards with support for syntax-highlighted code, categorized decks, and CSV import/export. Built by Group 4 at BCIT.
+**QuizCIT** is a web-based flashcard application designed for All students. Users can create, edit, and review flashcards with support for syntax-highlighted code, categorized decks, and CSV import. Built by Group 4 at BCIT.
 
 ---
 
