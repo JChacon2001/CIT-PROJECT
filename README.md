@@ -21,7 +21,7 @@
 - 📁 Organize cards into decks by course or topic
 - 💡 Syntax highlighting for code examples
 - 🌙 Dark mode for comfortable studying
-- 🔄 Import/export flashcards via CSV
+- 🔄 Import flashcards via CSV
 
 ---
 
@@ -38,8 +38,8 @@
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-org/quizcit.git
-   cd quizcit
+   git clone https://github.com/your-org/CIT-PROJECT
+   cd CIT-PROJECT
    ```
 
 2. **Install dependencies**
